@@ -5,7 +5,7 @@ let anchor;
    anchor = 'http://www.localhost:5000'
  }
  else{
-   anchor = process.env.PORT
+   anchor = 'https://spot-stats.herokuapp.com/login';
  }
 
 
