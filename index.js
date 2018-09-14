@@ -2,6 +2,7 @@ const express = require('express');
 var request = require('request'); // "Request" library
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
+var session = require('express-session');
 const path = require('path');
 
 const app = express();
@@ -35,16 +36,20 @@ var generateRandomString = function(length) {
     return text;
 };
 
-var stateKey = 'spotify_auth_state';
+let stateKey = 'spotify_auth_state';
 // Serve the static files from the React app
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'client/build')))
+    .use(cookieParser())
+
 
 // An api endpoint that returns a short list of items
 app.get('/login', function(req, res) {
 
     var state = generateRandomString(16);
-    console.log('this is state',state);//It's getting here
-    res.cookie(stateKey, state);
+    // console.log('this is state',state);//It's getting here
+    res.cookie(stateKey, state, stateKey);
+    console.log('Cookies and state ', req.cookies, state, stateKey);
+    // console.log('state key and state', stateKey, state);
 
     // your application requests authorization
     var scope = 'user-read-private user-read-email user-read-playback-state user-top-read';
@@ -62,12 +67,13 @@ app.get('/callback', function(req, res) {
   console.log('in callback');
     // your application requests refresh and access tokens
     // after checking the state parameter
+
     var code = req.query.code || null;
     var state = req.query.state || null;
     var storedState = req.cookies ? req.cookies[stateKey] : null;
-    console.log('here storedstate and req query state ', storedState, req.query.state);
+    console.log('here storedstate, req cookies and req query state ', storedState, req.cookies, req.query.state);
 
-    if (state === null || state !== storedState) {
+    if (!req.query) {
       console.log('in state === null', state);
         res.redirect('/#' +
       querystring.stringify({

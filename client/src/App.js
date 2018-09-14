@@ -5,7 +5,7 @@ import Home from './Home';
 import List from './List';
 
 import TopArtists from './top-artists';
-// import TopTracks from './top-tracks';
+import TopTracks from './top-tracks';
 import SpotifyWebApi from 'spotify-web-api-js';
 
 
@@ -80,18 +80,59 @@ getMyTopArtists(term, callback) {
     return hashParams;
   }
   render() {
-    const App = () => (
-      <div>
-        <Switch>
-          <Route exact path='/' component={Home}/>
-          <Route path='/list' component={List}/>
-        </Switch>
-      </div>
-    )
+    let anchor;
+     if (process.env.NODE_ENV != 'production') {
+       anchor = 'http://www.localhost:5000/login'
+     }
+     else{
+       anchor = 'https://react-express-j.herokuapp.com/login';
+     }
+     let artists;
+     let tracks;
+     if (this.state.myTopArtists) {
+       artists = this.state.myTopArtists;
+     }
+     else if (this.state.myTopTracks) {
+       tracks = this.state.myTopTracks;
+     }
+
+
+
     return (
-      <Switch>
-        <App/>
-      </Switch>
+      <div className="app">
+        <h1>Project Home</h1>
+        <a href={anchor}>
+              Log In
+          </a>
+          {this.state.noNowPlaying === true && <div>Nothing is playing at the moment</div>}
+          {this.state.nowPlaying && this.state.noNowPlaying !== true && <div>
+            Now Playing: {this.state.nowPlaying.name}s
+            <img alt='album-art' src={this.state.nowPlaying.albumArt} style={{
+                height: 100
+              }}/>
+          </div>}
+          {
+            this.state.loggedIn &&
+              <div className='search-btns'>
+                <button className='btn btn-primary' onClick ={() => this.getNowPlaying()}>
+                  Check Now Playing</button>
+                <button className='btn btn-primary' onClick ={() => this.getMyTopArtists(this.state.term)}>
+                  Check Your 10 Top Artists Popularity</button>
+                  <button  className='btn btn-primary' onClick ={() => this.getMyTopTracks(this.state.term)}>
+                    Check Your 10 Top Tracks</button>
+              </div>
+          }
+          {
+            this.state.myTopArtists &&
+            <React.Fragment>
+            <TopArtists artists={artists} getMyTopArtists= {this.getMyTopArtists.bind(this)}/>
+            </React.Fragment>
+          }
+          {
+            this.state.myTopTracks &&
+            <TopTracks tracks={tracks} getMyTopTracks= {this.getMyTopTracks.bind(this)}/>
+          }
+      </div>
     );
   }
 }

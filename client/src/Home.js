@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 let anchor;
  if (process.env.NODE_ENV != 'production') {
-   anchor = 'http://www.localhost:5000'
+   anchor = 'http://www.localhost:5000/login'
  }
  else{
    anchor = 'https://react-express-j.herokuapp.com/login';
