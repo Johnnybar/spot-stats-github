@@ -1,6 +1,4 @@
-// import React, {Component} from 'react';
-// import SpotifyWebApi from 'spotify-web-api-js';
-// const spotifyApi = new SpotifyWebApi();
+
 import React from 'react';
 import SpotifyWebApi from 'spotify-web-api-js';
 const spotifyApi = new SpotifyWebApi();
@@ -102,7 +100,6 @@ export function getTrackInfoAndRecommendation(id, trackName){
 export function getRecommendationsBasedOnTopTracks(genres){
   spotifyApi.getRecommendations(genres).then((response) => {
     //20 tracks based on the 5 genres provided
-    console.log(response);
     let recommendationNames = response.tracks.filter(each => each.preview_url !== null).map(function(recommendations, i) {
       console.log(recommendations);
       return (<div key={i} onClick={this.uponClickOnTrackRecommendation.bind(this, i)} className='btn btn-info btn-sm btn-block'>

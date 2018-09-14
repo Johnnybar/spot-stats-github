@@ -1,9 +1,4 @@
-// import Chart from 'chart.js';
-// import {getRecommondationGenres, getTrackInfoAndRecommendation, getRecommendationsBasedOnTopTracks} from './spotify_modules';
-// import {getMyTopTracks} from './App';
-// import React, {Component} from 'react';
-// import SpotifyWebApi from 'spotify-web-api-js';
-// const spotifyApi = new SpotifyWebApi();
+
 import Chart from 'chart.js';
 import {getRecommondationGenres} from'./spotify_modules';
 import {getTrackInfoAndRecommendation} from'./spotify_modules';

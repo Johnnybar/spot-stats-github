@@ -1,8 +1,4 @@
-// import React, {Component} from 'react';
-// import Chart from 'chart.js';
-// import SpotifyWebApi from 'spotify-web-api-js';
-// import {getArtistInfoAndRecommendations} from './spotify_modules';
-// import {getMyTopArtists} from './App';
+
 import Chart from 'chart.js';
 import {getArtistInfoAndRecommendations} from './spotify_modules';
 import getMyTopArtists from './App';

@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
-import Home from './Home';
-import List from './List';
-
 import TopArtists from './top-artists';
 import TopTracks from './top-tracks';
 import SpotifyWebApi from 'spotify-web-api-js';
@@ -21,7 +18,6 @@ class App extends Component {
     this.getMyTopTracks = this.getMyTopTracks.bind(this);
     const token = params.access_token;
     // if (token) {
-      console.log(token, 'token here');
       spotifyApi.setAccessToken(token);
     // }
     this.state = {

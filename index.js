@@ -2,10 +2,9 @@ const express = require('express');
 var request = require('request'); // "Request" library
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
-var session = require('express-session');
 const path = require('path');
 
-const app = express();
+
 
 let secrets;
 let client_id;
@@ -35,8 +34,9 @@ var generateRandomString = function(length) {
     }
     return text;
 };
-
 let stateKey = 'spotify_auth_state';
+const app = express();
+
 // Serve the static files from the React app
 app.use(express.static(path.join(__dirname, 'client/build')))
     .use(cookieParser())
@@ -47,7 +47,7 @@ app.get('/login', function(req, res) {
 
     var state = generateRandomString(16);
     // console.log('this is state',state);//It's getting here
-    res.cookie(stateKey, state, stateKey);
+    res.cookie(stateKey, state);
     console.log('Cookies and state ', req.cookies, state, stateKey);
     // console.log('state key and state', stateKey, state);
 
@@ -73,14 +73,14 @@ app.get('/callback', function(req, res) {
     var storedState = req.cookies ? req.cookies[stateKey] : null;
     console.log('here storedstate, req cookies and req query state ', storedState, req.cookies, req.query.state);
 
-    if (!req.query) {
+      if (!req.query.state) {
       console.log('in state === null', state);
         res.redirect('/#' +
       querystring.stringify({
           error: 'state_mismatch'
       }));
     } else {
-        res.clearCookie(stateKey);
+        // res.clearCookie(stateKey);
         var authOptions = {
             url: 'https://accounts.spotify.com/api/token',
             form: {
@@ -109,7 +109,7 @@ app.get('/callback', function(req, res) {
 
                 // use the access token to access the Spotify Web API
                 request.get(options, function(error, response, body) {
-                    console.log(body);
+
                 });
 
                 // we can also pass the token to the browser to make requests from there
