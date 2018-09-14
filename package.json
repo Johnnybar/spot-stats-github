@@ -5,12 +5,14 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
+    "push": "concurrently \"git push heroku master\" \"git push origin master\"",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "^4.0.1",
     "express": "^4.16.3",
     "react-router-dom": "^4.3.1"
   }
