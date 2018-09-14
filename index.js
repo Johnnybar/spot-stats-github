@@ -43,7 +43,7 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 app.get('/login', function(req, res) {
 
     var state = generateRandomString(16);
-    console.log(state);//It's getting here
+    console.log('this is state',state);//It's getting here
     res.cookie(stateKey, state);
 
     // your application requests authorization
@@ -68,7 +68,7 @@ app.get('/callback', function(req, res) {
     // console.log('here storedstate: ', storedState);
 
     if (state === null || state !== storedState) {
-      console.log('in state === null');
+      console.log('in state === null', state);
         res.redirect('/#' +
       querystring.stringify({
           error: 'state_mismatch'
