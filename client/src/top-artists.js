@@ -3,7 +3,7 @@
 // import SpotifyWebApi from 'spotify-web-api-js';
 // import {getArtistInfoAndRecommendations} from './spotify_modules';
 // import {getMyTopArtists} from './App';
-import Chart from 'chart';
+import Chart from 'chart.js';
 import {getArtistInfoAndRecommendations} from './spotify_modules';
 import getMyTopArtists from './App';
 import React from 'react';

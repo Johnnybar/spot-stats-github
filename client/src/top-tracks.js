@@ -4,7 +4,7 @@
 // import React, {Component} from 'react';
 // import SpotifyWebApi from 'spotify-web-api-js';
 // const spotifyApi = new SpotifyWebApi();
-import Chart from 'chart';
+import Chart from 'chart.js';
 import {getRecommondationGenres} from'./spotify_modules';
 import {getTrackInfoAndRecommendation} from'./spotify_modules';
 import {getRecommendationsBasedOnTopTracks} from'./spotify_modules';

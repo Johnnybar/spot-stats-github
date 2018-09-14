@@ -20,9 +20,10 @@ class App extends Component {
     this.getMyTopArtists = this.getMyTopArtists.bind(this);
     this.getMyTopTracks = this.getMyTopTracks.bind(this);
     const token = params.access_token;
-    if (token) {
+    // if (token) {
+      console.log(token, 'token here');
       spotifyApi.setAccessToken(token);
-    }
+    // }
     this.state = {
       loggedIn: token
         ? true
@@ -53,6 +54,7 @@ class App extends Component {
   }
   getMyTopTracks(term, callback) {
     spotifyApi.getMyTopTracks({limit: 10, time_range: term}).then((response) => {
+    
       this.setState({myTopTracks: response.items, myTopArtists:false}, callback)
     }).catch(err => console.log(err))
   }
