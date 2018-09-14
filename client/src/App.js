@@ -54,7 +54,7 @@ class App extends Component {
   }
   getMyTopTracks(term, callback) {
     spotifyApi.getMyTopTracks({limit: 10, time_range: term}).then((response) => {
-    
+
       this.setState({myTopTracks: response.items, myTopArtists:false}, callback)
     }).catch(err => console.log(err))
   }
@@ -102,10 +102,31 @@ getMyTopArtists(term, callback) {
 
     return (
       <div className="app">
-        <h1>Project Home</h1>
+      <nav className='navbar navbar-light bg-light navbar-expand-lg fixed-top'>
+        <a href="#" className="navbar-brand">Spot.Stats</a>
+        <button className='navbar-toggler' data-toggle="collapse" data-target="#navbarCollapse">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className='collapse navbar-collapse' id='navbarCollapse'>
+        <ul className="navbar-nav ml-auto">
+              <li className="navbar-item">
+                  <a href="#" className="nav-link">Home</a>
+              </li>
+              <li className="navbar-item">
+                  <a href="#" className="nav-link">Contact</a>
+              </li>
+          </ul>
+          </div>
+
+      </nav>
+      <br></br>
+      <br></br>
+      <br></br>
+      { this.state.loggedIn === false  &&
         <a href={anchor}>
-              Log In
-          </a>
+            Log In
+        </a>}
+
           {this.state.noNowPlaying === true && <div>Nothing is playing at the moment</div>}
           {this.state.nowPlaying && this.state.noNowPlaying !== true && <div>
             Now Playing: {this.state.nowPlaying.name}s
