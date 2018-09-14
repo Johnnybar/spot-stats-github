@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+let anchor;
+ if (process.env.NODE_ENV != 'production') {
+   anchor = 'http://www.localhost:5000'
+ }
+ else{
+   anchor = process.env.PORT
+ }
 
 
 class Home extends Component {
@@ -7,12 +14,11 @@ class Home extends Component {
     return (
     <div className="App">
       <h1>Project Home</h1>
-      {/* Link to List.js */}
-      <Link to={'./list'}>
-        <button variant="raised">
-            My List
-        </button>
-      </Link>
+
+      <a href={anchor}>
+
+            Log In
+        </a>
     </div>
     );
   }
