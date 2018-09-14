@@ -65,7 +65,7 @@ app.get('/callback', function(req, res) {
     var code = req.query.code || null;
     var state = req.query.state || null;
     var storedState = req.cookies ? req.cookies[stateKey] : null;
-    // console.log('here storedstate: ', storedState);
+    console.log('here storedstate and req query state ', storedState, req.query.state);
 
     if (state === null || state !== storedState) {
       console.log('in state === null', state);
