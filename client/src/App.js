@@ -83,7 +83,7 @@ getMyTopArtists(term, callback) {
        anchor = 'http://www.localhost:5000/login'
      }
      else{
-       anchor = 'https://react-express-j.herokuapp.com/login';
+       anchor = 'https://spot-stats.herokuapp.com/login';
      }
      let artists;
      let tracks;
