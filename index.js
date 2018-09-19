@@ -75,7 +75,7 @@ app.get('/callback', function(req, res) {
     var storedState = req.cookies ? req.cookies[stateKey] : null;
     console.log('here storedstate, req cookies and req query state ', storedState, req.cookies, req.query.state);
 
-      if (req.query.state !== storedState) {
+      if (req.query.state !== storedState && process.env.NODE_ENV === 'production') {
       console.log('in state === null', state);
         res.redirect('/#' +
       querystring.stringify({
