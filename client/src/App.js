@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+// import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import TopArtists from './top-artists';
 import TopTracks from './top-tracks';
 import SpotifyWebApi from 'spotify-web-api-js';
+
 
 
 const spotifyApi = new SpotifyWebApi();
@@ -79,7 +80,7 @@ getMyTopArtists(term, callback) {
   }
   render() {
     let anchor;
-     if (process.env.NODE_ENV != 'production') {
+     if (process.env.NODE_ENV !== 'production') {
        anchor = 'http://www.localhost:5000/login'
      }
      else{
@@ -99,17 +100,17 @@ getMyTopArtists(term, callback) {
     return (
       <div className="app">
       <nav className='navbar navbar-light bg-light navbar-expand-lg fixed-top'>
-        <a href="#" className="navbar-brand">Spot.Stats</a>
+        <a href="/" className="navbar-brand">Spot.Stats</a>
         <button className='navbar-toggler' data-toggle="collapse" data-target="#navbarCollapse">
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className='collapse navbar-collapse' id='navbarCollapse'>
         <ul className="navbar-nav ml-auto">
               <li className="navbar-item">
-                  <a href="#" className="nav-link">Home</a>
+                  <a href="/" className="nav-link">Home</a>
               </li>
               <li className="navbar-item">
-                  <a href="#" className="nav-link">Contact</a>
+                  <a href="/" className="nav-link">Contact</a>
               </li>
           </ul>
           </div>

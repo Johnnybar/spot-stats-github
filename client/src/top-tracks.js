@@ -3,10 +3,10 @@ import Chart from 'chart.js';
 import {getRecommondationGenres} from'./spotify_modules';
 import {getTrackInfoAndRecommendation} from'./spotify_modules';
 import {getRecommendationsBasedOnTopTracks} from'./spotify_modules';
-import getMyTopTracks from'./App';
+// import getMyTopTracks from'./App';
 import React from'react';
-import SpotifyWebApi from'spotify-web-api-js';
-const spotifyApi = new SpotifyWebApi();
+// import SpotifyWebApi from'spotify-web-api-js';
+// const spotifyApi = new SpotifyWebApi();
 
 let chosenId,
   trackName, topTracks;
@@ -118,7 +118,7 @@ export default class TopTracks extends React.Component {
     let trackPopularity = tracks.map(track => track.popularity)
     let trackList = tracks.map(track => track.artists[0].name + ' - ' + track.name);
     let trackIds = tracks.map(track => track.id);
-    let artistsIds = tracks.map(track => track.artists[0].id)
+    // let artistsIds = tracks.map(track => track.artists[0].id)
      chart.options.title.text = 'new topTracks';
      chart.data.labels = trackList;
      chart.data.datasets[0].data = trackPopularity;

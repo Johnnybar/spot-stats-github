@@ -71,9 +71,9 @@ export function getRecommondationGenres(artistsIds){
 
     spotifyApi.getAvailableGenreSeeds().then((response)=>{
       let finalGenres = [];
-      function getRandomArbitrary(min, max) {
-        return Math.random() * (max - min) + min;
-      }
+      // function getRandomArbitrary(min, max) {
+      //   return Math.random() * (max - min) + min;
+      // }
       for (let i = 0; i < genresFound.length; i++) {
         if(response.genres.indexOf(genresFound[i]) !== -1 && finalGenres.indexOf(genresFound[i]) === -1){
         finalGenres.push(genresFound[i])

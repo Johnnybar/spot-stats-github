@@ -1,10 +1,10 @@
 
 import Chart from 'chart.js';
 import {getArtistInfoAndRecommendations} from './spotify_modules';
-import getMyTopArtists from './App';
+// import getMyTopArtists from './App';
 import React from 'react';
-import SpotifyWebApi from 'spotify-web-api-js';
-const spotifyApi = new SpotifyWebApi();
+// import SpotifyWebApi from 'spotify-web-api-js';
+// const spotifyApi = new SpotifyWebApi();
 
 let chosenId, topArtists;
 
@@ -131,9 +131,9 @@ export default class TopArtists extends React.Component {
     let recommendations = this.state.recommendations
     let selectedTrack = this.state.currentClickedTrack
     let indexOfClickedRecommendation = this.state.indexOfClickedRecommendation;
-    let chart = document.getElementById("topArtists");
+    // let chart = document.getElementById("topArtists");
     if(this.state.recommendations){
-    let currentlyPreviewed = recommendations.nameAndTrack[indexOfClickedRecommendation]
+    // let currentlyPreviewed = recommendations.nameAndTrack[indexOfClickedRecommendation]
 
   }
 
@@ -154,7 +154,7 @@ export default class TopArtists extends React.Component {
       {
         artistInfo && <div className='chosen-artist-container'>
             <div className='artist-name'>{artistInfo.name}</div>
-            <img className='artist-image' src={artistInfo.image}/>
+            <img alt='artist-img' className='artist-image' src={artistInfo.image}/>
             Here is a short clip of {artistInfo.name}s music
             <audio className='preview-track' src={sampleTrack} controls="controls">
               Your browser does not support the audio element.
