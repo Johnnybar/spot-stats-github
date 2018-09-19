@@ -53,14 +53,16 @@ app.get('/login', function(req, res) {
 
     // your application requests authorization
     var scope = 'user-read-private user-read-email user-read-playback-state user-top-read';
+
     res.redirect('https://accounts.spotify.com/authorize?' +
     querystring.stringify({
         response_type: 'code',
         client_id: client_id,
         scope: scope,
         redirect_uri: redirect_uri,
-        state: state
-    }));
+        state: state,
+        cookie:req.cookies.spotify_auth_state
+    }))
 });
 
 app.get('/callback', function(req, res) {
@@ -73,7 +75,7 @@ app.get('/callback', function(req, res) {
     var storedState = req.cookies ? req.cookies[stateKey] : null;
     console.log('here storedstate, req cookies and req query state ', storedState, req.cookies, req.query.state);
 
-      if (!req.query.state) {
+      if (req.query.state !== storedState) {
       console.log('in state === null', state);
         res.redirect('/#' +
       querystring.stringify({
