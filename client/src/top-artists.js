@@ -138,19 +138,23 @@ export default class TopArtists extends React.Component {
   }
 
     return (<div>
+      <div class="wrapper text-center">
       <div>Want to choose a different time range for analysis?</div>
-      <button className='btn btn-primary' onClick={(e)=>{
+      <div class="btn-group text-center">
+      <button type="button" class="btn btn-secondary" onClick={(e)=>{
         this.props.getMyTopArtists('short_term', this.updateConfigByMutating)
 }
 }>Click here for a shorter time range </button>
-      <button className='btn btn-primary' onClick={(e)=>{
+      <button type="button" class="btn btn-secondary" onClick={(e)=>{
         this.props.getMyTopArtists('medium_term', this.updateConfigByMutating)
 }
       }>Click here for a medium time range</button>
-      <button className='btn btn-primary' onClick={(e)=>{
+      <button type="button" class="btn btn-secondary" onClick={(e)=>{
         this.props.getMyTopArtists('long_term', this.updateConfigByMutating)
 }
 }>Click here for a longer time range</button>
+</div>
+</div>
       {
         artistInfo && <div className='chosen-artist-container'>
             <div className='artist-name'>{artistInfo.name}</div>
@@ -179,7 +183,8 @@ export default class TopArtists extends React.Component {
           "width" : "100",
           "height" : "100"
         }}></canvas>
-    </div>)
+
+  </div>)
 
   }
 

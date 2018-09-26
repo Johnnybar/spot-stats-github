@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "concurrently \"node index.js\" \"cd client && npm start\"",
     "push": "concurrently \"git push heroku master\" \"git push origin master\"",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },

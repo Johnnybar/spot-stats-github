@@ -150,7 +150,9 @@ export default class TopTracks extends React.Component {
     let topTracksRecommendations = this.state.topTracksRecommendations;
     let currentlyClicked = this.state.currentClickedRecommendation;
     return (<div>
+      <div class="wrapper text-center">
       <div>Want to choose a different time range for analysis?</div>
+      <div class="btn-group">
       <button className='btn btn-primary' onClick={(e)=>{
         this.props.getMyTopTracks('short_term', this.updateConfigByMutating)
 }
@@ -163,7 +165,14 @@ export default class TopTracks extends React.Component {
         this.props.getMyTopTracks('long_term', this.updateConfigByMutating)
 }
 }>Click here for a longer time range</button>
-      {topGenres && <button className='btn btn-primary' onClick={(e) => this.uponClickOnRecommendButton(e)}>Click here (as many times as you like) to generate a playlist based on your favourite tracks</button>}
+</div>
+</div>
+      {topGenres &&
+        <div class="text-center wrapper">
+        <button className='btn btn-secondary' onClick={(e) => this.uponClickOnRecommendButton(e)}>Click here (as many times as you like) to generate a playlist based on your favourite tracks
+        </button>
+        </div>
+      }
       {topTracksRecommendations && <div className='top-tracks-recommendation-container'>{topTracksRecommendations.nameAndTrack}</div>}
       {
         currentlyClicked && <div className='recommend-preview'>Listen to a preview of {currentlyClicked.name}
