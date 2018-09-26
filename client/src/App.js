@@ -54,10 +54,8 @@ class App extends Component {
     }).catch(err => console.log(err))
   }
   deleteCookies(e){
-
     document.cookie = e+'=; Max-Age=-99999999;';
-
-    window.location.reload(false);
+  window.location.href = "index.html";
 
   }
   getMyTopTracks(term, callback) {
@@ -209,14 +207,14 @@ getMyTopArtists(term, callback) {
               </div>
             </div>
           {/*- Slide Two - Set the background image for this slide in the line below*/}
-            <div className="carousel-item" style={{backgroundImage: `url(image1.jpg)`}}>
+            <div className="carousel-item" style={{backgroundImage: `url(image3.jpg)`}}>
               <div className="carousel-caption d-none d-md-block">
                 <h3>Second Slide</h3>
                 <p>This is a description for the second slide.</p>
               </div>
             </div>
             {/*-- Slide Three - Set the background image for this slide in the line below */}
-            <div className="carousel-item" style={{backgroundImage: `url(image1.jpg)`}}>
+            <div className="carousel-item" style={{backgroundImage: `url(image2.jpg)`}}>
               <div className="carousel-caption d-none d-md-block">
                 <h3>Third Slide</h3>
                 <p>This is a description for the third slide.</p>
