@@ -201,21 +201,21 @@ getMyTopArtists(term, callback) {
           <div className="carousel-inner" role="listbox">
             {/* Slide One - Set the background image for this slide in the line below */}
             <div className="carousel-item active" style={{backgroundImage: `url(image1.jpg)`}}>
-              <div className="carousel-caption d-none d-md-block">
+              <div className="carousel-caption d-none d-md-block" style={{backgroundColor:'#424242'}}>
                 <h3>First Slide</h3>
                 <p>This is a description for the first slide.</p>
               </div>
             </div>
           {/*- Slide Two - Set the background image for this slide in the line below*/}
             <div className="carousel-item" style={{backgroundImage: `url(image3.jpg)`}}>
-              <div className="carousel-caption d-none d-md-block">
+              <div className="carousel-caption d-none d-md-block" style={{backgroundColor:'#424242'}}>
                 <h3>Second Slide</h3>
                 <p>This is a description for the second slide.</p>
               </div>
             </div>
             {/*-- Slide Three - Set the background image for this slide in the line below */}
             <div className="carousel-item" style={{backgroundImage: `url(image2.jpg)`}}>
-              <div className="carousel-caption d-none d-md-block">
+              <div className="carousel-caption d-none d-md-block" style={{backgroundColor:'#424242'}}>
                 <h3>Third Slide</h3>
                 <p>This is a description for the third slide.</p>
               </div>
