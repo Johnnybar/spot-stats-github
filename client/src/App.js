@@ -32,6 +32,9 @@ class App extends Component {
       // }
     }
   }
+  componentDidMount(){
+    console.log(this.state);
+  }
   getNowPlaying() {
     spotifyApi.getMyCurrentPlaybackState().then((response) => {
       if(response){
@@ -99,6 +102,8 @@ getMyTopArtists(term, callback) {
 
     return (
       <div className="app">
+      { this.state.loggedIn === false  &&
+
 
       <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div className="container">
@@ -114,56 +119,33 @@ getMyTopArtists(term, callback) {
               <li className="nav-item">
                 <a className="nav-link" href="services.html">Services</a>
               </li>
+              <li className="nav-item dropdown">
+              <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Portfolio
+              </a>
+              <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+              <a className="dropdown-item" href="portfolio-1-col.html">1 Column Portfolio</a>
+              <a className="dropdown-item" href="portfolio-2-col.html">2 Column Portfolio</a>
+              <a className="dropdown-item" href="portfolio-3-col.html">3 Column Portfolio</a>
+              <a className="dropdown-item" href="portfolio-4-col.html">4 Column Portfolio</a>
+              <a className="dropdown-item" href="portfolio-item.html">Single Portfolio Item</a>
+              </div>
+              </li>
               <li className="nav-item">
-                <a className="nav-link" href="contact.html">Contact</a>
+                <a className="nav-link" href={anchor}>Sign In</a>
               </li>
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Portfolio
-                </a>
-                <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                  <a className="dropdown-item" href="portfolio-1-col.html">1 Column Portfolio</a>
-                  <a className="dropdown-item" href="portfolio-2-col.html">2 Column Portfolio</a>
-                  <a className="dropdown-item" href="portfolio-3-col.html">3 Column Portfolio</a>
-                  <a className="dropdown-item" href="portfolio-4-col.html">4 Column Portfolio</a>
-                  <a className="dropdown-item" href="portfolio-item.html">Single Portfolio Item</a>
-                </div>
-              </li>
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Blog
-                </a>
-                <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-                  <a className="dropdown-item" href="blog-home-1.html">Blog Home 1</a>
-                  <a className="dropdown-item" href="blog-home-2.html">Blog Home 2</a>
-                  <a className="dropdown-item" href="blog-post.html">Blog Post</a>
-                </div>
-              </li>
-              <li className="nav-item dropdown">
-                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Other Pages
-                </a>
-                <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
-                  <a className="dropdown-item" href="full-width.html">Full Width Page</a>
-                  <a className="dropdown-item" href="sidebar.html">Sidebar Page</a>
-                  <a className="dropdown-item" href="faq.html">FAQ</a>
-                  <a className="dropdown-item" href="404.html">404</a>
-                  <a className="dropdown-item" href="pricing.html">Pricing Table</a>
-                </div>
-              </li>
+
             </ul>
           </div>
         </div>
       </nav>
+    }
 
       <header>
       <br></br>
       <br></br>
       <br></br>
-      { this.state.loggedIn === false  &&
-        <a href={anchor}>
-            Log In
-        </a>}
+
 
         {/*  {this.state.noNowPlaying === true && <div>Nothing is playing at the moment</div>}
           {this.state.nowPlaying && this.state.noNowPlaying !== true && <div>
@@ -174,13 +156,7 @@ getMyTopArtists(term, callback) {
           </div>
         }*/}
         {/*END OF CONTAINER*/}
-        {this.state.noNowPlaying === true && <div>Nothing is playing at the moment</div>}
-        {this.state.nowPlaying && this.state.noNowPlaying !== true && <div>
-          Now Playing: {this.state.nowPlaying.name}s
-          <img alt='album-art' src={this.state.nowPlaying.albumArt} style={{
-              height: 100
-            }}/>
-        </div>}
+
           {/*  {
             this.state.loggedIn &&
               <div className='search-btns'>
@@ -278,6 +254,14 @@ getMyTopArtists(term, callback) {
 
         </div>
         {/*.row */}
+        {this.state.noNowPlaying === true && <div>Nothing is playing at the moment</div>}
+        {this.state.nowPlaying && this.state.noNowPlaying !== true &&
+          <div>
+          Now Playing: {this.state.nowPlaying.name}s
+          <img alt='album-art' src={this.state.nowPlaying.albumArt} style={{
+              height: 100
+            }}/>
+        </div>}
         {
           this.state.myTopArtists &&
           <React.Fragment>
@@ -325,7 +309,6 @@ getMyTopArtists(term, callback) {
       </div>
     }
 
-
       {/* Footer */}
       <footer className="py-5 bg-dark">
         <div className="container">
@@ -333,23 +316,7 @@ getMyTopArtists(term, callback) {
         </div>
         {/* /.container */}
       </footer>
-      {/*<nav className='navbar navbar-light bg-light navbar-expand-lg fixed-top'>
-        <a href="/" className="navbar-brand">Spot.Stats</a>
-        <button className='navbar-toggler' data-toggle="collapse" data-target="#navbarCollapse">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className='collapse navbar-collapse' id='navbarCollapse'>
-        <ul className="navbar-nav ml-auto">
-              <li className="navbar-item">
-                  <a href="/" className="nav-link">Home</a>
-              </li>
-              <li className="navbar-item">
-                  <a href="/" className="nav-link">Contact</a>
-              </li>
-          </ul>
-          </div>
 
-      </nav>*/}
 
       </div>
     );
