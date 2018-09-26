@@ -17,6 +17,7 @@ class App extends Component {
     this.getNowPlaying = this.getNowPlaying.bind(this);
     this.getMyTopArtists = this.getMyTopArtists.bind(this);
     this.getMyTopTracks = this.getMyTopTracks.bind(this);
+    this.deleteCookies = this.deleteCookies.bind(this);
     const token = params.access_token;
     // if (token) {
       spotifyApi.setAccessToken(token);
@@ -51,6 +52,13 @@ class App extends Component {
       this.setState({noNowPlaying:true})
     }
     }).catch(err => console.log(err))
+  }
+  deleteCookies(e){
+
+    document.cookie = e+'=; Max-Age=-99999999;';
+
+    window.location.reload(false);
+
   }
   getMyTopTracks(term, callback) {
     spotifyApi.getMyTopTracks({limit: 10, time_range: term}).then((response) => {
@@ -103,8 +111,6 @@ getMyTopArtists(term, callback) {
     return (
       <div className="app">
       { this.state.loggedIn === false  &&
-
-
       <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
         <div className="container">
           <a className="navbar-brand" href="index.html">Spot.Stats</a>
@@ -114,32 +120,50 @@ getMyTopArtists(term, callback) {
           <div className="collapse navbar-collapse" id="navbarResponsive">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
-                <a className="nav-link" href="about.html">About</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="services.html">Services</a>
-              </li>
-              <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Portfolio
-              </a>
-              <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-              <a className="dropdown-item" href="portfolio-1-col.html">1 Column Portfolio</a>
-              <a className="dropdown-item" href="portfolio-2-col.html">2 Column Portfolio</a>
-              <a className="dropdown-item" href="portfolio-3-col.html">3 Column Portfolio</a>
-              <a className="dropdown-item" href="portfolio-4-col.html">4 Column Portfolio</a>
-              <a className="dropdown-item" href="portfolio-item.html">Single Portfolio Item</a>
-              </div>
-              </li>
-              <li className="nav-item">
                 <a className="nav-link" href={anchor}>Sign In</a>
               </li>
-
             </ul>
           </div>
         </div>
       </nav>
     }
+    { this.state.loggedIn !== false  &&
+
+
+    <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div className="container">
+        <a className="navbar-brand" href="index.html">Spot.Stats</a>
+        <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span className="navbar-toggler-icon"></span>
+        </button>
+        <div className="collapse navbar-collapse" id="navbarResponsive">
+          <ul className="navbar-nav ml-auto">
+            <li className="nav-item">
+              <a className="nav-link" href="about.html">About</a>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" href="services.html">Services</a>
+            </li>
+            <li className="nav-item dropdown">
+            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Portfolio
+            </a>
+            <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+            <a className="dropdown-item" href="portfolio-1-col.html">1 Column Portfolio</a>
+            <a className="dropdown-item" href="portfolio-2-col.html">2 Column Portfolio</a>
+            <a className="dropdown-item" href="portfolio-3-col.html">3 Column Portfolio</a>
+            <a className="dropdown-item" href="portfolio-4-col.html">4 Column Portfolio</a>
+            <a className="dropdown-item" href="portfolio-item.html">Single Portfolio Item</a>
+            </div>
+            </li>
+            <li className="nav-item">
+              <a className="nav-link" onClick ={() => this.deleteCookies()}>Log Out</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  }
 
       <header>
       <br></br>
