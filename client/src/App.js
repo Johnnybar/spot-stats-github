@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 // import { Route, Switch } from 'react-router-dom';
 import './App.css';
+import AudioFeatures from './audio-features';
 import TopArtists from './top-artists';
 import TopTracks from './top-tracks';
 import SpotifyWebApi from 'spotify-web-api-js';
+import scrollIntoView from 'scroll-into-view';
 
 
 
@@ -15,6 +17,7 @@ class App extends Component {
     this.textInput = React.createRef();
     const params = this.getHashParams();
     this.getNowPlaying = this.getNowPlaying.bind(this);
+    this.getAudioFeatures = this.getAudioFeatures.bind(this);
     this.getMyTopArtists = this.getMyTopArtists.bind(this);
     this.getMyTopTracks = this.getMyTopTracks.bind(this);
     this.deleteCookies = this.deleteCookies.bind(this);
@@ -26,7 +29,7 @@ class App extends Component {
       loggedIn: token
         ? true
         : false,
-        term:'medium_term'
+        term:'medium_term',
       // nowPlaying: {
       //   name: 'Not Checked',
       //   albumArt: ''
@@ -34,7 +37,7 @@ class App extends Component {
     }
   }
   componentDidMount(){
-    console.log(this.state);
+    // console.log(this.state);
   }
   getNowPlaying() {
     spotifyApi.getMyCurrentPlaybackState().then((response) => {
@@ -51,18 +54,34 @@ class App extends Component {
       else{
       this.setState({noNowPlaying:true})
     }
-    }).catch(err => console.log(err))
+    })
+    .then(()=> scrollIntoView(document.getElementById("nowPlayingContainer")))
+    .catch(this.setState({noNowPlaying:true}, scrollIntoView(document.getElementById("nowPlayingContainer"))) )
   }
   deleteCookies(e){
     document.cookie = e+'=; Max-Age=-99999999;';
   window.location.href = "index.html";
 
   }
+
+  getAudioFeatures(){
+    this.setState({audioFeatures:true})
+    spotifyApi.getMyTopTracks({limit: 10, time_range: 'medium_term'}).then((response) => {
+      this.setState({topTracksForFeatures: response.items}, console.log('this is top tracks data', response.items))
+    })
+  .then(()=> scrollIntoView(document.getElementById("audioFeaturesContainer")))
+  .catch(err => console.log(err))
+
+
+
+  }
   getMyTopTracks(term, callback) {
     spotifyApi.getMyTopTracks({limit: 10, time_range: term}).then((response) => {
 
       this.setState({myTopTracks: response.items, myTopArtists:false}, callback)
-    }).catch(err => console.log(err))
+    })
+    .then(()=> scrollIntoView(document.getElementById("topTracksContainer")))
+    .catch(err => console.log(err))
   }
 
 getMyTopArtists(term, callback) {
@@ -72,7 +91,9 @@ getMyTopArtists(term, callback) {
     myTopTracks:false,
     term: term,
 }, callback);
-    }).catch(err => console.log(err))
+}).then(()=> scrollIntoView(document.getElementById("topArtistsContainer")))
+    .catch(err => console.log(err))
+
   }
 
   getHashParams() {
@@ -240,7 +261,7 @@ getMyTopArtists(term, callback) {
         <h2>Portfolio Heading</h2>
 
         <div className="row">
-          <div className="col-lg-4 col-sm-6 portfolio-item">
+          {/*<div className="col-lg-4 col-sm-6 portfolio-item">
             <div className="card h-100">
               <a href="#"><img className="card-img-top" src="http://placehold.it/700x400" alt="" /></a>
               <div className="card-body">
@@ -248,6 +269,17 @@ getMyTopArtists(term, callback) {
                   <a href="#" onClick ={() => this.getNowPlaying()}>Get Now Playing</a>
                 </h4>
                 <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
+              </div>
+            </div>
+          </div>*/}
+          <div className="col-lg-4 col-sm-6 portfolio-item">
+            <div className="card h-100">
+              <a href="#"><img className="card-img-top" src="http://placehold.it/700x400" alt=""/></a>
+              <div className="card-body">
+                <h4 className="card-title">
+                  <a href="#" onClick ={() => this.getAudioFeatures()}>Get Audio Features of your Favorite Tracks</a>
+                </h4>
+                <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
               </div>
             </div>
           </div>
@@ -276,14 +308,6 @@ getMyTopArtists(term, callback) {
 
         </div>
         {/*.row */}
-        {this.state.noNowPlaying === true && <div>Nothing is playing at the moment</div>}
-        {this.state.nowPlaying && this.state.noNowPlaying !== true &&
-          <div>
-          Now Playing: {this.state.nowPlaying.name}s
-          <img alt='album-art' src={this.state.nowPlaying.albumArt} style={{
-              height: 100
-            }}/>
-        </div>}
         {
           this.state.myTopArtists &&
           <React.Fragment>
@@ -294,6 +318,18 @@ getMyTopArtists(term, callback) {
           this.state.myTopTracks &&
           <TopTracks tracks={tracks} getMyTopTracks= {this.getMyTopTracks.bind(this)}/>
         }
+        {
+          this.state.topTracksForFeatures &&
+          <AudioFeatures tracks={this.state.topTracksForFeatures}/>
+        }
+        {this.state.noNowPlaying === true && <div id='nowPlayingContainer'>Nothing is playing at the moment</div>}
+        {this.state.nowPlaying && this.state.noNowPlaying !== true &&
+          <div id='nowPlayingContainer'>
+          Now Playing: {this.state.nowPlaying.name}s
+          <img alt='album-art' src={this.state.nowPlaying.albumArt} style={{
+            height: 100
+          }}/>
+          </div>}
         {/*-- Features Section */}
         <div className="row">
           <div className="col-lg-6">

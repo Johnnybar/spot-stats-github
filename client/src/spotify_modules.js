@@ -118,3 +118,11 @@ export function getRecommendationsBasedOnTopTracks(genres){
     })
   }).catch(err => console.log(err))
 }
+
+export function getFeaturesById(id){
+  spotifyApi.getAudioFeaturesForTrack(id).then((response) => {
+this.setState({
+  chosenTrackFeatures: response
+});
+  }).catch(err => console.log(err))
+}

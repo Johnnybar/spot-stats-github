@@ -149,10 +149,10 @@ export default class TopTracks extends React.Component {
     let topGenres = this.state.topTracksGenres;
     let topTracksRecommendations = this.state.topTracksRecommendations;
     let currentlyClicked = this.state.currentClickedRecommendation;
-    return (<div>
-      <div class="wrapper text-center">
+    return (<div id='topTracksContainer'>
+      <div className="wrapper text-center">
       <div>Want to choose a different time range for analysis?</div>
-      <div class="btn-group">
+      <div className="btn-group">
       <button className='btn btn-primary' onClick={(e)=>{
         this.props.getMyTopTracks('short_term', this.updateConfigByMutating)
 }
@@ -168,7 +168,7 @@ export default class TopTracks extends React.Component {
 </div>
 </div>
       {topGenres &&
-        <div class="text-center wrapper">
+        <div className="text-center wrapper">
         <button className='btn btn-secondary' onClick={(e) => this.uponClickOnRecommendButton(e)}>Click here (as many times as you like) to generate a playlist based on your favourite tracks
         </button>
         </div>
