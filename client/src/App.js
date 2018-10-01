@@ -67,7 +67,11 @@ class App extends Component {
   getAudioFeatures(){
     this.setState({audioFeatures:true})
     spotifyApi.getMyTopTracks({limit: 10, time_range: 'medium_term'}).then((response) => {
-      this.setState({topTracksForFeatures: response.items}, console.log('this is top tracks data', response.items))
+      this.setState({
+        topTracksForFeatures: response.items,
+        myTopArtists: false,
+        myTopTracks:false
+      }, console.log('this is top tracks data', response.items))
     })
   .then(()=> scrollIntoView(document.getElementById("audioFeaturesContainer")))
   .catch(err => console.log(err))
@@ -78,7 +82,10 @@ class App extends Component {
   getMyTopTracks(term, callback) {
     spotifyApi.getMyTopTracks({limit: 10, time_range: term}).then((response) => {
 
-      this.setState({myTopTracks: response.items, myTopArtists:false}, callback)
+      this.setState({myTopTracks: response.items,
+        myTopArtists:false,
+        topTracksForFeatures:false,
+      }, callback)
     })
     .then(()=> scrollIntoView(document.getElementById("topTracksContainer")))
     .catch(err => console.log(err))
@@ -89,6 +96,7 @@ getMyTopArtists(term, callback) {
         this.setState({
     myTopArtists: response.items,
     myTopTracks:false,
+    topTracksForFeatures:false,
     term: term,
 }, callback);
 }).then(()=> scrollIntoView(document.getElementById("topArtistsContainer")))
