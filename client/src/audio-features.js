@@ -3,7 +3,7 @@ import Chart from 'chart.js';
 // import getMyTopArtists from './App';
 import {getFeaturesById} from'./spotify_modules';
 import React from 'react';
-let featuresChart;
+let featuresChart, chosenId
 
 export default class AudioFeatures extends React.Component {
 
@@ -93,6 +93,16 @@ export default class AudioFeatures extends React.Component {
        },
        options: {
          ids: trackIds,
+         onClick: function(e) {
+           var element = featuresChart.getElementAtEvent(e);
+           if (element.length > 0) {
+             let clickedElementindex = element[0]["_index"];
+             let label = featuresChart.data.labels[clickedElementindex];
+             // chosenId = element[0]._chart.options.ids[clickedElementindex]
+             let value = featuresChart.data.datasets[0].data[clickedElementindex];
+             console.log(label, value);
+           }
+           },
          animation: {
            animateRotate: true,
            duration: 5000
