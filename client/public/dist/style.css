@@ -52,18 +52,17 @@
   background-color: #00acea !important;
   border-color: #00acea !important;
 }
-button {
-  margin: 5px !important;
-}
 .carousel-indicators {
   list-style: none;
+}
+.btn {
+  margin: 5px;
 }
 .carousel-indicators li,
 .carousel-indicators li.active {
   margin: 10px;
   width: 20px !important;
   height: 20px !important;
-  /* background-color: #fff !important; */
   position: relative !important;
   margin: 10px !important;
   border-radius: 50%;
@@ -93,4 +92,7 @@ button {
   opacity: 0;
   transition-duration: 2s !important;
   transition-property: opacity;
+}
+#nav-transparent {
+  background-color: #00000094 !important;
 }

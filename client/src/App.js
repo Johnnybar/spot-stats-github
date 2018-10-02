@@ -138,7 +138,7 @@ getMyTopArtists(term, callback) {
     return (
       <div className="app">
       { this.state.loggedIn === false  &&
-      <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <nav className="navbar fixed-top navbar-expand-lg navbar-dark fixed-top" id="nav-transparent">
         <div className="container">
           <a className="navbar-brand" href="index.html">Spot.Stats</a>
           <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -157,7 +157,7 @@ getMyTopArtists(term, callback) {
     { this.state.loggedIn !== false  &&
 
 
-    <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <nav className="navbar fixed-top navbar-expand-lg navbar-dark fixed-top" id="nav-transparent">
       <div className="container">
         <a className="navbar-brand" href="index.html">Spot.Stats</a>
         <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -168,19 +168,14 @@ getMyTopArtists(term, callback) {
             <li className="nav-item">
               <a className="nav-link" href="about.html">About</a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="services.html">Services</a>
-            </li>
             <li className="nav-item dropdown">
-            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Portfolio
+            <a className="nav-link dropdown-toggle" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Features
             </a>
             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-            <a className="dropdown-item" href="portfolio-1-col.html">1 Column Portfolio</a>
-            <a className="dropdown-item" href="portfolio-2-col.html">2 Column Portfolio</a>
-            <a className="dropdown-item" href="portfolio-3-col.html">3 Column Portfolio</a>
-            <a className="dropdown-item" href="portfolio-4-col.html">4 Column Portfolio</a>
-            <a className="dropdown-item" href="portfolio-item.html">Single Portfolio Item</a>
+            <a className="dropdown-item" onClick ={() => this.getMyTopTracks(this.state.term)}>Top Tracks</a>
+            <a className="dropdown-item" onClick ={() => this.getMyTopArtists(this.state.term)}>Top Artists</a>
+            <a className="dropdown-item" onClick ={() => this.getAudioFeatures()}>Audio Features</a>
             </div>
             </li>
             <li className="nav-item">
@@ -193,9 +188,7 @@ getMyTopArtists(term, callback) {
   }
 
       <header>
-      <br></br>
-      <br></br>
-      <br></br>
+
 
 
         {/*  {this.state.noNowPlaying === true && <div>Nothing is playing at the moment</div>}
@@ -230,21 +223,21 @@ getMyTopArtists(term, callback) {
           <div className="carousel-inner" role="listbox">
             {/* Slide One - Set the background image for this slide in the line below */}
             <div className="carousel-item active" style={{backgroundImage: `url(smoke3.jpg)`}}>
-              <div className="carousel-caption d-none d-md-block" style={{backgroundColor:'#424242'}}>
+              <div className="carousel-caption d-none d-md-block" style={{backgroundColor:'transparent'}}>
                 <h3>First Slide</h3>
                 <p>This is a description for the first slide.</p>
               </div>
             </div>
           {/*- Slide Two - Set the background image for this slide in the line below*/}
             <div className="carousel-item" style={{backgroundImage: `url(smoke2.jpg)`}}>
-              <div className="carousel-caption d-none d-md-block" style={{backgroundColor:'#424242'}}>
+              <div className="carousel-caption d-none d-md-block" style={{backgroundColor:'transparent'}}>
                 <h3>Second Slide</h3>
                 <p>This is a description for the second slide.</p>
               </div>
             </div>
             {/*-- Slide Three - Set the background image for this slide in the line below */}
-            <div className="carousel-item" style={{backgroundImage: `url(smoke1.jpg)`}}>
-              <div className="carousel-caption d-none d-md-block" style={{backgroundColor:'#424242'}}>
+            <div className="carousel-item" style={{backgroundImage: `url(smoke4.jpg)`}}>
+              <div className="carousel-caption d-none d-md-block" style={{backgroundColor:'transparent'}}>
                 <h3>Third Slide</h3>
                 <p>This is a description for the third slide.</p>
               </div>
@@ -266,8 +259,8 @@ getMyTopArtists(term, callback) {
         this.state.loggedIn &&
       <div className="container">
           {/*-- Portfolio Section*/}
-        <h2>Portfolio Heading</h2>
-
+          <br/>
+          <br/>
         <div className="row">
           {/*<div className="col-lg-4 col-sm-6 portfolio-item">
             <div className="card h-100">
@@ -282,7 +275,7 @@ getMyTopArtists(term, callback) {
           </div>*/}
           <div className="col-lg-4 col-sm-6 portfolio-item">
             <div className="card h-100">
-              <a href="#"><img className="card-img-top" src="http://placehold.it/700x400" alt=""/></a>
+              <a href="#"><img className="card-img-top" src="audioFeaturesCard.jpg" alt=""/></a>
               <div className="card-body">
                 <h4 className="card-title">
                   <a href="#" onClick ={() => this.getAudioFeatures()}>Get Audio Features of your Favorite Tracks</a>
@@ -293,7 +286,7 @@ getMyTopArtists(term, callback) {
           </div>
           <div className="col-lg-4 col-sm-6 portfolio-item">
             <div className="card h-100">
-              <a href="#"><img className="card-img-top" src="http://placehold.it/700x400" alt=""/></a>
+              <a href="#"><img className="card-img-top" src="topArtistsCard.jpg" alt=""/></a>
               <div className="card-body">
                 <h4 className="card-title">
                   <a href="#" onClick ={() => this.getMyTopArtists(this.state.term)}>Check Your 10 Top Artists Popularity</a>
@@ -304,7 +297,7 @@ getMyTopArtists(term, callback) {
           </div>
           <div className="col-lg-4 col-sm-6 portfolio-item">
             <div className="card h-100">
-              <a href="#"><img className="card-img-top" src="http://placehold.it/700x400" alt=""/></a>
+              <a href="#"><img className="card-img-top" src="topTracksCard.jpg" alt=""/></a>
               <div className="card-body">
                 <h4 className="card-title">
                   <a href="#" onClick ={() => this.getMyTopTracks(this.state.term)}>Check Your 10 Top Tracks</a>
@@ -319,16 +312,26 @@ getMyTopArtists(term, callback) {
         {
           this.state.myTopArtists &&
           <React.Fragment>
+          <br/>
+          <br/>
           <TopArtists artists={artists} getMyTopArtists= {this.getMyTopArtists.bind(this)}/>
           </React.Fragment>
         }
         {
           this.state.myTopTracks &&
+          <React.Fragment>
+          <br/>
+          <br/>
           <TopTracks tracks={tracks} getMyTopTracks= {this.getMyTopTracks.bind(this)}/>
+          </React.Fragment>
         }
         {
           this.state.topTracksForFeatures &&
+          <React.Fragment>
+          <br/>
+          <br/>
           <AudioFeatures tracks={this.state.topTracksForFeatures}/>
+          </React.Fragment>
         }
         {this.state.noNowPlaying === true && <div id='nowPlayingContainer'>Nothing is playing at the moment</div>}
         {this.state.nowPlaying && this.state.noNowPlaying !== true &&

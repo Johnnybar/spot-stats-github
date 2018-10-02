@@ -134,6 +134,7 @@ export default class AudioFeatures extends React.Component {
     return (
       <div id="audioFeaturesContainer">
       <div className="wrapper text-center">
+      <h3>Click one of your favorite tracks to get an analysis of its musical features</h3>
       <div className="btn-group text-center">
       {trackNames}
       </div>

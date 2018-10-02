@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"node index.js\" \"cd client && npm start\"",
+    "start": "concurrently \"node index.js\" \"cd client && less-watch-compiler public public/dist style.less\" \"cd client && npm start\"",
     "push": "concurrently \"git push heroku master\" \"git push origin master\"",
     "heroku-postbuild": "cd client && npm install --only=dev && npm install && npm run build"
   },
@@ -16,6 +16,8 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
+    "less": "^3.8.1",
+    "less-watch-compiler": "^1.11.3",
     "querystring": "^0.2.0",
     "react-cookie": "^3.0.4",
     "react-router-dom": "^4.3.1",
