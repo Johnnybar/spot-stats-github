@@ -3,6 +3,7 @@ import Chart from 'chart.js';
 // import getMyTopArtists from './App';
 import {getFeaturesById} from'./spotify_modules';
 import React from 'react';
+let featuresChart;
 
 export default class AudioFeatures extends React.Component {
 
@@ -24,7 +25,7 @@ export default class AudioFeatures extends React.Component {
     let labelArr = [];
     let dataArr = [];
     for (var key in this.state.chosenTrackFeatures) {
-        if(this.state.chosenTrackFeatures[key]>0 && this.state.chosenTrackFeatures[key]<1){
+        if(this.state.chosenTrackFeatures[key] >= 0 && this.state.chosenTrackFeatures[key] <=1 && key !== 'mode' && key !== 'key'){
         labelArr.push(key);
         dataArr.push(this.state.chosenTrackFeatures[key])
       }
@@ -32,9 +33,10 @@ export default class AudioFeatures extends React.Component {
 
     let trackNames = topTracksForFeatures.map(track => <button className="btn btn-secondary" style={{whiteSpace: 'normal'}} key={track.id} onClick={(e)=> this.getFeaturesById(track.id)}>{track.artists[0].name + ' - ' + track.name}</button>);
     if(this.state.chosenTrackFeatures){
+    featuresChart && featuresChart.chart && featuresChart.chart.destroy();
 
       let ctx = document.getElementById("featuresChart").getContext('2d');
-       let featuresChart = new Chart(ctx, {
+        featuresChart = new Chart(ctx, {
        type: 'doughnut',
        data: {
          labels: labelArr,
