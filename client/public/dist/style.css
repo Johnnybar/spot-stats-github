@@ -10,6 +10,9 @@
     height: 500px;
   }
 }
+button {
+  white-space: normal !important;
+}
 .chosen-artist-container {
   display: flex;
   flex-direction: column;
