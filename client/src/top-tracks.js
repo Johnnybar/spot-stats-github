@@ -4,7 +4,7 @@ import {getRecommondationGenres} from'./spotify_modules';
 import {getTrackInfoAndRecommendation} from'./spotify_modules';
 import {getRecommendationsBasedOnTopTracks} from'./spotify_modules';
 // import getMyTopTracks from'./App';
-import React from'react';
+import React from 'react';
 // import SpotifyWebApi from'spotify-web-api-js';
 // const spotifyApi = new SpotifyWebApi();
 
@@ -89,25 +89,7 @@ export default class TopTracks extends React.Component {
         },
         scaleShowValues: false,
         scaleShowGridLines: false,
-        scales: {
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: true,
-                autoSkip: false,
-                display: false
-              }
-            }
-          ],
-          xAxes: [
-            {
-              ticks: {
-                autoSkip: false,
-                display: false
-              }
-            }
-          ]
-        }
+
       }
     });
   }
@@ -146,6 +128,7 @@ export default class TopTracks extends React.Component {
   }
 
   render() {
+
     let topGenres = this.state.topTracksGenres;
     let topTracksRecommendations = this.state.topTracksRecommendations;
     let currentlyClicked = this.state.currentClickedRecommendation;
@@ -181,7 +164,7 @@ export default class TopTracks extends React.Component {
             </audio>
           </div>
       }
-      <div className="chart-container" style={{position:"relative", height:"100%", width: "100%"}}>
+      <div className="chart-container" style={{position:"relative"}}>
       <canvas onClick={(e) => this.uponClick(e)} id="topTracks"></canvas>
         </div>
     </div>)

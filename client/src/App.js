@@ -281,6 +281,10 @@ getMyTopArtists(term, callback) {
           }}/>
           </div>}
         {/*-- Features Section */}
+        <br/>
+        <br/>
+        <br/>
+
         <div className="row">
           <div className="col-lg-6">
             <h2>Modern Business Features</h2>
