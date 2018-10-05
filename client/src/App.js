@@ -4,6 +4,7 @@ import './App.css';
 import AudioFeatures from './audio-features';
 import TopArtists from './top-artists';
 import TopTracks from './top-tracks';
+
 import SpotifyWebApi from 'spotify-web-api-js';
 import scrollIntoView from 'scroll-into-view';
 
@@ -40,6 +41,8 @@ class App extends Component {
   window.location.href = "index.html";
 
   }
+
+
 
   getAudioFeatures(){
     this.setState({audioFeatures:true})
@@ -161,7 +164,6 @@ getMyTopArtists(term, callback) {
   }
 
       <header>
-
         <div id="carousel" className="carousel slide carousel-fade" data-ride="carousel"  data-interval="3000">
 
           <ol className="carousel-indicators">
@@ -214,7 +216,7 @@ getMyTopArtists(term, callback) {
 
           <div className="col-lg-4 col-sm-6 portfolio-item">
             <div className="card h-100">
-              <a href="#"><img className="card-img-top" src="audioFeaturesCard.jpg" alt=""/></a>
+              <a href="#" onClick ={() => this.getAudioFeatures()}><img className="card-img-top" src="audioFeaturesCard.jpg" alt=""/></a>
               <div className="card-body">
                 <h4 className="card-title">
                   <a href="#" onClick ={() => this.getAudioFeatures()}>Get Audio Features of your Favorite Tracks</a>
@@ -225,7 +227,7 @@ getMyTopArtists(term, callback) {
           </div>
           <div className="col-lg-4 col-sm-6 portfolio-item">
             <div className="card h-100">
-              <a href="#"><img className="card-img-top" src="topArtistsCard.jpg" alt=""/></a>
+              <a href="#" onClick ={() => this.getMyTopArtists(this.state.term)}><img className="card-img-top" src="topArtistsCard.jpg" alt=""/></a>
               <div className="card-body">
                 <h4 className="card-title">
                   <a href="#" onClick ={() => this.getMyTopArtists(this.state.term)}>Check Your 10 Top Artists Popularity</a>
@@ -236,7 +238,7 @@ getMyTopArtists(term, callback) {
           </div>
           <div className="col-lg-4 col-sm-6 portfolio-item">
             <div className="card h-100">
-              <a href="#"><img className="card-img-top" src="topTracksCard.jpg" alt=""/></a>
+              <a href="#" onClick ={() => this.getMyTopTracks(this.state.term)}><img className="card-img-top" src="topTracksCard.jpg" alt=""/></a>
               <div className="card-body">
                 <h4 className="card-title">
                   <a href="#" onClick ={() => this.getMyTopTracks(this.state.term)}>Check Your 10 Top Tracks</a>
@@ -248,6 +250,7 @@ getMyTopArtists(term, callback) {
 
         </div>
         {/*.row */}
+
         {
           this.state.myTopArtists &&
           <React.Fragment>
