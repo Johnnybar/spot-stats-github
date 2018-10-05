@@ -180,11 +180,9 @@ export default class TopArtists extends React.Component {
             </audio>
           </div>
       }
-
-      <canvas onClick={(e)=> this.uponClick(e)} id="topArtists" style={{
-          "width" : "100",
-          "height" : "100"
-        }}></canvas>
+      <div className="chart-container" style={{position:"relative", height:"100%", width: "100%"}}>
+      <canvas onClick={(e)=> this.uponClick(e)} id="topArtists" ></canvas>
+        </div>
 
   </div>)
 
