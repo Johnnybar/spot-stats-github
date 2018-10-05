@@ -16,7 +16,6 @@ class App extends Component {
     super();
     this.textInput = React.createRef();
     const params = this.getHashParams();
-    this.getNowPlaying = this.getNowPlaying.bind(this);
     this.getAudioFeatures = this.getAudioFeatures.bind(this);
     this.getMyTopArtists = this.getMyTopArtists.bind(this);
     this.getMyTopTracks = this.getMyTopTracks.bind(this);
@@ -321,7 +320,7 @@ getMyTopArtists(term, callback) {
       {/* Footer */}
       <footer className="py-5 bg-dark">
         <div className="container">
-          <p className="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
+          <p className="m-0 text-center text-white">Copyright &copy; Jonathan Bareket 2018</p>
         </div>
         {/* /.container */}
       </footer>
