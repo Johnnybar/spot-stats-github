@@ -142,10 +142,9 @@ export default class AudioFeatures extends React.Component {
 
 
       </div>
-      <canvas id="featuresChart" style={{
-        "width" : "100",
-        "height" : "100"
-      }}></canvas>
+      <div className="chart-container" style={{position:"relative", height:"100%", width: "100%"}}>
+      <canvas id="featuresChart"></canvas>
+      </div>
       </div>)
 
     }

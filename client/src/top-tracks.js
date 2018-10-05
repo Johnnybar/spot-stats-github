@@ -181,10 +181,9 @@ export default class TopTracks extends React.Component {
             </audio>
           </div>
       }
-      <canvas onClick={(e) => this.uponClick(e)} id="topTracks" style={{
-          "width" : "100",
-          "height" : "100"
-        }}></canvas>
+      <div className="chart-container" style={{position:"relative", height:"100%", width: "100%"}}>
+      <canvas onClick={(e) => this.uponClick(e)} id="topTracks"></canvas>
+        </div>
     </div>)
 
   }
