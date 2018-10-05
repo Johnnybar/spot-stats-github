@@ -30,34 +30,12 @@ class App extends Component {
         ? true
         : false,
         term:'medium_term',
-      // nowPlaying: {
-      //   name: 'Not Checked',
-      //   albumArt: ''
-      // }
+
     }
   }
   componentDidMount(){
-    // console.log(this.state);
   }
-  getNowPlaying() {
-    spotifyApi.getMyCurrentPlaybackState().then((response) => {
-      if(response){
-      this.setState({
-        nowPlaying: {
-          name: response.item.name,
-          albumArt: response.item.album.images[0].url
-        },
-        noNowPlaying:false
-      })
 
-    }
-      else{
-      this.setState({noNowPlaying:true})
-    }
-    })
-    .then(()=> scrollIntoView(document.getElementById("nowPlayingContainer")))
-    .catch(this.setState({noNowPlaying:true}, scrollIntoView(document.getElementById("nowPlayingContainer"))) )
-  }
   deleteCookies(e){
     document.cookie = e+'=; Max-Age=-99999999;';
   window.location.href = "index.html";
@@ -75,10 +53,8 @@ class App extends Component {
     })
   .then(()=> scrollIntoView(document.getElementById("audioFeaturesContainer")))
   .catch(err => console.log(err))
-
-
-
   }
+
   getMyTopTracks(term, callback) {
     spotifyApi.getMyTopTracks({limit: 10, time_range: term}).then((response) => {
 
@@ -101,7 +77,6 @@ getMyTopArtists(term, callback) {
 }, callback);
 }).then(()=> scrollIntoView(document.getElementById("topArtistsContainer")))
     .catch(err => console.log(err))
-
   }
 
   getHashParams() {
@@ -116,6 +91,7 @@ getMyTopArtists(term, callback) {
     }
     return hashParams;
   }
+
   render() {
     let anchor;
      if (process.env.NODE_ENV !== 'production') {
@@ -132,8 +108,6 @@ getMyTopArtists(term, callback) {
      else if (this.state.myTopTracks) {
        tracks = this.state.myTopTracks;
      }
-
-
 
     return (
       <div className="app">
@@ -189,30 +163,6 @@ getMyTopArtists(term, callback) {
 
       <header>
 
-
-
-        {/*  {this.state.noNowPlaying === true && <div>Nothing is playing at the moment</div>}
-          {this.state.nowPlaying && this.state.noNowPlaying !== true && <div>
-            Now Playing: {this.state.nowPlaying.name}s
-            <img alt='album-art' src={this.state.nowPlaying.albumArt} style={{
-                height: 100
-              }}/>
-          </div>
-        }*/}
-        {/*END OF CONTAINER*/}
-
-          {/*  {
-            this.state.loggedIn &&
-              <div className='search-btns'>
-                <button className='btn btn-primary' onClick ={() => this.getNowPlaying()}>
-                  Check Now Playing</button>
-                <button className='btn btn-primary' onClick ={() => this.getMyTopArtists(this.state.term)}>
-                  Check Your 10 Top Artists Popularity</button>
-                  <button  className='btn btn-primary' onClick ={() => this.getMyTopTracks(this.state.term)}>
-                    Check Your 10 Top Tracks</button>
-              </div>
-          }*/}
-
         <div id="carousel" className="carousel slide carousel-fade" data-ride="carousel"  data-interval="3000">
 
           <ol className="carousel-indicators">
@@ -262,17 +212,7 @@ getMyTopArtists(term, callback) {
           <br/>
           <br/>
         <div className="row">
-          {/*<div className="col-lg-4 col-sm-6 portfolio-item">
-            <div className="card h-100">
-              <a href="#"><img className="card-img-top" src="http://placehold.it/700x400" alt="" /></a>
-              <div className="card-body">
-                <h4 className="card-title">
-                  <a href="#" onClick ={() => this.getNowPlaying()}>Get Now Playing</a>
-                </h4>
-                <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur eum quasi sapiente nesciunt? Voluptatibus sit, repellat sequi itaque deserunt, dolores in, nesciunt, illum tempora ex quae? Nihil, dolorem!</p>
-              </div>
-            </div>
-          </div>*/}
+
           <div className="col-lg-4 col-sm-6 portfolio-item">
             <div className="card h-100">
               <a href="#"><img className="card-img-top" src="audioFeaturesCard.jpg" alt=""/></a>
