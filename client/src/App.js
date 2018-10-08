@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
-// import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import AudioFeatures from './audio-features';
 import TopArtists from './top-artists';
 import TopTracks from './top-tracks';
-
 import SpotifyWebApi from 'spotify-web-api-js';
 import scrollIntoView from 'scroll-into-view';
-
-
 
 const spotifyApi = new SpotifyWebApi();
 
@@ -41,8 +37,6 @@ class App extends Component {
   window.location.href = "index.html";
 
   }
-
-
 
   getAudioFeatures(){
     this.setState({audioFeatures:true})
@@ -331,7 +325,6 @@ getMyTopArtists(term, callback) {
         </div>
         {/* /.container */}
       </footer>
-
 
       </div>
     );
