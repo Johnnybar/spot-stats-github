@@ -1,4 +1,3 @@
-
 import Chart from 'chart.js';
 import {getArtistInfoAndRecommendations} from './spotify_modules';
 // import getMyTopArtists from './App';
