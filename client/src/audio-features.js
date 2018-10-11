@@ -1,9 +1,29 @@
 import Chart from 'chart.js';
 // import {getArtistInfoAndRecommendations} from './spotify_modules';
 // import getMyTopArtists from './App';
+import Slider, { Range, createSliderWithTooltip } from 'rc-slider';
+import 'rc-slider/assets/index.css';
 import {getFeaturesById} from'./spotify_modules';
 import React from 'react';
 let featuresChart, chosenId
+
+const SliderWithTooltip = createSliderWithTooltip(Slider);
+function log(value) {
+  console.log(value); //eslint-disable-line
+}
+
+const marks = {
+  0: '0',
+  25: '25',
+  50: '50',
+  75: '75',
+  100: {
+    style: {
+      color: 'red',
+    },
+    label: <strong>100</strong>,
+  },
+};
 
 export default class AudioFeatures extends React.Component {
 
@@ -143,6 +163,7 @@ export default class AudioFeatures extends React.Component {
       </div>
       <div className="chart-container" style={{position:"relative", height:"100%", width: "100%"}}>
       <canvas id="featuresChart"></canvas>
+ <Slider.Range min={0} marks={marks} step={1} defaultValue={[0, 20]} onChange={log} />
       </div>
       </div>)
 
