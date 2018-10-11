@@ -5,9 +5,22 @@ import TopArtists from './top-artists';
 import TopTracks from './top-tracks';
 import SpotifyWebApi from 'spotify-web-api-js';
 import scrollIntoView from 'scroll-into-view';
+import Slider, { Range, createSliderWithTooltip } from 'rc-slider';
+import 'rc-slider/assets/index.css';
 
 const spotifyApi = new SpotifyWebApi();
-
+const marks = {
+  0: '0',
+  25: '25',
+  50: '50',
+  75: '75',
+  100: {
+    style: {
+      color: 'red',
+    },
+    label: <strong>100</strong>,
+  },
+};
 class App extends Component {
   constructor() {
     super();
@@ -16,6 +29,7 @@ class App extends Component {
     this.getAudioFeatures = this.getAudioFeatures.bind(this);
     this.getMyTopArtists = this.getMyTopArtists.bind(this);
     this.getMyTopTracks = this.getMyTopTracks.bind(this);
+    this.getDancy = this.getDancy.bind(this);
     this.deleteCookies = this.deleteCookies.bind(this);
     const token = params.access_token;
     // if (token) {
@@ -37,7 +51,12 @@ class App extends Component {
   window.location.href = "index.html";
 
   }
+  getDancy(){
 
+    spotifyApi.getRecommendations({danceability: 0.2}).then((response) => {
+      console.log(response, 'this is response');
+    }).catch(err => console.log(err))
+  }
   getAudioFeatures(){
     this.setState({audioFeatures:true})
     spotifyApi.getMyTopTracks({limit: 10, time_range: 'medium_term'}).then((response) => {
@@ -267,6 +286,9 @@ getMyTopArtists(term, callback) {
           <br/>
           <br/>
           <AudioFeatures tracks={this.state.topTracksForFeatures}/>
+          <Slider.Range min={0} marks={marks} step={1} defaultValue={[0, 20]} onChange={(e)=>console.log(e)} />
+          <br/>
+          <button onClick={this.getDancy.bind(this)}>'Use the slider to search for a track with the same danceability'</button>
           </React.Fragment>
         }
         {this.state.noNowPlaying === true && <div id='nowPlayingContainer'>Nothing is playing at the moment</div>}
