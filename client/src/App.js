@@ -1,26 +1,30 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './App.css';
 import AudioFeatures from './audio-features';
 import TopArtists from './top-artists';
 import TopTracks from './top-tracks';
 import SpotifyWebApi from 'spotify-web-api-js';
 import scrollIntoView from 'scroll-into-view';
-import Slider, { Range, createSliderWithTooltip } from 'rc-slider';
+import Slider, {Range, createSliderWithTooltip} from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
 const spotifyApi = new SpotifyWebApi();
 const marks = {
   0: '0',
-  25: '0.25',
-  50: '0.5',
-  75: '0.75',
-  100: {
+  0.25: '0.25',
+  0.50: '0.5',
+  0.75: '0.75',
+  1: {
     style: {
-      color: 'red',
+      color: 'red'
     },
-    label: <strong>1</strong>,
-  },
+    label: <strong>1</strong>
+  }
 };
+let customizedTracks;
+let customizedTrackList;
+let customizedSample;
+
 class App extends Component {
   constructor() {
     super();
@@ -29,7 +33,7 @@ class App extends Component {
     this.getAudioFeatures = this.getAudioFeatures.bind(this);
     this.getMyTopArtists = this.getMyTopArtists.bind(this);
     this.getMyTopTracks = this.getMyTopTracks.bind(this);
-    this.getDancy = this.getDancy.bind(this);
+    this.getTracksByFeatures = this.getTracksByFeatures.bind(this);
     this.deleteCookies = this.deleteCookies.bind(this);
     const token = params.access_token;
     // if (token) {
@@ -37,74 +41,86 @@ class App extends Component {
     // }
     this.state = {
       loggedIn: token
-      ? true
-      : false,
-      term:'medium_term',
-      danceability_status:true,
-      energy_status:true,
-      speechiness_status:true,
-      acousticness_status:true,
-      instrumentalness_status:true,
-      liveness_status:true,
-      valence_status:true
+        ? true
+        : false,
+      term: 'medium_term',
+      danceability_status: true,
+      energy_status: true,
+      speechiness_status: true,
+      acousticness_status: true,
+      instrumentalness_status: true,
+      liveness_status: true,
+      valence_status: true
     }
   }
-  componentDidMount(){
-  }
+  componentDidMount() {}
 
-  deleteCookies(e){
-    document.cookie = e+'=; Max-Age=-99999999;';
+  deleteCookies(e) {
+    document.cookie = e + '=; Max-Age=-99999999;';
     window.location.href = "index.html";
 
   }
-  getDancy(){
-
-    spotifyApi.getRecommendations({"min_danceability": "0.6", "max_danceability":"0.9", "seed_tracks":"5gDFPrS4cSij7z19liu4Pk"}).then((response) => {
-      console.log(response, 'this is response');
+  getTracksByFeatures() {
+    let valuesArr = [];
+    let currentState = this.state;
+    var propNames = Object.keys(currentState).filter(function (prop) {
+  return (~prop.indexOf("max") || ~prop.indexOf("min"))
+})
+    for(var prop of propNames){
+      valuesArr.push("'" +prop + "'"+":" +  "'"+currentState[prop]+"'")
+    }
+    let values = String(valuesArr)
+    console.log(values);
+    spotifyApi.getRecommendations({values, "seed_tracks": this.state.topTracksForFeatures[0].id}).then((response) => {
+      console.log(response.tracks, 'this is response');
+      this.setState({
+        tracksFromChosenFeatures: response.tracks
+      })
+      console.log(this.state.topTracksForFeatures, 'here');
+       customizedTracks = this.state.tracksFromChosenFeatures;
+         customizedTrackList = customizedTracks.map(track => track.artists[0].name + ' - ' + track.name);
+       customizedSample = customizedTracks.map(track => track.preview_url)
+// blahblah
     }).catch(err => console.log(err))
   }
-  getAudioFeatures(){
-    this.setState({audioFeatures:true})
+  getAudioFeatures() {
+    this.setState({audioFeatures: true})
     spotifyApi.getMyTopTracks({limit: 10, time_range: 'medium_term'}).then((response) => {
       this.setState({
         topTracksForFeatures: response.items,
         myTopArtists: false,
-        myTopTracks:false
+        myTopTracks: false
       }, console.log('this is top tracks data', response.items))
-    })
-    .then(()=> scrollIntoView(document.getElementById("audioFeaturesContainer")))
-    .catch(err => console.log(err))
+    }).then(() => scrollIntoView(document.getElementById("audioFeaturesContainer"))).catch(err => console.log(err))
   }
 
   getMyTopTracks(term, callback) {
     spotifyApi.getMyTopTracks({limit: 10, time_range: term}).then((response) => {
 
-      this.setState({myTopTracks: response.items,
-        myTopArtists:false,
-        topTracksForFeatures:false,
+      this.setState({
+        myTopTracks: response.items,
+        myTopArtists: false,
+        topTracksForFeatures: false
       }, callback)
-    })
-    .then(()=> scrollIntoView(document.getElementById("topTracksContainer")))
-    .catch(err => console.log(err))
+    }).then(() => scrollIntoView(document.getElementById("topTracksContainer"))).catch(err => console.log(err))
   }
 
   getMyTopArtists(term, callback) {
     spotifyApi.getMyTopArtists({limit: 10, time_range: term}).then((response) => {
       this.setState({
         myTopArtists: response.items,
-        myTopTracks:false,
-        topTracksForFeatures:false,
-        term: term,
+        myTopTracks: false,
+        topTracksForFeatures: false,
+        term: term
       }, callback);
-    }).then(()=> scrollIntoView(document.getElementById("topArtistsContainer")))
-    .catch(err => console.log(err))
+    }).then(() => scrollIntoView(document.getElementById("topArtistsContainer"))).catch(err => console.log(err))
   }
 
   getHashParams() {
     var hashParams = {};
     var e,
-    r = /([^&;=]+)=?([^&;]*)/g,
-    q = window.location.hash.substring(1);
+      r = /([^&;=]+)=?([^&;]*)/g,
+      q = window.location.hash.substring(1);
     e = r.exec(q)
     while (e) {
       hashParams[e[1]] = decodeURIComponent(e[2]);
@@ -117,23 +133,20 @@ class App extends Component {
     let anchor;
     if (process.env.NODE_ENV !== 'production') {
       anchor = 'http://www.localhost:5000/login'
-    }
-    else{
+    } else {
       anchor = 'https://spot-stats.herokuapp.com/login';
     }
     let artists;
     let tracks;
     if (this.state.myTopArtists) {
       artists = this.state.myTopArtists;
-    }
-    else if (this.state.myTopTracks) {
+    } else if (this.state.myTopTracks) {
       tracks = this.state.myTopTracks;
     }
 
-    return (
-      <div className="app">
-        { this.state.loggedIn === false  &&
-          <nav className="navbar fixed-top navbar-expand-lg navbar-dark fixed-top" id="nav-transparent">
+    return (<div className="app">
+      {
+        this.state.loggedIn === false && <nav className="navbar fixed-top navbar-expand-lg navbar-dark fixed-top" id="nav-transparent">
             <div className="container">
               <a className="navbar-brand" href="index.html">Spot.Stats</a>
               <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -148,11 +161,9 @@ class App extends Component {
               </div>
             </div>
           </nav>
-        }
-        { this.state.loggedIn !== false  &&
-
-
-          <nav className="navbar fixed-top navbar-expand-lg navbar-dark fixed-top" id="nav-transparent">
+      }
+      {
+        this.state.loggedIn !== false && <nav className="navbar fixed-top navbar-expand-lg navbar-dark fixed-top" id="nav-transparent">
             <div className="container">
               <a className="navbar-brand" href="index.html">Spot.Stats</a>
               <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -180,55 +191,66 @@ class App extends Component {
               </div>
             </div>
           </nav>
-        }
+      }
 
-        <header>
-          <div id="carousel" className="carousel slide carousel-fade" data-ride="carousel"  data-interval="3000">
+      <header>
+        <div id="carousel" className="carousel slide carousel-fade" data-ride="carousel" data-interval="3000">
 
-            <ol className="carousel-indicators">
-              <li data-target="#carousel" data-slide-to="0" className="active"></li>
-              <li data-target="#carousel" data-slide-to="1"></li>
-              <li data-target="#carousel" data-slide-to="2"></li>
-            </ol>
-            <div className="carousel-inner" role="listbox">
-              {/* Slide One - Set the background image for this slide in the line below */}
-              <div className="carousel-item active" style={{backgroundImage: `url(smoke3.jpg)`}}>
-                <div className="carousel-caption d-none d-md-block" style={{backgroundColor:'transparent'}}>
-                  <h3>First Slide</h3>
-                  <p>This is a description for the first slide.</p>
-                </div>
-              </div>
-              {/*- Slide Two - Set the background image for this slide in the line below*/}
-              <div className="carousel-item" style={{backgroundImage: `url(smoke2.jpg)`}}>
-                <div className="carousel-caption d-none d-md-block" style={{backgroundColor:'transparent'}}>
-                  <h3>Second Slide</h3>
-                  <p>This is a description for the second slide.</p>
-                </div>
-              </div>
-              {/*-- Slide Three - Set the background image for this slide in the line below */}
-              <div className="carousel-item" style={{backgroundImage: `url(smoke4.jpg)`}}>
-                <div className="carousel-caption d-none d-md-block" style={{backgroundColor:'transparent'}}>
-                  <h3>Third Slide</h3>
-                  <p>This is a description for the third slide.</p>
-                </div>
+          <ol className="carousel-indicators">
+            <li data-target="#carousel" data-slide-to="0" className="active"></li>
+            <li data-target="#carousel" data-slide-to="1"></li>
+            <li data-target="#carousel" data-slide-to="2"></li>
+          </ol>
+          <div className="carousel-inner" role="listbox">
+            {/* Slide One - Set the background image for this slide in the line below */}
+            <div className="carousel-item active" style={{
+                backgroundImage: `url(smoke3.jpg)`
+              }}>
+              <div className="carousel-caption d-none d-md-block" style={{
+                  backgroundColor: 'transparent'
+                }}>
+                <h3>First Slide</h3>
+                <p>This is a description for the first slide.</p>
               </div>
             </div>
-            <a className="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-              <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span className="sr-only">Previous</span>
-            </a>
-            <a className="carousel-control-next" href="#carousel" role="button" data-slide="next">
-              <span className="carousel-control-next-icon" aria-hidden="true"></span>
-              <span className="sr-only">Next</span>
-            </a>
+            {/* - Slide Two - Set the background image for this slide in the line below */}
+            <div className="carousel-item" style={{
+                backgroundImage: `url(smoke2.jpg)`
+              }}>
+              <div className="carousel-caption d-none d-md-block" style={{
+                  backgroundColor: 'transparent'
+                }}>
+                <h3>Second Slide</h3>
+                <p>This is a description for the second slide.</p>
+              </div>
+            </div>
+            {/* -- Slide Three - Set the background image for this slide in the line below */}
+            <div className="carousel-item" style={{
+                backgroundImage: `url(smoke4.jpg)`
+              }}>
+              <div className="carousel-caption d-none d-md-block" style={{
+                  backgroundColor: 'transparent'
+                }}>
+                <h3>Third Slide</h3>
+                <p>This is a description for the third slide.</p>
+              </div>
+            </div>
           </div>
-        </header>
+          <a className="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+            <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span className="sr-only">Previous</span>
+          </a>
+          <a className="carousel-control-next" href="#carousel" role="button" data-slide="next">
+            <span className="carousel-control-next-icon" aria-hidden="true"></span>
+            <span className="sr-only">Next</span>
+          </a>
+        </div>
+      </header>
 
-        {/*Page Content */}
-        {
-          this.state.loggedIn &&
-          <div className="container">
-            {/*-- Portfolio Section*/}
+      {/* Page Content */}
+      {
+        this.state.loggedIn && <div className="container">
+            {/* -- Portfolio Section */}
             <br/>
             <br/>
             <div className="row">
@@ -246,7 +268,7 @@ class App extends Component {
               </div>
               <div className="col-lg-4 col-sm-6 portfolio-item">
                 <div className="card h-100">
-                  <a href="#" onClick ={() => this.getMyTopArtists(this.state.term)}><img className="card-img-top" src="topArtistsCard.jpg" alt=""/></a>
+                  <a href="#" onClick={() => this.getMyTopArtists(this.state.term)}><img className="card-img-top" src="topArtistsCard.jpg" alt=""/></a>
                   <div className="card-body">
                     <h4 className="card-title">
                       <a href="#" onClick ={() => this.getMyTopArtists(this.state.term)}>Check Your 10 Top Artists Popularity</a>
@@ -268,87 +290,186 @@ class App extends Component {
               </div>
 
             </div>
-            {/*.row */}
+            {/* .row */}
 
             {
-              this.state.myTopArtists &&
-              <React.Fragment>
-                <br/>
-                <br/>
-                <TopArtists artists={artists} getMyTopArtists= {this.getMyTopArtists.bind(this)}/>
-              </React.Fragment>
+              this.state.myTopArtists && <React.Fragment>
+                  <br/>
+                  <br/>
+                  <TopArtists artists={artists} getMyTopArtists={this.getMyTopArtists.bind(this)}/>
+                </React.Fragment>
             }
             {
-              this.state.myTopTracks &&
-              <React.Fragment>
-                <br/>
-                <br/>
-                <TopTracks tracks={tracks} getMyTopTracks= {this.getMyTopTracks.bind(this)}/>
-              </React.Fragment>
+              this.state.myTopTracks && <React.Fragment>
+                  <br/>
+                  <br/>
+                  <TopTracks tracks={tracks} getMyTopTracks={this.getMyTopTracks.bind(this)}/>
+                </React.Fragment>
             }
             {
-              this.state.topTracksForFeatures &&
-              <React.Fragment>
-                <br/>
-                <br/>
-                <AudioFeatures tracks={this.state.topTracksForFeatures}/>
-                <Slider.Range min={0} marks={marks} step={1} defaultValue={[0, 20]} onChange={(e)=>console.log(e)} />
-                <br/>
-                <button className="btn" disabled={this.state.energy_status}><p  onClick={()=> {
-                  this.setState(prevState => ({
-                    energy_status: !prevState.energy_status
-                  }
-                )); console.log(this.state);
-              }}>Energy</p></button>
-                <button className="btn" disabled={this.state.acousticness_status}><p  onClick={()=> {
-                  this.setState(prevState => ({
-                    acousticness_status: !prevState.acousticness_status
-                  }
-                )); console.log(this.state);
-              }}>Acousticness</p></button>
-                <button className="btn" disabled={this.state.danceability_status}><p  onClick={()=> {
-                  this.setState(prevState => ({
-                    danceability_status: !prevState.danceability_status
-                  }
-                )); console.log(this.state);
-              }}>Danceability</p></button>
-                <button className="btn" disabled={this.state.instrumentalness_status}><p  onClick={()=> {
-                  this.setState(prevState => ({
-                    instrumentalness_status: !prevState.instrumentalness_status
-                  }
-                )); console.log(this.state);
-              }}>Instrumentalness</p></button>
-                <button className="btn" disabled={this.state.liveness_status}><p  onClick={()=> {
-                  this.setState(prevState => ({
-                    liveness_status: !prevState.liveness_status
-                  }
-                )); console.log(this.state);
-              }}>Livenss</p></button>
-                <button className="btn" disabled={this.state.valence_status}><p  onClick={()=> {
-                  this.setState(prevState => ({
-                    valence_status: !prevState.valence_status
-                  }
-                )); console.log(this.state);
-              }}>Valence</p></button>
-                <button className="btn" disabled={this.state.speechiness_status}><p  onClick={()=> {
-                  this.setState(prevState => ({
-                    speechiness_status: !prevState.speechiness_status
-                  }
-                )); console.log(this.state);
-              }}>Speechiness</p></button>
+              this.state.topTracksForFeatures && <React.Fragment>
+                  <br/>
+                  <br/>
+                  <AudioFeatures tracks={this.state.topTracksForFeatures}/> {/* Buttons for activating slider and slider with values */}
 
-              <button onClick={this.getDancy.bind(this)}>'Use the slider to search for a track with the same danceability'</button>
-            </React.Fragment>
-          }
-          {this.state.noNowPlaying === true && <div id='nowPlayingContainer'>Nothing is playing at the moment</div>}
-          {this.state.nowPlaying && this.state.noNowPlaying !== true &&
-            <div id='nowPlayingContainer'>
-              Now Playing: {this.state.nowPlaying.name}s
-              <img alt='album-art' src={this.state.nowPlaying.albumArt} style={{
-                height: 100
-              }}/>
-            </div>}
-            {/*-- Features Section */}
+                  <button className="btn" disabled={this.state.energy_status}>
+                    <p onClick={() => {
+                        this.setState(prevState => ({
+                          energy_status: !prevState.energy_status
+                        }));
+                        console.log(this.state);
+                      }}>Energy</p>
+                  </button>
+                  {
+                    this.state.energy_status == false && <React.Fragment>
+                        <Slider.Range min={0} max={1} marks={marks} step={0.05} defaultValue={[0, 0.25]} onChange={(e) => {
+                            let valueArr = e;
+                            this.setState({min_energy: valueArr[0], max_energy: valueArr[1]})
+                          }
+}/>
+                        <br/>
+                      </React.Fragment>
+                  }
+                  <button className="btn" disabled={this.state.acousticness_status}>
+                    <p onClick={() => {
+                        this.setState(prevState => ({
+                          acousticness_status: !prevState.acousticness_status
+                        }))
+                      }}>Acousticness</p>
+                  </button>
+                  {
+                    this.state.acousticness_status == false && <React.Fragment>
+                        <Slider.Range min={0} max={1} marks={marks} step={0.05} defaultValue={[0, 0.25]} onChange={(e) => {
+                            let valueArr = e;
+                            this.setState({min_acousticness: valueArr[0], max_acousticness: valueArr[1]})
+                          }
+}/>
+                        <br/>
+                      </React.Fragment>
+                  }
+                  <button className="btn" disabled={this.state.danceability_status}>
+                    <p onClick={() => {
+                        this.setState(prevState => ({
+                          danceability_status: !prevState.danceability_status
+                        }));
+                      }}>Danceability</p>
+                  </button>
+                  {
+                    this.state.danceability_status == false && <React.Fragment>
+                        <Slider.Range min={0} max={1} marks={marks} step={0.05} defaultValue={[0, 0.25]} onChange={(e) => {
+                            let valueArr = e;
+                            this.setState({min_danceability: valueArr[0], max_danceability: valueArr[1]})
+                            console.log(this.state);
+                          }
+}/>
+                        <br/>
+                      </React.Fragment>
+                  }
+                  <button className="btn" disabled={this.state.instrumentalness_status}>
+                    <p onClick={() => {
+                        this.setState(prevState => ({
+                          instrumentalness_status: !prevState.instrumentalness_status
+                        }));
+                        console.log(this.state);
+                      }}>Instrumentalness</p>
+                  </button>
+                  {
+                    this.state.instrumentalness_status == false && <React.Fragment>
+                        <Slider.Range min={0} max={1} marks={marks} step={0.05} defaultValue={[0, 0.25]} onChange={(e) => {
+                            let valueArr = e;
+                            this.setState({min_instrumentalness: valueArr[0], max_instrumentalness: valueArr[1]})
+                            console.log(this.state);
+                          }
+}/>
+                        <br/>
+                      </React.Fragment>
+                  }
+                  <button className="btn" disabled={this.state.liveness_status}>
+                    <p onClick={() => {
+                        this.setState(prevState => ({
+                          liveness_status: !prevState.liveness_status
+                        }));
+                        console.log(this.state);
+                      }}>Liveness</p>
+                  </button>
+                  {
+                    this.state.liveness_status == false && <React.Fragment>
+                        <Slider.Range min={0} max={1} marks={marks} step={0.05} defaultValue={[0, 0.25]} onChange={(e) => {
+                            let valueArr = e;
+                            this.setState({min_liveness: valueArr[0], max_liveness: valueArr[1]})
+                          }
+}/>
+                        <br/>
+                      </React.Fragment>
+                  }
+                  <button className="btn" disabled={this.state.valence_status}>
+                    <p onClick={() => {
+                        this.setState(prevState => ({
+                          valence_status: !prevState.valence_status
+                        }));
+                        console.log(this.state);
+                      }}>Valence</p>
+                  </button>
+                  {
+                    this.state.valence_status == false && <React.Fragment>
+                        <Slider.Range min={0} max={1} marks={marks} step={0.05} defaultValue={[0, 0.25]} onChange={(e) => {
+                            let valueArr = e;
+                            this.setState({min_valence: valueArr[0], max_valence: valueArr[1]})
+                          }
+}/>
+                        <br/>
+                      </React.Fragment>
+                  }
+                  <button className="btn" disabled={this.state.speechiness_status}>
+                    <p onClick={() => {
+                        this.setState(prevState => ({
+                          speechiness_status: !prevState.speechiness_status
+                        }));
+                        console.log(this.state);
+                      }}>Speechiness</p>
+                  </button>
+                  {
+                    this.state.speechiness_status == false && <React.Fragment>
+                        <Slider.Range min={0} max={1} marks={marks} step={0.05} defaultValue={[0, 0.25]} onChange={(e) => {
+                            let valueArr = e;
+                            this.setState({min_speechiness: valueArr[0], max_speechiness: valueArr[1]})
+                          }
+}/>
+                        <br/>
+                      </React.Fragment>
+                  }
+
+                  {/* Slider and slider values */}
+
+                  <button onClick={this.getTracksByFeatures.bind(this)}>Use the slider to search for a similar track with your own customized features</button>
+                </React.Fragment>
+
+            }
+            {this.state.noNowPlaying === true && <div id='nowPlayingContainer'>Nothing is playing at the moment</div>}
+            {
+              this.state.nowPlaying && this.state.noNowPlaying !== true && <div id='nowPlayingContainer'>
+                  Now Playing: {this.state.nowPlaying.name}s
+                  <img alt='album-art' src={this.state.nowPlaying.albumArt} style={{
+                      height: 100
+                    }}/>
+                </div>
+            }
+
+            {/* -- Recommended tracks based on chosen features Section */}
+            {
+              customizedTrackList && <React.Fragment>
+                  <br/>
+                  <br/>
+
+                <ul>
+                  <li>{customizedTrackList}</li>
+
+                </ul>
+
+                </React.Fragment>
+            }
+
+            {/* -- Features Section */}
             <br/>
             <br/>
             <br/>
@@ -372,7 +493,7 @@ class App extends Component {
                 <img className="img-fluid rounded" src="http://placehold.it/700x450" alt=""/>
               </div>
             </div>
-            {/*.row */}
+            {/* .row */}
 
             <hr></hr>
 
@@ -387,18 +508,17 @@ class App extends Component {
             </div>
 
           </div>
-        }
+      }
 
-        {/* Footer */}
-        <footer className="py-5 bg-dark">
-          <div className="container">
-            <p className="m-0 text-center text-white">Copyright &copy; Jonathan Bareket 2018</p>
-          </div>
-          {/* /.container */}
-        </footer>
+      {/* Footer */}
+      <footer className="py-5 bg-dark">
+        <div className="container">
+          <p className="m-0 text-center text-white">Copyright &copy; Jonathan Bareket 2018</p>
+        </div>
+        {/* /.container */}
+      </footer>
 
-      </div>
-    );
+    </div>);
   }
 }
 

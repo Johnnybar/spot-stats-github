@@ -5,8 +5,6 @@ import {getFeaturesById} from'./spotify_modules';
 import React from 'react';
 let featuresChart, chosenId
 
-
-
 export default class AudioFeatures extends React.Component {
   constructor() {
     super();
@@ -16,7 +14,6 @@ export default class AudioFeatures extends React.Component {
   componentDidMount() {
 
   }
-
 
   render() {
     let chosenTrackArr = [];
