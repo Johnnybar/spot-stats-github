@@ -11,14 +11,14 @@ import 'rc-slider/assets/index.css';
 const spotifyApi = new SpotifyWebApi();
 const marks = {
   0: '0',
-  25: '25',
-  50: '50',
-  75: '75',
+  25: '0.25',
+  50: '0.5',
+  75: '0.75',
   100: {
     style: {
       color: 'red',
     },
-    label: <strong>100</strong>,
+    label: <strong>1</strong>,
   },
 };
 class App extends Component {
@@ -47,7 +47,6 @@ class App extends Component {
       instrumentalness_status:true,
       liveness_status:true,
       valence_status:true
-
     }
   }
   componentDidMount(){
@@ -60,7 +59,7 @@ class App extends Component {
   }
   getDancy(){
 
-    spotifyApi.getRecommendations({"target_danceability": "0.9","target_energy":0.9,valence:"0.9",  "seed_tracks":"5gDFPrS4cSij7z19liu4Pk"}).then((response) => {
+    spotifyApi.getRecommendations({"min_danceability": "0.6", "max_danceability":"0.9", "seed_tracks":"5gDFPrS4cSij7z19liu4Pk"}).then((response) => {
       console.log(response, 'this is response');
     }).catch(err => console.log(err))
   }

@@ -5,6 +5,7 @@
   "dependencies": {
     "chart": "^0.1.2",
     "chart.js": "^2.7.2",
+    "immutability-helper": "^2.8.1",
     "react": "^16.5.1",
     "react-cookie": "^3.0.4",
     "react-dom": "^16.5.1",
