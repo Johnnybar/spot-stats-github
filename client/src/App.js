@@ -78,9 +78,9 @@ class App extends Component {
       })
       console.log(this.state.topTracksForFeatures, 'here');
        customizedTracks = this.state.tracksFromChosenFeatures;
-         customizedTrackList = customizedTracks.map(track => track.artists[0].name + ' - ' + track.name);
+         customizedTrackList = customizedTracks.map(track => `${track.artists[0].name} - ${track.name} ` );
        customizedSample = customizedTracks.map(track => track.preview_url)
-// blahblah
+
     }).catch(err => console.log(err))
   }
   getAudioFeatures() {
@@ -463,6 +463,9 @@ class App extends Component {
 
                 <ul>
                   <li>{customizedTrackList}</li>
+                  <audio className='preview-track' src={customizedTrackList[0].preview_url} controls="controls">
+                    Your browser does not support the audio element.
+                  </audio>
 
                 </ul>
 
