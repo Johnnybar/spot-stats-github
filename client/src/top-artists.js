@@ -9,7 +9,6 @@ import scrollIntoView from 'scroll-into-view';
 let chosenId, topArtists;
 
 export default class TopArtists extends React.Component {
-
   constructor() {
     super();
     this.state = {};

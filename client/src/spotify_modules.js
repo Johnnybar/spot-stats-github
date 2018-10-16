@@ -3,6 +3,10 @@ import SpotifyWebApi from 'spotify-web-api-js';
 const spotifyApi = new SpotifyWebApi();
 
 let trackIds;
+let customizedTracks;
+let customizedTrackList;
+let customizedSample;
+
 
 export function getArtistInfoAndRecommendations(id) {
 
