@@ -320,6 +320,7 @@ let options ={};
                   <AudioFeatures tracks={this.state.topTracksForFeatures}/> {/* Buttons for activating slider and slider with values */}
                   {/* Buttons for customizing tracks */}
                   <div id="customizedButtonsContainer">
+                    <div className='container title-plus-slider'>
                     <button className="btn" disabled={this.state.energy_status}>
                       <p onClick={() => {
                           this.setState(prevState => ({
@@ -337,6 +338,8 @@ let options ={};
                           <br/>
                         </React.Fragment>
                     }
+                    </div>
+                    <div className='container title-plus-slider'>
                     <button className="btn" disabled={this.state.acousticness_status}>
                       <p onClick={() => {
                           this.setState(prevState => ({
@@ -354,6 +357,8 @@ let options ={};
                           <br/>
                         </React.Fragment>
                     }
+                  </div>
+                  <div className='container title-plus-slider'>
                     <button className="btn" disabled={this.state.danceability_status}>
                       <p onClick={() => {
                           this.setState(prevState => ({
@@ -371,6 +376,8 @@ let options ={};
                           <br/>
                         </React.Fragment>
                     }
+                  </div>
+                  <div className='container title-plus-slider'>
                     <button className="btn" disabled={this.state.instrumentalness_status}>
                       <p onClick={() => {
                           this.setState(prevState => ({
@@ -388,6 +395,8 @@ let options ={};
                           <br/>
                         </React.Fragment>
                     }
+                  </div>
+                  <div className='container title-plus-slider'>
                     <button className="btn" disabled={this.state.liveness_status}>
                       <p onClick={() => {
                           this.setState(prevState => ({
@@ -405,6 +414,8 @@ let options ={};
                           <br/>
                         </React.Fragment>
                     }
+                  </div>
+                  <div className='container title-plus-slider'>
                     <button className="btn" disabled={this.state.valence_status}>
                       <p onClick={() => {
                           this.setState(prevState => ({
@@ -422,6 +433,8 @@ let options ={};
                           <br/>
                         </React.Fragment>
                     }
+                  </div>
+                  <div className='container title-plus-slider'>
                     <button className="btn" disabled={this.state.speechiness_status}>
                       <p onClick={() => {
                           this.setState(prevState => ({
@@ -439,13 +452,15 @@ let options ={};
                           <br/>
                         </React.Fragment>
                     }
+                  </div>
 
 
                   </div>
 
                   {/* Slider and slider values */}
-
-                  <button className = "btn btn-secondary" onClick={this.getTracksByFeatures.bind(this)}>Use the slider to search for similar tracks to yours with your own customized features</button>
+                  <div className="text-center">
+                  <button className = "btn btn-primary center-block" onClick={this.getTracksByFeatures.bind(this)}>Use the sliders to search for similar tracks <br/> with your own customized features and click here</button>
+                  </div>
                   <br/>
                 </React.Fragment>
 
