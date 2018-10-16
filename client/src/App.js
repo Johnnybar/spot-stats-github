@@ -61,19 +61,29 @@ class App extends Component {
     window.location.href = "index.html";
 
   }
-  getTracksByFeatures() {
+  getTracksByFeatures(general) {
+
     let currentState = this.state;
     var propNames = Object.keys(currentState).filter(function (prop) {
   return (~prop.indexOf("max") || ~prop.indexOf("min"))
 })
 let options ={};
-
     let ids = this.state.topTracksForFeatures.map(track=>  track.id);
-    options["seed_tracks"] = ids.slice(0,4)
+
+    //// line below for a general search://////////
+    if(general ==="general"){
+      delete options.seed_tracks;
+     options["seed_genres"] = [ "electro","rock", "hip_hop", "jazz", "classical"]
+    }
+    else{
+      delete options.seed_genres;
+
+      options["seed_tracks"] = ids.slice(0,4)
+    }
     for(var p of propNames){
+
         options[p]= currentState[p]
     }
-
 
     spotifyApi.getRecommendations(options).then((response) => {
       this.setState({
@@ -459,7 +469,14 @@ let options ={};
 
                   {/* Slider and slider values */}
                   <div className="text-center">
-                  <button className = "btn btn-primary center-block" onClick={this.getTracksByFeatures.bind(this)}>Use the sliders to search for similar tracks <br/> with your own customized features and click here</button>
+                  <button className = "btn btn-primary center-block"
+                    onClick={this.getTracksByFeatures.bind(this)}>Use the sliders to search for similar tracks <br/>
+                   with your own customized features and click here</button>
+                  <button className = "btn btn-primary center-block"
+                    onClick={this.getTracksByFeatures.bind(this, "general")}>
+                   or click here for general results to your <br/>
+                 customized music search</button>
+                  {/* <button className = "btn btn-primary center-block" onClick={this.getTracksByFeaturesExpanded.bind(this)}>Or here to search general tracks unrelated to your taste</button> */}
                   </div>
                   <br/>
                 </React.Fragment>
