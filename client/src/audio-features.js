@@ -25,6 +25,10 @@ export default class AudioFeatures extends React.Component {
         if(this.state.chosenTrackFeatures[key] >= 0 && this.state.chosenTrackFeatures[key] <=1 && key !== 'mode' && key !== 'key'){
         labelArr.push(key);
         dataArr.push(this.state.chosenTrackFeatures[key])
+        let index = labelArr.indexOf('valence');
+        if(index !== -1){
+          labelArr[index] = 'positivity'
+        }
       }
 };
 

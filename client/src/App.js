@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import './App.css';
 import AudioFeatures from './audio-features';
-import CustomizedFeaturesButtons from './customized-features-buttons';
 import TopArtists from './top-artists';
 import TopTracks from './top-tracks';
+import CustomizedTracks from './customized-tracks';
 import SpotifyWebApi from 'spotify-web-api-js';
 import scrollIntoView from 'scroll-into-view';
 import Slider, {Range, createSliderWithTooltip} from 'rc-slider';
@@ -11,9 +11,8 @@ import 'rc-slider/assets/index.css';
 
 const spotifyApi = new SpotifyWebApi();
 let customizedTracks;
-let customizedTrackList;
 let customizedSample;
-{/*const marks = {
+const marks = {
   0: '0',
   0.25: '0.25',
   0.50: '0.5',
@@ -24,7 +23,7 @@ let customizedSample;
     },
     label: <strong>1</strong>
   }
-};*/}
+};
 
 
 class App extends Component {
@@ -45,6 +44,13 @@ class App extends Component {
         ? true
         : false,
       term: 'medium_term',
+      danceability_status: true,
+      energy_status: true,
+      speechiness_status: true,
+      acousticness_status: true,
+      instrumentalness_status: true,
+      liveness_status: true,
+      valence_status: true
 
     }
   }
@@ -56,22 +62,24 @@ class App extends Component {
 
   }
   getTracksByFeatures() {
-    let valuesArr = [];
     let currentState = this.state;
     var propNames = Object.keys(currentState).filter(function (prop) {
   return (~prop.indexOf("max") || ~prop.indexOf("min"))
 })
-    for(var prop of propNames){
-      valuesArr.push("'" +prop + "'"+":" +  "'"+currentState[prop]+"'")
+let options ={};
+
+    let ids = this.state.topTracksForFeatures.map(track=>  track.id);
+    options["seed_tracks"] = ids.slice(0,4)
+    for(var p of propNames){
+        options[p]= currentState[p]
     }
-    let values = String(valuesArr)
-    console.log(values);
-    spotifyApi.getRecommendations({values, "seed_tracks": this.state.topTracksForFeatures[0].id}).then((response) => {
-      console.log(response.tracks, 'this is response');
+
+
+    spotifyApi.getRecommendations(options).then((response) => {
       this.setState({
         tracksFromChosenFeatures: response.tracks
       })
-      console.log(this.state);
+      console.log(options, response, 'This is options and results');
        // customizedTracks = this.state.tracksFromChosenFeatures;
        //   customizedTrackList = customizedTracks.map(track => `${track.artists[0].name} - ${track.name} ` );
        // customizedSample = customizedTracks.map(track => track.preview_url)
@@ -85,7 +93,7 @@ class App extends Component {
         topTracksForFeatures: response.items,
         myTopArtists: false,
         myTopTracks: false
-      }, console.log('this is top tracks data', response.items))
+      })
     }).then(() => scrollIntoView(document.getElementById("audioFeaturesContainer"))).catch(err => console.log(err))
   }
 
@@ -138,6 +146,10 @@ class App extends Component {
     } else if (this.state.myTopTracks) {
       tracks = this.state.myTopTracks;
     }
+    {/*display list of customized tracks*/}
+    // if(this.state.tracksFromChosenFeatures){
+    //    customizedTrackList = this.state.tracksFromChosenFeatures.map(track => track.artists[0].name + ' - ' + track.name)
+    // }
 
     return (<div className="app">
       {
@@ -306,31 +318,144 @@ class App extends Component {
                   <br/>
                   <br/>
                   <AudioFeatures tracks={this.state.topTracksForFeatures}/> {/* Buttons for activating slider and slider with values */}
+                  {/* Buttons for customizing tracks */}
+                  <div id="customizedButtonsContainer">
+                    <button className="btn" disabled={this.state.energy_status}>
+                      <p onClick={() => {
+                          this.setState(prevState => ({
+                            energy_status: !prevState.energy_status
+                          }));
+                        }}>Energy</p>
+                    </button>
+                    {
+                      this.state.energy_status == false && <React.Fragment>
+                          <Slider.Range min={0} max={1} marks={marks} step={0.05} defaultValue={[0, 0.25]} onChange={(e) => {
+                              let valueArr = e;
+                              this.setState({min_energy: valueArr[0], max_energy: valueArr[1]})
+                            }
+                }/>
+                          <br/>
+                        </React.Fragment>
+                    }
+                    <button className="btn" disabled={this.state.acousticness_status}>
+                      <p onClick={() => {
+                          this.setState(prevState => ({
+                            acousticness_status: !prevState.acousticness_status
+                          }))
+                        }}>Acousticness</p>
+                    </button>
+                    {
+                      this.state.acousticness_status == false && <React.Fragment>
+                          <Slider.Range min={0} max={1} marks={marks} step={0.05} defaultValue={[0, 0.25]} onChange={(e) => {
+                              let valueArr = e;
+                              this.setState({min_acousticness: valueArr[0], max_acousticness: valueArr[1]})
+                            }
+                }/>
+                          <br/>
+                        </React.Fragment>
+                    }
+                    <button className="btn" disabled={this.state.danceability_status}>
+                      <p onClick={() => {
+                          this.setState(prevState => ({
+                            danceability_status: !prevState.danceability_status
+                          }));
+                        }}>Danceability</p>
+                    </button>
+                    {
+                      this.state.danceability_status == false && <React.Fragment>
+                          <Slider.Range min={0} max={1} marks={marks} step={0.05} defaultValue={[0, 0.25]} onChange={(e) => {
+                              let valueArr = e;
+                              this.setState({min_danceability: valueArr[0], max_danceability: valueArr[1]})
+                            }
+                }/>
+                          <br/>
+                        </React.Fragment>
+                    }
+                    <button className="btn" disabled={this.state.instrumentalness_status}>
+                      <p onClick={() => {
+                          this.setState(prevState => ({
+                            instrumentalness_status: !prevState.instrumentalness_status
+                          }));
+                        }}>Instrumentalness</p>
+                    </button>
+                    {
+                      this.state.instrumentalness_status == false && <React.Fragment>
+                          <Slider.Range min={0} max={1} marks={marks} step={0.05} defaultValue={[0, 0.25]} onChange={(e) => {
+                              let valueArr = e;
+                              this.setState({min_instrumentalness: valueArr[0], max_instrumentalness: valueArr[1]})
+                            }
+                }/>
+                          <br/>
+                        </React.Fragment>
+                    }
+                    <button className="btn" disabled={this.state.liveness_status}>
+                      <p onClick={() => {
+                          this.setState(prevState => ({
+                            liveness_status: !prevState.liveness_status
+                          }));
+                        }}>Liveness</p>
+                    </button>
+                    {
+                      this.state.liveness_status == false && <React.Fragment>
+                          <Slider.Range min={0} max={1} marks={marks} step={0.05} defaultValue={[0, 0.25]} onChange={(e) => {
+                              let valueArr = e;
+                              this.setState({min_liveness: valueArr[0], max_liveness: valueArr[1]})
+                            }
+                }/>
+                          <br/>
+                        </React.Fragment>
+                    }
+                    <button className="btn" disabled={this.state.valence_status}>
+                      <p onClick={() => {
+                          this.setState(prevState => ({
+                            valence_status: !prevState.valence_status
+                          }));
+                        }}>Positivity</p>
+                    </button>
+                    {
+                      this.state.valence_status == false && <React.Fragment>
+                          <Slider.Range min={0} max={1} marks={marks} step={0.05} defaultValue={[0, 0.25]} onChange={(e) => {
+                              let valueArr = e;
+                              this.setState({min_valence: valueArr[0], max_valence: valueArr[1]})
+                            }
+                }/>
+                          <br/>
+                        </React.Fragment>
+                    }
+                    <button className="btn" disabled={this.state.speechiness_status}>
+                      <p onClick={() => {
+                          this.setState(prevState => ({
+                            speechiness_status: !prevState.speechiness_status
+                          }));
+                        }}>Speechiness</p>
+                    </button>
+                    {
+                      this.state.speechiness_status == false && <React.Fragment>
+                          <Slider.Range min={0} max={1} marks={marks} step={0.05} defaultValue={[0, 0.25]} onChange={(e) => {
+                              let valueArr = e;
+                              this.setState({min_speechiness: valueArr[0], max_speechiness: valueArr[1]})
+                            }
+                }/>
+                          <br/>
+                        </React.Fragment>
+                    }
 
-                  <CustomizedFeaturesButtons />
+
+                  </div>
 
                   {/* Slider and slider values */}
 
-                  <button onClick={this.getTracksByFeatures.bind(this)}>Use the slider to search for a similar track with your own customized features</button>
-
+                  <button className = "btn btn-secondary" onClick={this.getTracksByFeatures.bind(this)}>Use the slider to search for similar tracks to yours with your own customized features</button>
+                  <br/>
                 </React.Fragment>
 
             }
             {
-              this.state.tracksFromChosenFeatures && <React.Fragment>
+              this.state.tracksFromChosenFeatures && <div className = 'customized-tracks-container container'>
 
-                  <br/>
-                  <br/>
+                  <CustomizedTracks tracks={this.state.tracksFromChosenFeatures} />
 
-                <ul>
-                  <li>{this.state.tracksFromChosenFeatures.map(track => track.artists[0].name + ' - ' + track.name )}</li>
-                  {/* <audio className='preview-track' src={this.state.tracksFromChosenFeatures[0].preview_url} controls="controls">
-                    Your browser does not support the audio element.
-                  </audio> */}
-
-                </ul>
-
-                </React.Fragment>
+                </div>
             }
             {this.state.noNowPlaying === true && <div id='nowPlayingContainer'>Nothing is playing at the moment</div>}
             {
