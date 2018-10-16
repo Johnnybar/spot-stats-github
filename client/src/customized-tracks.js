@@ -14,7 +14,7 @@ export default class CustomizedTracks extends React.Component {
 
   render() {
     let customizedTrackList = this.props.tracks.map(track =>
-      <div className='customized-track row '>
+      <div key ={track.id} className='customized-track row '>
         <div id="customized-track-button" className="col" key={track.id}>{track.artists[0].name + ' - ' + track.name}
   </div>
 

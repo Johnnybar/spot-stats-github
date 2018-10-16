@@ -327,9 +327,10 @@ let options ={};
               this.state.topTracksForFeatures && <React.Fragment>
                   <br/>
                   <br/>
-                  <AudioFeatures tracks={this.state.topTracksForFeatures}/> {/* Buttons for activating slider and slider with values */}
+                  <AudioFeatures tracks={this.state.topTracksForFeatures}/>
+                  {/* Buttons for activating slider and slider with values */}
                   {/* Buttons for customizing tracks */}
-                  <div id="customizedButtonsContainer">
+                  <div id="customizedButtonsContainer container">
                     <div className='container title-plus-slider'>
                     <button className="btn" disabled={this.state.energy_status}>
                       <p onClick={() => {
