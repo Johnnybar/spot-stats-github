@@ -212,7 +212,7 @@ class App extends Component {
     <div className="container d-flex h-100 align-items-center">
       <div className="mx-auto text-center">
 <h1 className="mx-auto my-0" style={{fontFamily:'Delicate'}}>Spot.Stats</h1>
-        <h2 className="text-white-50 mx-auto mt-2 mb-5">The go-to app for your customized Spotify usage statistics, recommendations and search</h2>
+        <h2 className="text-white-50 mx-auto mt-2 mb-5">The go-to page for your customized Spotify usage statistics, recommendations and search</h2>
         <a href="#about" className="btn btn-primary js-scroll-trigger">Get Started</a>
       </div>
     </div>
@@ -422,7 +422,7 @@ class App extends Component {
       <div className="container d-flex h-100 align-items-center">
         <div className="mx-auto text-center">
           <h1 className="mx-auto my-0" style={{fontFamily:'Delicate'}}>Spot.Stats</h1>
-          <h2 className="text-white-50 mx-auto mt-2 mb-5">The go-to app for your customized Spotify usage statistics, recommendations and search</h2>
+          <h2 className="text-white-50 mx-auto mt-2 mb-5">The go-to page for your customized Spotify usage statistics, recommendations and search</h2>
           <a href="#features-container" className="btn btn-primary js-scroll-trigger" onClick={()=>scrollIntoView(document.getElementById("features-section"))}>Check It Out</a>
         </div>
       </div>
@@ -458,10 +458,10 @@ class App extends Component {
                   fontFamily: 'Varela Round',
                   textTransform: "uppercase",
                   letterSpacing: "0.15rem"}}>
-                  <a href="#smtg" style={{color:"black"}} onClick ={() => this.getMyTopArtists(this.state.term)}>10 Top Artists</a>
+                  <a href="#smtg" style={{color:"black"}} onClick ={() => this.getMyTopArtists(this.state.term)}>Top 10 Artists</a>
                 </h4>
                 <hr className="my-4"></hr>
-                <div className="small text-black-50">Check Your 10 Top Artists and their Popularity</div>
+                <div className="small text-black-50">Check Your Top 10 Artists and their Popularity</div>
               </div>
             </div>
           </div>
@@ -696,6 +696,7 @@ class App extends Component {
 
       </div>
     </div>
+
     <div className="social d-flex justify-content-center">
       <a href="#smtg" className="mx-2">
         <i className="fab fa-twitter"></i>
@@ -707,6 +708,7 @@ class App extends Component {
         <i className="fab fa-github"></i>
       </a>
     </div>
+
   </div>
 </section>
 {/* <!-- Footer --> */}
