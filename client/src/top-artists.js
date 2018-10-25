@@ -156,7 +156,7 @@ export default class TopArtists extends React.Component {
 </div>
       {
         artistInfo && <div className='chosen-artist-container'>
-            <div className='artist-name'>{artistInfo.name}</div>
+            <div className='artist-name grey-text'>{artistInfo.name}</div>
             <img alt='artist-img' className='artist-image' src={artistInfo.image}/>
             <p className="grey-text">Here is a short clip of {artistInfo.name}s music</p>
             <audio className='preview-track' src={sampleTrack} controls="controls">
