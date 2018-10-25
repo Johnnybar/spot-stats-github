@@ -4,9 +4,6 @@
   font-weight: 400;
   src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v18/KFOmCnqEu92Fr1Mu4mxP.ttf) format('truetype');
 }
-body {
-  font-family: 'Roboto', sans-serif !important;
-}
 @font-face {
   font-family: "Delicate";
   src: url(delicate-regular.ttf) format("truetype");
@@ -89,46 +86,8 @@ button {
   background-color: #00acea !important;
   border-color: #00acea !important;
 }
-.carousel-indicators {
-  list-style: none;
-}
 .btn {
   margin: 5px;
-}
-.carousel-indicators li,
-.carousel-indicators li.active {
-  margin: 10px;
-  width: 20px !important;
-  height: 20px !important;
-  position: relative !important;
-  margin: 10px !important;
-  border-radius: 50%;
-  border: 1px solid #fff;
-}
-.carousel-fade .carousel-inner .item,
-.carousel-fade .carousel-inner .active.left,
-.carousel-fade .carousel-inner .active.right {
-  opacity: 0;
-}
-.carousel-fade .carousel-inner .active,
-.carousel-fade .carousel-inner .next.left,
-.carousel-fade .carousel-inner .prev.right {
-  opacity: 1;
-}
-.carousel-fade .carousel-inner .next,
-.carousel-fade .carousel-inner .prev,
-.carousel-fade .carousel-inner .active.left,
-.carousel-fade .carousel-inner .active.right {
-  left: 0;
-  transform: translate3d(0, 0, 0);
-}
-.carousel-fade .carousel-control {
-  z-index: 2;
-}
-.carousel-fade .carousel-item {
-  opacity: 0;
-  transition-duration: 2s !important;
-  transition-property: opacity;
 }
 #nav-transparent {
   background-color: #00000094 !important;
@@ -339,7 +298,7 @@ button {
   border: 0;
 }
 .contact-section {
-  padding: 5rem 0 0;
+  padding: 30px 0px 130px 0px;
 }
 .contact-section .card {
   border: 0;
@@ -388,6 +347,7 @@ a:hover {
 }
 .bg-black {
   background-color: #161616 !important;
+  padding-bottom: 50px;
 }
 .bg-primary {
   background-color: #64a19d !important;
