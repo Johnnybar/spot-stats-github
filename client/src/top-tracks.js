@@ -134,7 +134,7 @@ export default class TopTracks extends React.Component {
     let currentlyClicked = this.state.currentClickedRecommendation;
     return (<div id='topTracksContainer'>
       <div className="wrapper text-center">
-      <div>Want to choose a different time range for analysis?</div>
+      <div className="grey-text">Want to choose a different time range for analysis?</div>
       <div className="btn-group">
       <button className='btn btn-primary' onClick={(e)=>{
         this.props.getMyTopTracks('short_term', this.updateConfigByMutating)

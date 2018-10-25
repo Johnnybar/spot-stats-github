@@ -193,8 +193,8 @@ class App extends Component {
     <div className="container">
       <a className="navbar-brand js-scroll-trigger" href="index.html">Spot.Stats</a>
       <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-        Menu
+        {/* <span className="navbar-toggler-icon"></span> */}
+
         <i className="fas fa-bars"></i>
       </button>
       <div className="collapse navbar-collapse" id="navbarResponsive">
@@ -211,9 +211,9 @@ class App extends Component {
   <header className="masthead">
     <div className="container d-flex h-100 align-items-center">
       <div className="mx-auto text-center">
-        <h1 className="mx-auto my-0 text-uppercase">Grayscale</h1>
-        <h2 className="text-white-50 mx-auto mt-2 mb-5">A free, responsive, one page Bootstrap theme created by Start Bootstrap.</h2>
-        <a href="about" className="btn btn-primary js-scroll-trigger">Get Started</a>
+<h1 className="mx-auto my-0" style={{fontFamily:'Delicate'}}>Spot.Stats</h1>
+        <h2 className="text-white-50 mx-auto mt-2 mb-5">The go-to app for your customized Spotify usage statistics, recommendations and search</h2>
+        <a href="#about" className="btn btn-primary js-scroll-trigger">Get Started</a>
       </div>
     </div>
   </header>
@@ -389,8 +389,8 @@ class App extends Component {
       <div className="container">
         <a className="navbar-brand js-scroll-trigger" href="index.html">Spot.Stats</a>
         <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-          Menu
+          {/* <span className="navbar-toggler-icon"></span> */}
+
           <i className="fas fa-bars"></i>
         </button>
         <div className="collapse navbar-collapse" id="navbarResponsive">
@@ -421,15 +421,15 @@ class App extends Component {
     <header className="masthead">
       <div className="container d-flex h-100 align-items-center">
         <div className="mx-auto text-center">
-          <h1 className="mx-auto my-0 text-uppercase">Grayscale</h1>
-          <h2 className="text-white-50 mx-auto mt-2 mb-5">A free, responsive, one page Bootstrap theme created by Start Bootstrap.</h2>
-          <a href="#about" className="btn btn-primary js-scroll-trigger">Get Started</a>
+          <h1 className="mx-auto my-0" style={{fontFamily:'Delicate'}}>Spot.Stats</h1>
+          <h2 className="text-white-50 mx-auto mt-2 mb-5">The go-to app for your customized Spotify usage statistics, recommendations and search</h2>
+          <a href="#features-container" className="btn btn-primary js-scroll-trigger" onClick={()=>scrollIntoView(document.getElementById("features-section"))}>Check It Out</a>
         </div>
       </div>
     </header>
 
-    {/* <!-- Contact Section --> */}
-    <section className="contact-section bg-black">
+    {/* <!-- Features Section --> */}
+    <section className="contact-section bg-black" id="features-section">
       <div className="container">
 
         <div className="row">
@@ -437,7 +437,7 @@ class App extends Component {
           <div className="col-md-4 mb-3 mb-md-0">
             <div className="card py-4 h-100">
               <div className="card-body text-center">
-                <i className="fas fa-map-marked-alt text-primary mb-2"></i>
+                <i className="fas fa-chart-pie text-primary mb-2"></i>
                 <h4 className="text-uppercase m-0" style={{fontSize: "0.8rem",
                   fontFamily: 'Varela Round',
                   textTransform: "uppercase",
@@ -453,7 +453,7 @@ class App extends Component {
           <div className="col-md-4 mb-3 mb-md-0">
             <div className="card py-4 h-100">
               <div className="card-body text-center">
-                <i className="fas fa-envelope text-primary mb-2"></i>
+                <i className="fas fa-fire text-primary mb-2"></i>
                 <h4 className="text-uppercase m-0" style={{fontSize: "0.8rem",
                   fontFamily: 'Varela Round',
                   textTransform: "uppercase",
@@ -461,14 +461,14 @@ class App extends Component {
                   <a href="#smtg" style={{color:"black"}} onClick ={() => this.getMyTopArtists(this.state.term)}>10 Top Artists</a>
                 </h4>
                 <hr className="my-4"></hr>
-                <div className="small text-black-50">Check Your 10 Top Artists Popularity</div>
+                <div className="small text-black-50">Check Your 10 Top Artists and their Popularity</div>
               </div>
             </div>
           </div>
           <div className="col-md-4 mb-3 mb-md-0">
             <div className="card py-4 h-100">
               <div className="card-body text-center">
-                <i className="fas fa-mobile-alt text-primary mb-2"></i>
+                <i className="fas fa-headphones-alt text-primary mb-2"></i>
                 <h4 className="text-uppercase m-0" style={{fontSize: "0.8rem",
                   fontFamily: 'Varela Round',
                   textTransform: "uppercase",
@@ -490,7 +490,7 @@ class App extends Component {
 
 {/* Page Content */}
 {
-  this.state.loggedIn && <div className="container">
+  this.state.loggedIn && <div className="container" id="fade-bg">
 
 
 {
@@ -680,6 +680,7 @@ class App extends Component {
 }
 
 {/* Footer */}
+<hr></hr>
 <section id="signup" className="signup-section">
   <div className="container">
     <div className="row">

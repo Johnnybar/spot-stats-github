@@ -138,7 +138,7 @@ export default class TopArtists extends React.Component {
 
     return (<div id="topArtistsContainer">
       <div className="wrapper text-center">
-      <div>Want to choose a different time range for analysis?</div>
+      <div className="grey-text">Want to choose a different time range for analysis?</div>
       <div className="btn-group text-center">
       <button type="button" className="btn btn-secondary" onClick={(e)=>{
         this.props.getMyTopArtists('short_term', this.updateConfigByMutating)
@@ -158,7 +158,7 @@ export default class TopArtists extends React.Component {
         artistInfo && <div className='chosen-artist-container'>
             <div className='artist-name'>{artistInfo.name}</div>
             <img alt='artist-img' className='artist-image' src={artistInfo.image}/>
-            Here is a short clip of {artistInfo.name}s music
+            <p className="grey-text">Here is a short clip of {artistInfo.name}s music</p>
             <audio className='preview-track' src={sampleTrack} controls="controls">
               Your browser does not support the audio element.
             </audio>
@@ -166,7 +166,7 @@ export default class TopArtists extends React.Component {
           </div>
       } {
         recommendations && <div className='recommendation-container'>
-            <h2>Here are some track recommendations based on {artistInfo.name}</h2>
+            <h2 className="grey-text">Here are some track recommendations based on {artistInfo.name}</h2>
             <div className='artists-recommendations'>
               {recommendations.nameAndTrack}
             </div>
