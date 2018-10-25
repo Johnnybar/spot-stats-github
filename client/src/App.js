@@ -6,12 +6,11 @@ import TopTracks from './top-tracks';
 import CustomizedTracks from './customized-tracks';
 import SpotifyWebApi from 'spotify-web-api-js';
 import scrollIntoView from 'scroll-into-view';
-import Slider, {Range, createSliderWithTooltip} from 'rc-slider';
+import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 
 const spotifyApi = new SpotifyWebApi();
-let customizedTracks;
-let customizedSample;
+
 const marks = {
   0: '0',
   0.25: '0.25',
@@ -168,107 +167,421 @@ class App extends Component {
     // }
 
     return (<div className="app">
+
       {
-        this.state.loggedIn === false && <nav className="navbar fixed-top navbar-expand-lg navbar-dark fixed-top" id="nav-transparent">
-          <div className="container">
-            <a className="navbar-brand" href="index.html">Spot.Stats</a>
-            <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarResponsive">
-              <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
-                  <a className="nav-link" href={anchor}>Sign In</a>
-                </li>
-              </ul>
+        this.state.loggedIn === false &&
+        <div>
+          {/* <nav className="navbar fixed-top navbar-expand-lg navbar-dark fixed-top" id="nav-transparent">
+            <div className="container">
+              <a className="navbar-brand" href="index.html">Spot.Stats</a>
+              <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+              </button>
+              <div className="collapse navbar-collapse" id="navbarResponsive">
+                <ul className="navbar-nav ml-auto">
+                  <li className="nav-item">
+                    <a className="nav-link" href={anchor}>Sign In</a>
+                  </li>
+                </ul>
+              </div>
             </div>
-          </div>
-        </nav>
+          </nav> */}
+        <div id="page-top">
+
+          {/* <!-- Navigation --> */}
+          <nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+            <div className="container">
+              <a className="navbar-brand js-scroll-trigger" href="index.html">Spot.Stats</a>
+              <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+                Menu
+                <i className="fas fa-bars"></i>
+              </button>
+              <div className="collapse navbar-collapse" id="navbarResponsive">
+                <ul className="navbar-nav ml-auto">
+                  <li className="nav-item">
+                    <a className="nav-link" href={anchor}>Sign In</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </nav>
+
+          {/* <!-- Header --> */}
+          <header className="masthead">
+            <div className="container d-flex h-100 align-items-center">
+              <div className="mx-auto text-center">
+                <h1 className="mx-auto my-0 text-uppercase">Grayscale</h1>
+                <h2 className="text-white-50 mx-auto mt-2 mb-5">A free, responsive, one page Bootstrap theme created by Start Bootstrap.</h2>
+                <a href="about" className="btn btn-primary js-scroll-trigger">Get Started</a>
+              </div>
+            </div>
+          </header>
+
+          {/* <!-- About Section --> */}
+          <section id="about" className="about-section text-center">
+            <div className="container">
+              <div className="row">
+                <div className="col-lg-8 mx-auto">
+                  <h2 className="text-white mb-4">Built with Bootstrap 4</h2>
+                  <p className="text-white-50">Grayscale is a free Bootstrap theme created by Start Bootstrap. It can be yours right now, simply download the template on
+                    <a href="http://startbootstrap.com/template-overviews/grayscale/">the preview page</a>. The theme is open source, and you can use it for any purpose, personal or commercial.</p>
+                </div>
+              </div>
+              <img src="ipad.png" className="img-fluid" alt=""></img>
+            </div>
+          </section>
+
+          {/* <!-- Projects Section --> */}
+          <section id="projects" className="projects-section bg-light">
+            <div className="container">
+
+              {/* <!-- Featured Project Row --> */}
+              <div className="row align-items-center no-gutters mb-4 mb-lg-5">
+                <div className="col-xl-8 col-lg-7">
+                  <img className="img-fluid mb-3 mb-lg-0" src="bg-masthead.jpg" alt=""></img>
+                </div>
+                <div className="col-xl-4 col-lg-5">
+                  <div className="featured-text text-center text-lg-left">
+                    <h4>Shoreline</h4>
+                    <p className="text-black-50 mb-0">Grayscale is open source and MIT licensed. This means you can use it for any project - even commercial projects! Download it, customize it, and publish your website!</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* <!-- Project One Row --> */}
+              <div className="row justify-content-center no-gutters mb-5 mb-lg-0">
+                <div className="col-lg-6">
+                  <img className="img-fluid" src="demo-image-01.jpg" alt=""></img>
+                </div>
+                <div className="col-lg-6">
+                  <div className="bg-black text-center h-100 project">
+                    <div className="d-flex h-100">
+                      <div className="project-text w-100 my-auto text-center text-lg-left">
+                        <h4 className="text-white">Misty</h4>
+                        <p className="mb-0 text-white-50">An example of where you can put an image of a project, or anything else, along with a description.</p>
+                        <hr className="d-none d-lg-block mb-0 ml-0"></hr>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* <!-- Project Two Row --> */}
+              <div className="row justify-content-center no-gutters">
+                <div className="col-lg-6">
+                  <img className="img-fluid" src="demo-image-02.jpg" alt=""></img>
+                </div>
+                <div className="col-lg-6 order-lg-first">
+                  <div className="bg-black text-center h-100 project">
+                    <div className="d-flex h-100">
+                      <div className="project-text w-100 my-auto text-center text-lg-right">
+                        <h4 className="text-white">Mountains</h4>
+                        <p className="mb-0 text-white-50">Another example of a project with its respective description. These sections work well responsively as well, try this theme on a small screen!</p>
+                        <hr className="d-none d-lg-block mb-0 mr-0"></hr>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          {/* <!-- Signup Section --> */}
+          <section id="signup" className="signup-section">
+            <div className="container">
+              <div className="row">
+                <div className="col-md-10 col-lg-8 mx-auto text-center">
+
+                  <i className="far fa-paper-plane fa-2x mb-2 text-white"></i>
+                  <h2 className="text-white mb-5">Subscribe to receive updates!</h2>
+
+                  <form className="form-inline d-flex">
+                    <input type="email" className="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail" placeholder="Enter email address..."></input>
+                    <button type="submit" className="btn btn-primary mx-auto">Subscribe</button>
+                  </form>
+
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* <!-- Contact Section --> */}
+          <section className="contact-section bg-black">
+            <div className="container">
+
+              <div className="row">
+
+                <div className="col-md-4 mb-3 mb-md-0">
+                  <div className="card py-4 h-100">
+                    <div className="card-body text-center">
+                      <i className="fas fa-map-marked-alt text-primary mb-2"></i>
+                      <h4 className="text-uppercase m-0">Address</h4>
+                      <hr className="my-4"></hr>
+                      <div className="small text-black-50">4923 Market Street, Orlando FL</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-md-4 mb-3 mb-md-0">
+                  <div className="card py-4 h-100">
+                    <div className="card-body text-center">
+                      <i className="fas fa-envelope text-primary mb-2"></i>
+                      <h4 className="text-uppercase m-0">Email</h4>
+                      <hr className="my-4"></hr>
+                      <div className="small text-black-50">
+                        <a href="#smtg">hello@yourdomain.com</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-md-4 mb-3 mb-md-0">
+                  <div className="card py-4 h-100">
+                    <div className="card-body text-center">
+                      <i className="fas fa-mobile-alt text-primary mb-2"></i>
+                      <h4 className="text-uppercase m-0">Phone</h4>
+                      <hr className="my-4"></hr>
+                      <div className="small text-black-50">+1 (555) 902-832</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="social d-flex justify-content-center">
+                <a href="#smtg" className="mx-2">
+                  <i className="fab fa-twitter"></i>
+                </a>
+                <a href="#smtg" className="mx-2">
+                  <i className="fab fa-facebook-f"></i>
+                </a>
+                <a href="#smtg" className="mx-2">
+                  <i className="fab fa-github"></i>
+                </a>
+              </div>
+
+            </div>
+          </section>
+
+          {/* <!-- Footer --> */}
+          <footer className="bg-black small text-center text-white-50">
+            <div className="container">
+              Copyright &copy; Your Website 2018ss
+            </div>
+          </footer>
+
+
+          {/* <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> */}
+
+
+        </div>
+
+      </div>
       }
       {
-        this.state.loggedIn !== false && <nav className="navbar fixed-top navbar-expand-lg navbar-dark fixed-top" id="nav-transparent">
-          <div className="container">
-            <a className="navbar-brand" href="index.html">Spot.Stats</a>
-            <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarResponsive">
-              <ul className="navbar-nav ml-auto">
-                <li className="nav-item">
-                  <a className="nav-link" href="about.html">About</a>
-                </li>
-                <li className="nav-item dropdown">
-                  <a className="nav-link dropdown-toggle" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Features
-                  </a>
-                  <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
-                    <a className="dropdown-item" onClick ={() => this.getMyTopTracks(this.state.term)}>Top Tracks</a>
-                    <a className="dropdown-item" onClick ={() => this.getMyTopArtists(this.state.term)}>Top Artists</a>
-                    <a className="dropdown-item" onClick ={() => this.getAudioFeatures()}>Audio Features</a>
-                  </div>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" onClick ={() => this.deleteCookies()}>Log Out</a>
-                </li>
-              </ul>
+        this.state.loggedIn !== false &&
+
+        <div id="page-top">
+
+          {/* <!-- Navigation --> */}
+          <nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+            <div className="container">
+              <a className="navbar-brand js-scroll-trigger" href="index.html">Spot.Stats</a>
+              <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span>
+                Menu
+                <i className="fas fa-bars"></i>
+              </button>
+              <div className="collapse navbar-collapse" id="navbarResponsive">
+                <ul className="navbar-nav ml-auto">
+
+                  <li className="nav-item">
+                     <a className="nav-link" href="about.html">About</a>
+                  </li>
+                  <li className="nav-item dropdown">
+                <a className="nav-link dropdown-toggle" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Features
+                    </a>
+                     <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+                     <a className="dropdown-item" onClick ={() => this.getMyTopTracks(this.state.term)}>Top Tracks</a>
+                     <a className="dropdown-item" onClick ={() => this.getMyTopArtists(this.state.term)}>Top Artists</a>
+                     <a className="dropdown-item" onClick ={() => this.getAudioFeatures()}>Audio Features</a>
+                    </div>
+                 </li>
+                 <li className="nav-item">
+                   <a className="nav-link" onClick ={() => this.deleteCookies()}>Log Out</a>
+                 </li>
+                </ul>
+              </div>
             </div>
-          </div>
-        </nav>
+          </nav>
+
+          {/* <!-- Header --> */}
+          <header className="masthead">
+            <div className="container d-flex h-100 align-items-center">
+              <div className="mx-auto text-center">
+                <h1 className="mx-auto my-0 text-uppercase">Grayscale</h1>
+                <h2 className="text-white-50 mx-auto mt-2 mb-5">A free, responsive, one page Bootstrap theme created by Start Bootstrap.</h2>
+                <a href="#about" className="btn btn-primary js-scroll-trigger">Get Started</a>
+              </div>
+            </div>
+          </header>
+
+          {/* <!-- About Section --> */}
+
+
+          {/* <!-- Projects Section --> */}
+          <section id="projects" className="projects-section bg-light">
+            <div className="container">
+
+              {/* <!-- Featured Project Row --> */}
+              <div className="row align-items-center no-gutters mb-4 mb-lg-5">
+                <div className="col-xl-8 col-lg-7">
+                  <img className="img-fluid mb-3 mb-lg-0" src="bg-masthead.jpg" alt=""></img>
+                </div>
+                <div className="col-xl-4 col-lg-5">
+                  <div className="featured-text text-center text-lg-left">
+                    <h4>Shoreline</h4>
+                    <p className="text-black-50 mb-0">Grayscale is open source and MIT licensed. This means you can use it for any project - even commercial projects! Download it, customize it, and publish your website!</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* <!-- Project One Row --> */}
+              <div className="row justify-content-center no-gutters mb-5 mb-lg-0">
+                <div className="col-lg-6">
+                  <img className="img-fluid" src="demo-image-01.jpg" alt=""></img>
+                </div>
+                <div className="col-lg-6">
+                  <div className="bg-black text-center h-100 project">
+                    <div className="d-flex h-100">
+                      <div className="project-text w-100 my-auto text-center text-lg-left">
+                        <h4 className="text-white">Misty</h4>
+                        <p className="mb-0 text-white-50">An example of where you can put an image of a project, or anything else, along with a description.</p>
+                        <hr className="d-none d-lg-block mb-0 ml-0"></hr>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* <!-- Project Two Row --> */}
+              <div className="row justify-content-center no-gutters">
+                <div className="col-lg-6">
+                  <img className="img-fluid" src="demo-image-02.jpg" alt=""></img>
+                </div>
+                <div className="col-lg-6 order-lg-first">
+                  <div className="bg-black text-center h-100 project">
+                    <div className="d-flex h-100">
+                      <div className="project-text w-100 my-auto text-center text-lg-right">
+                        <h4 className="text-white">Mountains</h4>
+                        <p className="mb-0 text-white-50">Another example of a project with its respective description. These sections work well responsively as well, try this theme on a small screen!</p>
+                        <hr className="d-none d-lg-block mb-0 mr-0"></hr>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          {/* <!-- Signup Section --> */}
+          <section id="signup" className="signup-section">
+            <div className="container">
+              <div className="row">
+                <div className="col-md-10 col-lg-8 mx-auto text-center">
+
+                  <i className="far fa-paper-plane fa-2x mb-2 text-white"></i>
+                  <h2 className="text-white mb-5">Subscribe to receive updates!</h2>
+
+                  <form className="form-inline d-flex">
+                    <input type="email" className="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail" placeholder="Enter email address..."></input>
+                    <button type="submit" className="btn btn-primary mx-auto">Subscribe</button>
+                  </form>
+
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* <!-- Contact Section --> */}
+          <section className="contact-section bg-black">
+            <div className="container">
+
+              <div className="row">
+
+                <div className="col-md-4 mb-3 mb-md-0">
+                  <div className="card py-4 h-100">
+                    <div className="card-body text-center">
+                      <i className="fas fa-map-marked-alt text-primary mb-2"></i>
+                      <h4 className="text-uppercase m-0">Address</h4>
+                      <hr className="my-4"></hr>
+                      <div className="small text-black-50">4923 Market Street, Orlando FL</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-md-4 mb-3 mb-md-0">
+                  <div className="card py-4 h-100">
+                    <div className="card-body text-center">
+                      <i className="fas fa-envelope text-primary mb-2"></i>
+                      <h4 className="text-uppercase m-0">Email</h4>
+                      <hr className="my-4"></hr>
+                      <div className="small text-black-50">
+                        <a href="#smtg">hello@yourdomain.com</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="col-md-4 mb-3 mb-md-0">
+                  <div className="card py-4 h-100">
+                    <div className="card-body text-center">
+                      <i className="fas fa-mobile-alt text-primary mb-2"></i>
+                      <h4 className="text-uppercase m-0">Phone</h4>
+                      <hr className="my-4"></hr>
+                      <div className="small text-black-50">+1 (555) 902-832</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="social d-flex justify-content-center">
+                <a href="#smtg" className="mx-2">
+                  <i className="fab fa-twitter"></i>
+                </a>
+                <a href="#smtg" className="mx-2">
+                  <i className="fab fa-facebook-f"></i>
+                </a>
+                <a href="#smtg" className="mx-2">
+                  <i className="fab fa-github"></i>
+                </a>
+              </div>
+
+            </div>
+          </section>
+
+          {/* <!-- Footer --> */}
+          <footer className="bg-black small text-center text-white-50">
+            <div className="container">
+              Copyright &copy; Your Website 2018ss
+            </div>
+          </footer>
+
+
+          {/* <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> */}
+
+
+        </div>
+
       }
 
       <header>
-        <div id="carousel" className="carousel slide carousel-fade" data-ride="carousel" data-interval="3000">
-
-          <ol className="carousel-indicators">
-            <li data-target="#carousel" data-slide-to="0" className="active"></li>
-            <li data-target="#carousel" data-slide-to="1"></li>
-            <li data-target="#carousel" data-slide-to="2"></li>
-          </ol>
-          <div className="carousel-inner" role="listbox">
-            {/* Slide One - Set the background image for this slide in the line below */}
-            <div className="carousel-item active" style={{
-              backgroundImage: `url(smoke3.jpg)`
-            }}>
-            <div className="carousel-caption d-none d-md-block" style={{
-              backgroundColor: 'transparent'
-            }}>
-            <h3>First Slide</h3>
-            <p>This is a description for the first slide.</p>
-          </div>
-        </div>
-        {/* - Slide Two - Set the background image for this slide in the line below */}
-        <div className="carousel-item" style={{
-          backgroundImage: `url(smoke2.jpg)`
-        }}>
-        <div className="carousel-caption d-none d-md-block" style={{
-          backgroundColor: 'transparent'
-        }}>
-        <h3>Second Slide</h3>
-        <p>This is a description for the second slide.</p>
-      </div>
-    </div>
-    {/* -- Slide Three - Set the background image for this slide in the line below */}
-    <div className="carousel-item" style={{
-      backgroundImage: `url(smoke4.jpg)`
-    }}>
-    <div className="carousel-caption d-none d-md-block" style={{
-      backgroundColor: 'transparent'
-    }}>
-    <h3>Third Slide</h3>
-    <p>This is a description for the third slide.</p>
-  </div>
-</div>
-</div>
-<a className="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-  <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-  <span className="sr-only">Previous</span>
-</a>
-<a className="carousel-control-next" href="#carousel" role="button" data-slide="next">
-  <span className="carousel-control-next-icon" aria-hidden="true"></span>
-  <span className="sr-only">Next</span>
-</a>
-</div>
+      
 </header>
+
 
 {/* Page Content */}
 {
@@ -280,10 +593,10 @@ class App extends Component {
 
       <div className="col-lg-4 col-sm-6 portfolio-item">
         <div className="card h-100">
-          <a href="#" onClick ={() => this.getAudioFeatures()}><img className="card-img-top" src="audioFeaturesCard.jpg" alt=""/></a>
+          <a href="#smtg" onClick ={() => this.getAudioFeatures()}><img className="card-img-top" src="audioFeaturesCard.jpg" alt=""/></a>
           <div className="card-body">
             <h4 className="card-title">
-              <a href="#" onClick ={() => this.getAudioFeatures()}>Get Audio Features of your Favorite Tracks</a>
+              <a href="#smtg" onClick ={() => this.getAudioFeatures()}>Get Audio Features of your Favorite Tracks</a>
             </h4>
             <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
           </div>
@@ -291,10 +604,10 @@ class App extends Component {
       </div>
       <div className="col-lg-4 col-sm-6 portfolio-item">
         <div className="card h-100">
-          <a href="#" onClick={() => this.getMyTopArtists(this.state.term)}><img className="card-img-top" src="topArtistsCard.jpg" alt=""/></a>
+          <a href="#smtg" onClick={() => this.getMyTopArtists(this.state.term)}><img className="card-img-top" src="topArtistsCard.jpg" alt=""/></a>
           <div className="card-body">
             <h4 className="card-title">
-              <a href="#" onClick ={() => this.getMyTopArtists(this.state.term)}>Check Your 10 Top Artists Popularity</a>
+              <a href="#smtg" onClick ={() => this.getMyTopArtists(this.state.term)}>Check Your 10 Top Artists Popularity</a>
             </h4>
             <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra euismod odio, gravida pellentesque urna varius vitae.</p>
           </div>
@@ -302,10 +615,10 @@ class App extends Component {
       </div>
       <div className="col-lg-4 col-sm-6 portfolio-item">
         <div className="card h-100">
-          <a href="#" onClick ={() => this.getMyTopTracks(this.state.term)}><img className="card-img-top" src="topTracksCard.jpg" alt=""/></a>
+          <a href="#smtg" onClick ={() => this.getMyTopTracks(this.state.term)}><img className="card-img-top" src="topTracksCard.jpg" alt=""/></a>
           <div className="card-body">
             <h4 className="card-title">
-              <a href="#" onClick ={() => this.getMyTopTracks(this.state.term)}>Check Your 10 Top Tracks</a>
+              <a href="#smtg" onClick ={() => this.getMyTopTracks(this.state.term)}>Check Your 10 Top Tracks</a>
             </h4>
             <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos quisquam, error quod sed cumque, odio distinctio velit nostrum temporibus necessitatibus et facere atque iure perspiciatis mollitia recusandae vero vel quam!</p>
           </div>
@@ -514,26 +827,6 @@ class App extends Component {
 <br/>
 <br/>
 
-<div className="row">
-  <div className="col-lg-6">
-    <h2>Modern Business Features</h2>
-    <p>The Modern Business template by Start Bootstrap includes:</p>
-    <ul>
-      <li>
-        <strong>Bootstrap v4</strong>
-      </li>
-      <li>jQuery</li>
-      <li>Font Awesome</li>
-      <li>Working contact form with validation</li>
-      <li>Unstyled page elements for easy customization</li>
-    </ul>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Corporis, omnis doloremque non cum id reprehenderit, quisquam totam aspernatur tempora minima unde aliquid ea culpa sunt. Reiciendis quia dolorum ducimus unde.</p>
-  </div>
-  <div className="col-lg-6">
-    <img className="img-fluid rounded" src="http://placehold.it/700x450" alt=""/>
-  </div>
-</div>
-{/* .row */}
 
 <hr></hr>
 
@@ -543,7 +836,7 @@ class App extends Component {
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, expedita, saepe, vero rerum deleniti beatae veniam harum neque nemo praesentium cum alias asperiores commodi.</p>
   </div>
   <div className="col-md-4">
-    <a className="btn btn-lg btn-secondary btn-block" href="#">Call to Action</a>
+    <a className="btn btn-lg btn-secondary btn-block" href="#smtg">Call to Action</a>
   </div>
 </div>
 

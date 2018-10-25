@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.4.1",
     "concurrently": "^4.0.1",
     "cookie-parser": "^1.4.3",
     "express": "^4.16.3",

@@ -2,7 +2,6 @@ import Chart from 'chart.js';
 import {getArtistInfoAndRecommendations} from './spotify_modules';
 // import getMyTopArtists from './App';
 import React from 'react';
-import scrollIntoView from 'scroll-into-view';
 // import SpotifyWebApi from 'spotify-web-api-js';
 // const spotifyApi = new SpotifyWebApi();
 
