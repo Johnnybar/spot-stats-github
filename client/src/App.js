@@ -454,7 +454,7 @@ class App extends Component {
                   fontFamily: 'Varela Round',
                   textTransform: "uppercase",
                   letterSpacing: "0.15rem"}}>
-                  <a href="#smtg" style={{color:"black"}} onClick ={() => this.getMyTopTracks(this.state.term)}>Check Your Top 10 Tracks</a>
+                  <a href="#smtg" style={{color:"black"}} onClick ={() => this.getMyTopTracks(this.state.term)}>Top 10 Tracks</a>
                 </h4>
                 <hr className="my-4"></hr>
                 <div className="small text-black-50">Check Your Top 10 Tracks</div>
