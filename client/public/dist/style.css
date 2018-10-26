@@ -4,6 +4,9 @@
   font-weight: 400;
   src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v18/KFOmCnqEu92Fr1Mu4mxP.ttf) format('truetype');
 }
+body {
+  font-family: 'Varela Round', sans-serif !important;
+}
 @font-face {
   font-family: "Delicate";
   src: url(delicate-regular.ttf) format("truetype");
