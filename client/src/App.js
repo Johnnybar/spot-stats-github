@@ -200,7 +200,7 @@ class App extends Component {
       <div className="collapse navbar-collapse" id="navbarResponsive">
         <ul className="navbar-nav ml-auto">
           <li className="nav-item">
-            <a className="nav-link" href={anchor}>Sign In</a>
+            <a className="nav-link" href={anchor}>Log In to Spotify</a>
           </li>
         </ul>
       </div>
@@ -212,7 +212,7 @@ class App extends Component {
     <div className="container d-flex h-100 align-items-center">
       <div className="mx-auto text-center">
 <h1 className="mx-auto my-0" style={{fontFamily:'Delicate'}}>Spot.Stats</h1>
-        <h2 className="text-white-50 mx-auto mt-2 mb-5">The go-to page for your customized Spotify usage statistics, recommendations and search</h2>
+        <h2 className="text-white-50 mx-auto mt-2 mb-5"></h2>
         <a href="#about" className="btn btn-primary js-scroll-trigger">Get Started</a>
       </div>
     </div>
@@ -223,12 +223,11 @@ class App extends Component {
     <div className="container">
       <div className="row">
         <div className="col-lg-8 mx-auto">
-          <h2 className="text-white mb-4">Built with Bootstrap 4</h2>
-          <p className="text-white-50">Grayscale is a free Bootstrap theme created by Start Bootstrap. It can be yours right now, simply download the template on
-            <a href="http://startbootstrap.com/template-overviews/grayscale/">the preview page</a>. The theme is open source, and you can use it for any purpose, personal or commercial.</p>
+          <h2 className="text-white mb-4">Your Spotify go-to page</h2>
+          <p className="text-white-50">Use Spotify's algorithm to generate interactive charts based on your music, get custom-made recommendations or customize your own algorithm, and get an insight into your own taste</p>
           </div>
         </div>
-        <img src="ipad.png" className="img-fluid" alt=""></img>
+        <img src="ipad2.png" className="img-fluid" alt=""></img>
       </div>
     </section>
 
@@ -243,8 +242,8 @@ class App extends Component {
           </div>
           <div className="col-xl-4 col-lg-5">
             <div className="featured-text text-center text-lg-left">
-              <h4>Shoreline</h4>
-              <p className="text-black-50 mb-0">Grayscale is open source and MIT licensed. This means you can use it for any project - even commercial projects! Download it, customize it, and publish your website!</p>
+              <h4>Get an insight into your music</h4>
+              <p className="text-black-50 mb-0">Using Spotify's algorithm, find out about your listening habits using attractive, interactive charts. Toggle between your favorite artists and tracks these days and your all-time favorites. Easily get recommendations based on your taste and listen to samples.</p>
             </div>
           </div>
         </div>
@@ -258,8 +257,8 @@ class App extends Component {
             <div className="bg-black text-center h-100 project">
               <div className="d-flex h-100">
                 <div className="project-text w-100 my-auto text-center text-lg-left">
-                  <h4 className="text-white">Misty</h4>
-                  <p className="mb-0 text-white-50">An example of where you can put an image of a project, or anything else, along with a description.</p>
+                  <h4 className="text-white">Break down your tracks and see what they're made of</h4>
+                  <p className="mb-0 text-white-50">Get an analysis of your favorite tracks, based on features such as danceability and positivity,  and let the clever pie chart sort your tracks out for you.</p>
                   <hr className="d-none d-lg-block mb-0 ml-0"></hr>
                 </div>
               </div>
@@ -276,8 +275,8 @@ class App extends Component {
             <div className="bg-black text-center h-100 project">
               <div className="d-flex h-100">
                 <div className="project-text w-100 my-auto text-center text-lg-right">
-                  <h4 className="text-white">Mountains</h4>
-                  <p className="mb-0 text-white-50">Another example of a project with its respective description. These sections work well responsively as well, try this theme on a small screen!</p>
+                  <h4 className="text-white">Customize your own recommendations</h4>
+                  <p className="mb-0 text-white-50">Using interactive sliders, choose which kind of tracks you'd like to search for, based on multiple categories and tastes. Choose to search using your favorite tracks as a reference or search spotify without limitations.</p>
                   <hr className="d-none d-lg-block mb-0 mr-0"></hr>
                 </div>
               </div>
@@ -300,7 +299,7 @@ class App extends Component {
                 <i className="fas fa-map-marked-alt text-primary mb-2"></i>
                 <h4 className="text-uppercase m-0">Address</h4>
                 <hr className="my-4"></hr>
-                <div className="small text-black-50">4923 Market Street, Orlando FL</div>
+                <div className="small text-black-50">4923 Leftblank St., Orlando FL</div>
               </div>
             </div>
           </div>
@@ -312,7 +311,7 @@ class App extends Component {
                 <h4 className="text-uppercase m-0">Email</h4>
                 <hr className="my-4"></hr>
                 <div className="small text-black-50">
-                  <a href="#smtg">hello@yourdomain.com</a>
+                  <a href="#smtg">nonefornow@email.com</a>
                 </div>
               </div>
             </div>
@@ -348,7 +347,7 @@ class App extends Component {
     {/* <!-- Footer --> */}
     <footer className="bg-black small text-center text-white-50">
       <div className="container">
-        Copyright &copy; Your Website 2018ss
+        Copyright &copy; Jonathan Bareket 2018
       </div>
     </footer>
 
