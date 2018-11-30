@@ -28,11 +28,11 @@ export function getArtistInfoAndRecommendations(id) {
       }
       spotifyApi.getRecommendations(recommendOptions).then((response) => {
         let recommendationNames = response.tracks.filter(each => each.preview_url !== null).map(function(recommendations, i) {
-          return (<div className='btn btn-info btn-block btn-sm' key={i} onClick={this.uponClickOnRecommendation.bind(this, i)}>
+          return (<button id="round-button" className="btn btn-secondary" style={{whiteSpace: 'normal'}} key={i} onClick={this.uponClickOnRecommendation.bind(this, i)}>
             {recommendations.artists[0].name + ' - '}
             <br></br>
             {recommendations.name}
-          </div>);
+          </button>);
         }, this);
         recommendationNames = recommendationNames.slice(0, 8);
         let recommendationSampleTrack = response.tracks.filter(each => each.preview_url !== null).map(eachRecommendation => eachRecommendation.preview_url).slice(0, 8);
@@ -105,11 +105,11 @@ export function getRecommendationsBasedOnTopTracks(genres){
     //20 tracks based on the 5 genres provided
     let recommendationNames = response.tracks.filter(each => each.preview_url !== null).map(function(recommendations, i) {
       console.log(recommendations);
-      return (<div key={i} onClick={this.uponClickOnTrackRecommendation.bind(this, i)} className='btn btn-info btn-sm btn-block'>
+      return (<button key={i} onClick={this.uponClickOnTrackRecommendation.bind(this, i)} id="round-button" className="btn btn-secondary" style={{whiteSpace: 'normal'}}>
         {recommendations.artists[0].name + ' - '}
         <br></br>
         {recommendations.name}
-      </div>);
+      </button>);
     },this);
     recommendationNames = recommendationNames.slice(0, 8);
     let recommendationSampleTrack = response.tracks.filter(each => each.preview_url !== null).map(eachRecommendation => eachRecommendation.preview_url).slice(0, 8);

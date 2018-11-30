@@ -102,7 +102,7 @@ class App extends Component {
   }
   getAudioFeatures() {
     this.setState({audioFeatures: true, featuresHidden: false})
-    spotifyApi.getMyTopTracks({limit: 10, time_range: 'medium_term'}).then((response) => {
+    spotifyApi.getMyTopTracks({limit: 9, time_range: 'medium_term'}).then((response) => {
       this.setState({
         topTracksForFeatures: response.items,
         myTopArtists: false,
@@ -216,7 +216,7 @@ class App extends Component {
       <div className="mx-auto text-center">
 <h1 className="mx-auto my-0" style={{fontFamily:'Delicate'}}>Spot.Stats</h1>
         <h2 className="text-white-50 mx-auto mt-2 mb-5"></h2>
-        <a href="#about" className="btn btn-primary js-scroll-trigger">Get Started</a>
+        <a href="#about" className="btn btn-primary js-scroll-trigger btn-transparent">Get Started</a>
       </div>
     </div>
   </header>
@@ -406,7 +406,7 @@ class App extends Component {
         <div className="mx-auto text-center">
           <h1 className="mx-auto my-0" style={{fontFamily:'Delicate'}}>Spot.Stats</h1>
           <h2 className="text-white-50 mx-auto mt-2 mb-5">The go-to page for your customized Spotify usage statistics, recommendations and search</h2>
-          <a href="#features-container" className="btn btn-primary js-scroll-trigger" onClick={()=>scrollIntoView(document.getElementById("features-section"))}>Check It Out</a>
+          <a href="#features-container" className="btn btn-primary js-scroll-trigger btn-white" onClick={()=>scrollIntoView(document.getElementById("features-section"))}>Check It Out</a>
         </div>
       </div>
     </header>
@@ -502,7 +502,7 @@ class App extends Component {
     <div id="customizedButtonsContainer container">
       <div className='container title-plus-slider'>
         <h3 className="grey-text" style={{paddingTop: 40, textAlign: 'center'}}>OR use the sliders below to search for tracks based on features</h3>
-        <button className="btn" disabled={this.state.energy_status}>
+        <button className="btn btn-slider btn-transparent" disabled={this.state.energy_status}>
           <p onClick={() => {
             this.setState(prevState => ({
               energy_status: !prevState.energy_status,
@@ -522,7 +522,7 @@ class App extends Component {
       }
     </div>
     <div className='container title-plus-slider'>
-      <button className="btn" disabled={this.state.acousticness_status}>
+      <button className="btn btn-slider btn-transparent" disabled={this.state.acousticness_status}>
         <p onClick={() => {
           this.setState(prevState => ({
             acousticness_status: !prevState.acousticness_status,
@@ -542,7 +542,7 @@ class App extends Component {
     }
   </div>
   <div className='container title-plus-slider'>
-    <button className="btn" disabled={this.state.danceability_status}>
+    <button className="btn btn-slider btn-transparent" disabled={this.state.danceability_status}>
       <p onClick={() => {
         this.setState(prevState => ({
           danceability_status: !prevState.danceability_status,
@@ -562,7 +562,7 @@ class App extends Component {
   }
 </div>
 <div className='container title-plus-slider'>
-  <button className="btn" disabled={this.state.instrumentalness_status}>
+  <button className="btn btn-slider btn-transparent" disabled={this.state.instrumentalness_status}>
     <p onClick={() => {
       this.setState(prevState => ({
         instrumentalness_status: !prevState.instrumentalness_status,
@@ -582,7 +582,7 @@ class App extends Component {
 }
 </div>
 <div className='container title-plus-slider'>
-  <button className="btn" disabled={this.state.liveness_status}>
+  <button className="btn btn-slider btn-transparent" disabled={this.state.liveness_status}>
     <p onClick={() => {
       this.setState(prevState => ({
         liveness_status: !prevState.liveness_status,
@@ -602,7 +602,7 @@ class App extends Component {
 }
 </div>
 <div className='container title-plus-slider'>
-  <button className="btn" disabled={this.state.valence_status}>
+  <button className="btn btn-slider btn-transparent" disabled={this.state.valence_status}>
     <p onClick={() => {
       this.setState(prevState => ({
         valence_status: !prevState.valence_status,
@@ -622,7 +622,7 @@ class App extends Component {
 }
 </div>
 <div className='container title-plus-slider'>
-  <button className="btn" disabled={this.state.speechiness_status}>
+  <button className="btn btn-slider btn-transparent" disabled={this.state.speechiness_status}>
     <p onClick={() => {
       this.setState(prevState => ({
         speechiness_status: !prevState.speechiness_status,
@@ -648,9 +648,9 @@ class App extends Component {
 
 {/* Slider and slider values */}
 <div className="text-center" style={{paddingTop: 30}}>
-  <button className = "btn btn-primary center-block"
+  <button className = "btn btn-primary center-block btn-white"
     onClick={this.getTracksByFeatures.bind(this)}>Search using favorite tracks as reference</button>
-    <button className = "btn btn-primary center-block"
+    <button className = "btn btn-primary center-block btn-white"
       onClick={this.getTracksByFeatures.bind(this, "general")}>
       Search for all music results</button>
       {/* <button className = "btn btn-primary center-block" onClick={this.getTracksByFeaturesExpanded.bind(this)}>Or here to search general tracks unrelated to your taste</button> */}

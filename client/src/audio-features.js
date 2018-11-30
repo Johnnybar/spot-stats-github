@@ -31,7 +31,7 @@ export default class AudioFeatures extends React.Component {
       }
 };
 
-    let trackNames = topTracksForFeatures.map(track => <button id="audio-features-button" className="btn btn-secondary" style={{whiteSpace: 'normal'}} key={track.id} onClick={(e)=> this.getFeaturesById(track.id)}>{track.artists[0].name + ' - ' + track.name}</button>);
+    let trackNames = topTracksForFeatures.map(track => <button id="round-button" className="btn btn-secondary" style={{whiteSpace: 'normal'}} key={track.id} onClick={(e)=> this.getFeaturesById(track.id)}>{track.artists[0].name + ' - ' + track.name}</button>);
     if(this.state.chosenTrackFeatures){
     featuresChart && featuresChart.chart && featuresChart.chart.destroy();
 
@@ -149,7 +149,7 @@ export default class AudioFeatures extends React.Component {
 
       </div>
       <div className="chart-container" style={{position:"relative", height:"100%", width: "100%"}}>
-      <canvas width="1400" height="700" minWidth='200' id="featuresChart"></canvas>
+      <canvas width="800" height="400" minWidth='200' id="featuresChart"></canvas>
 
       </div>
       </div>)

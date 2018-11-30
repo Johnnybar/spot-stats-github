@@ -148,15 +148,15 @@ maintainAspectRatio: false,
       <div className="wrapper text-center">
       <div className="grey-text">Want to choose a different time range for analysis?</div>
       <div className="btn-group text-center">
-      <button type="button" className="btn btn-secondary" onClick={(e)=>{
+      <button type="button" className="btn btn-secondary btn-transparent" onClick={(e)=>{
         this.props.getMyTopArtists('short_term', this.updateConfigByMutating)
 }
 }>Click here for a shorter time range </button>
-      <button type="button" className="btn btn-secondary" onClick={(e)=>{
+      <button type="button" className="btn btn-secondary btn-transparent" onClick={(e)=>{
         this.props.getMyTopArtists('medium_term', this.updateConfigByMutating)
 }
       }>Click here for a medium time range</button>
-      <button type="button" className="btn btn-secondary" onClick={(e)=>{
+      <button type="button" className="btn btn-secondary btn-transparent" onClick={(e)=>{
         this.props.getMyTopArtists('long_term', this.updateConfigByMutating)
 }
 }>Click here for a longer time range</button>
@@ -166,7 +166,7 @@ maintainAspectRatio: false,
         artistInfo && <div className='chosen-artist-container'>
             <div className='artist-name grey-text'>{artistInfo.name}</div>
             <img alt='artist-img' className='artist-image' src={artistInfo.image}/>
-            <p className="grey-text">Here is a short clip of {artistInfo.name}s music</p>
+            `<p className="grey-text">Here is a short clip of {artistInfo.name}'s music</p>`
             <audio className='preview-track' src={sampleTrack} controls="controls">
               Your browser does not support the audio element.
             </audio>
@@ -174,7 +174,7 @@ maintainAspectRatio: false,
           </div>
       } {
         recommendations && <div className='recommendation-container'>
-            <h2 className="grey-text">Here are some track recommendations based on {artistInfo.name}</h2>
+            <h2 className="grey-text" style={{textAlign: 'center'}}>Here are some track recommendations based on {artistInfo.name}</h2>
             <div className='artists-recommendations'>
               {recommendations.nameAndTrack}
             </div>

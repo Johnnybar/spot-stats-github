@@ -148,15 +148,15 @@ export default class TopTracks extends React.Component {
       <div className="wrapper text-center">
       <div className="grey-text">Want to choose a different time range for analysis?</div>
       <div className="btn-group">
-      <button className='btn btn-primary' onClick={(e)=>{
+      <button className='btn btn-primary btn-transparent' onClick={(e)=>{
         this.props.getMyTopTracks('short_term', this.updateConfigByMutating)
 }
 }>Click here for a shorter time range </button>
-      <button className='btn btn-primary' onClick={(e)=>{
+      <button className='btn btn-primary btn-transparent' onClick={(e)=>{
         this.props.getMyTopTracks('medium_term', this.updateConfigByMutating)
 }
       }>Click here for a medium time range</button>
-      <button className='btn btn-primary' onClick={(e)=>{
+      <button className='btn btn-primary btn-transparent' onClick={(e)=>{
         this.props.getMyTopTracks('long_term', this.updateConfigByMutating)
 }
 }>Click here for a longer time range</button>
@@ -164,11 +164,11 @@ export default class TopTracks extends React.Component {
 </div>
       {topGenres &&
         <div className="text-center wrapper">
-        <button className='btn btn-secondary' onClick={(e) => this.uponClickOnRecommendButton(e)}>Click here (as many times as you like) to generate a playlist based on your favourite tracks
+        <button className='btn btn-secondary btn-white' onClick={(e) => this.uponClickOnRecommendButton(e)}>Click here (as many times as you like) to generate a playlist based on your favourite tracks
         </button>
         </div>
       }
-      {topTracksRecommendations && <div className='top-tracks-recommendation-container'>{topTracksRecommendations.nameAndTrack}</div>}
+      {topTracksRecommendations && <div className='top-tracks-recommendation-container' style={{paddingBottom: '50px'}}>{topTracksRecommendations.nameAndTrack}</div>}
       {
         currentlyClicked && <div className='recommend-preview'>Listen to a preview of {currentlyClicked.name}
             <audio className='preview-track' src={currentlyClicked.preview_url} controls="controls">
