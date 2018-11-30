@@ -61,6 +61,14 @@ export default class TopArtists extends React.Component {
         ]
       },
       options: {
+        legend: {
+            labels: {
+                fontColor: "white",
+                fontSize: 14,
+                textAlign: 'center'
+            }
+        },
+maintainAspectRatio: false,
         ids: artistIds,
         onClick: function(e) {
           var element = topArtists.getElementAtEvent(e);
@@ -177,8 +185,8 @@ export default class TopArtists extends React.Component {
             </audio>
           </div>
       }
-      <div className="chart-container" style={{position:"relative", height:"100%", width: "100%"}}>
-      <canvas onClick={(e)=> this.uponClick(e)} id="topArtists" ></canvas>
+      <div className="chart-container" style={{}}>
+      <canvas minWidth= '200' width='300' height='600' onClick={(e)=> this.uponClick(e)} id="topArtists" ></canvas>
         </div>
 
   </div>)

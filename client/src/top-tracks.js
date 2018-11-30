@@ -74,6 +74,18 @@ export default class TopTracks extends React.Component {
       },
 
       options: {
+
+ scale: {
+   display: false
+ },
+        maintainAspectRatio: false,
+        legend: {
+            labels: {
+                fontColor: "white",
+                fontSize: 14,
+                textAlign: 'center'
+            }
+        },
         ids: trackIds,
         onClick: function(e) {
           var element = topTracks.getElementAtEvent(e);
@@ -132,7 +144,7 @@ export default class TopTracks extends React.Component {
     let topGenres = this.state.topTracksGenres;
     let topTracksRecommendations = this.state.topTracksRecommendations;
     let currentlyClicked = this.state.currentClickedRecommendation;
-    return (<div id='topTracksContainer'>
+    return (<div id='topTracksContainer' style={{}}>
       <div className="wrapper text-center">
       <div className="grey-text">Want to choose a different time range for analysis?</div>
       <div className="btn-group">
@@ -164,8 +176,8 @@ export default class TopTracks extends React.Component {
             </audio>
           </div>
       }
-      <div className="chart-container" style={{position:"relative"}}>
-      <canvas onClick={(e) => this.uponClick(e)} id="topTracks"></canvas>
+      <div className="chart-container" style={{}}>
+      <canvas width="1400" height="700" minWidth='200' onClick={(e) => this.uponClick(e)} id="topTracks"></canvas>
         </div>
     </div>)
 

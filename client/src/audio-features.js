@@ -92,6 +92,14 @@ export default class AudioFeatures extends React.Component {
          ]
        },
        options: {
+         maintainAspectRatio: false,
+         legend: {
+             labels: {
+                 fontColor: "white",
+                 fontSize: 14,
+                 textAlign: 'center'
+             }
+         },
          ids: trackIds,
          onClick: function(e) {
            var element = featuresChart.getElementAtEvent(e);
@@ -140,8 +148,8 @@ export default class AudioFeatures extends React.Component {
 
 
       </div>
-      <div className="chart-container" style={{position:"relative", height:"100%", width: "100%"}}>    
-      <canvas id="featuresChart"></canvas>
+      <div className="chart-container" style={{position:"relative", height:"100%", width: "100%"}}>
+      <canvas width="1400" height="700" minWidth='200' id="featuresChart"></canvas>
 
       </div>
       </div>)

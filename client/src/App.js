@@ -49,7 +49,8 @@ class App extends Component {
       acousticness_status: true,
       instrumentalness_status: true,
       liveness_status: true,
-      valence_status: true
+      valence_status: true,
+      featuresHidden: false
 
     }
   }
@@ -95,10 +96,12 @@ class App extends Component {
       //   customizedTrackList = customizedTracks.map(track => `${track.artists[0].name} - ${track.name} ` );
       // customizedSample = customizedTracks.map(track => track.preview_url)
 
-    }).catch(err => console.log(err))
+    })
+    .then(() => scrollIntoView(document.getElementById("customized-tracks-container")))
+    .catch(err => console.log(err))
   }
   getAudioFeatures() {
-    this.setState({audioFeatures: true})
+    this.setState({audioFeatures: true, featuresHidden: false})
     spotifyApi.getMyTopTracks({limit: 10, time_range: 'medium_term'}).then((response) => {
       this.setState({
         topTracksForFeatures: response.items,
@@ -491,15 +494,19 @@ class App extends Component {
   this.state.topTracksForFeatures && <React.Fragment>
     <br/>
     <br/>
+    { this.state.topTracksForFeatures && this.state.featuresHidden !== true &&
     <AudioFeatures tracks={this.state.topTracksForFeatures}/>
+    }
     {/* Buttons for activating slider and slider with values */}
     {/* Buttons for customizing tracks */}
     <div id="customizedButtonsContainer container">
       <div className='container title-plus-slider'>
+        <h3 className="grey-text" style={{paddingTop: 40, textAlign: 'center'}}>OR use the sliders below to search for tracks based on features</h3>
         <button className="btn" disabled={this.state.energy_status}>
           <p onClick={() => {
             this.setState(prevState => ({
-              energy_status: !prevState.energy_status
+              energy_status: !prevState.energy_status,
+              featuresHidden: true
             }));
           }}>Energy</p>
         </button>
@@ -518,7 +525,8 @@ class App extends Component {
       <button className="btn" disabled={this.state.acousticness_status}>
         <p onClick={() => {
           this.setState(prevState => ({
-            acousticness_status: !prevState.acousticness_status
+            acousticness_status: !prevState.acousticness_status,
+            featuresHidden: true
           }))
         }}>Acousticness</p>
       </button>
@@ -537,7 +545,8 @@ class App extends Component {
     <button className="btn" disabled={this.state.danceability_status}>
       <p onClick={() => {
         this.setState(prevState => ({
-          danceability_status: !prevState.danceability_status
+          danceability_status: !prevState.danceability_status,
+          featuresHidden: true
         }));
       }}>Danceability</p>
     </button>
@@ -556,7 +565,8 @@ class App extends Component {
   <button className="btn" disabled={this.state.instrumentalness_status}>
     <p onClick={() => {
       this.setState(prevState => ({
-        instrumentalness_status: !prevState.instrumentalness_status
+        instrumentalness_status: !prevState.instrumentalness_status,
+        featuresHidden: true
       }));
     }}>Instrumentalness</p>
   </button>
@@ -575,7 +585,8 @@ class App extends Component {
   <button className="btn" disabled={this.state.liveness_status}>
     <p onClick={() => {
       this.setState(prevState => ({
-        liveness_status: !prevState.liveness_status
+        liveness_status: !prevState.liveness_status,
+        featuresHidden: true
       }));
     }}>Liveness</p>
   </button>
@@ -594,7 +605,8 @@ class App extends Component {
   <button className="btn" disabled={this.state.valence_status}>
     <p onClick={() => {
       this.setState(prevState => ({
-        valence_status: !prevState.valence_status
+        valence_status: !prevState.valence_status,
+        featuresHidden: true
       }));
     }}>Positivity</p>
   </button>
@@ -613,7 +625,8 @@ class App extends Component {
   <button className="btn" disabled={this.state.speechiness_status}>
     <p onClick={() => {
       this.setState(prevState => ({
-        speechiness_status: !prevState.speechiness_status
+        speechiness_status: !prevState.speechiness_status,
+        featuresHidden: true
       }));
     }}>Speechiness</p>
   </button>
@@ -632,15 +645,14 @@ class App extends Component {
 
 </div>
 
+
 {/* Slider and slider values */}
-<div className="text-center">
+<div className="text-center" style={{paddingTop: 30}}>
   <button className = "btn btn-primary center-block"
-    onClick={this.getTracksByFeatures.bind(this)}>Use the sliders to search for similar tracks <br/>
-    with your own customized features and click here</button>
+    onClick={this.getTracksByFeatures.bind(this)}>Search using favorite tracks as reference</button>
     <button className = "btn btn-primary center-block"
       onClick={this.getTracksByFeatures.bind(this, "general")}>
-      or click here for general results to your <br/>
-      customized music search</button>
+      Search for all music results</button>
       {/* <button className = "btn btn-primary center-block" onClick={this.getTracksByFeaturesExpanded.bind(this)}>Or here to search general tracks unrelated to your taste</button> */}
     </div>
     <br/>
@@ -648,7 +660,7 @@ class App extends Component {
 
 }
 {
-  this.state.tracksFromChosenFeatures && <div className = 'customized-tracks-container container'>
+  this.state.tracksFromChosenFeatures && <div id="customized-tracks-container" className = 'customized-tracks-container container'>
 
     <CustomizedTracks tracks={this.state.tracksFromChosenFeatures} />
 
