@@ -87,11 +87,11 @@ class App extends Component {
 
     spotifyApi.getRecommendations(options).then((response) => {
       this.setState({
-        tracksFromChosenFeatures: response.tracks,
+        tracksFromChosenFeatures: response.tracks.slice(0,8),
         myTopArtists: false,
         myTopTracks: false
       })
-      console.log(options, response, 'This is options and results');
+
       // customizedTracks = this.state.tracksFromChosenFeatures;
       //   customizedTrackList = customizedTracks.map(track => `${track.artists[0].name} - ${track.name} ` );
       // customizedSample = customizedTracks.map(track => track.preview_url)
@@ -133,7 +133,7 @@ class App extends Component {
         tracksFromChosenFeatures: false,
         term: term
       }, callback);
-    }).then(() => scrollIntoView(document.getElementById("topArtistsContainer"))).catch(err => console.log(err))
+    }).then(() => scrollIntoView(document.getElementById("topArtists"))).catch(err => console.log(err))
   }
 
   getHashParams() {
@@ -290,70 +290,6 @@ class App extends Component {
       </div>
     </section>
 
-    {/* <!-- Contact Section --> */}
-    <section className="contact-section bg-black">
-      <div className="container">
-
-        <div className="row">
-
-          <div className="col-md-4 mb-3 mb-md-0">
-            <div className="card py-4 h-100">
-              <div className="card-body text-center">
-                <i className="fas fa-map-marked-alt text-primary mb-2"></i>
-                <h4 className="text-uppercase m-0">Address</h4>
-                <hr className="my-4"></hr>
-                <div className="small text-black-50">4923 Leftblank St., Orlando FL</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-md-4 mb-3 mb-md-0">
-            <div className="card py-4 h-100">
-              <div className="card-body text-center">
-                <i className="fas fa-envelope text-primary mb-2"></i>
-                <h4 className="text-uppercase m-0">Email</h4>
-                <hr className="my-4"></hr>
-                <div className="small text-black-50">
-                  <a href="#smtg">nonefornow@email.com</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="col-md-4 mb-3 mb-md-0">
-            <div className="card py-4 h-100">
-              <div className="card-body text-center">
-                <i className="fas fa-mobile-alt text-primary mb-2"></i>
-                <h4 className="text-uppercase m-0">Phone</h4>
-                <hr className="my-4"></hr>
-                <div className="small text-black-50">+1 (555) 902-832</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="social d-flex justify-content-center">
-          <a href="#smtg" className="mx-2">
-            <i className="fab fa-twitter"></i>
-          </a>
-          <a href="#smtg" className="mx-2">
-            <i className="fab fa-facebook-f"></i>
-          </a>
-          <a href="#smtg" className="mx-2">
-            <i className="fab fa-github"></i>
-          </a>
-        </div>
-
-      </div>
-    </section>
-
-    {/* <!-- Footer --> */}
-    <footer className="bg-black small text-center text-white-50">
-      <div className="container">
-        Copyright &copy; Jonathan Bareket 2018
-      </div>
-    </footer>
-
 
     {/* <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script> */}
 
@@ -425,11 +361,11 @@ class App extends Component {
                   fontFamily: 'Varela Round',
                   textTransform: "uppercase",
                   letterSpacing: "0.15rem"}}>
-                  <a href="#smtg" style={{color:"black"}} onClick ={() => this.getAudioFeatures()}>Audio Features</a>
+                  <a href="#smtg" style={{color:"black"}} onClick ={() => this.getAudioFeatures()}>Audio Features & Feature Search</a>
                 </h4>
                 <hr className="my-4"></hr>
                 {/* <a href="#smtg" onClick ={() => this.getAudioFeatures()}><img className="card-img-top" src="audioFeaturesCard.jpg" alt=""/></a> */}
-                <div className="small text-black-50">Get Audio Features of your Favorite Tracks</div>
+                <div className="small text-black-50">Get Audio Features of your Favorite Tracks, Search for Tracks Based on Features</div>
               </div>
             </div>
           </div>
@@ -444,7 +380,7 @@ class App extends Component {
                   <a href="#smtg" style={{color:"black"}} onClick ={() => this.getMyTopArtists(this.state.term)}>Top 10 Artists</a>
                 </h4>
                 <hr className="my-4"></hr>
-                <div className="small text-black-50">Check Your Top 10 Artists and their Popularity</div>
+                <div className="small text-black-50">Check Your Top 10 Artists, Get Recommendations for each Artist</div>
               </div>
             </div>
           </div>
@@ -459,7 +395,7 @@ class App extends Component {
                   <a href="#smtg" style={{color:"black"}} onClick ={() => this.getMyTopTracks(this.state.term)}>Top 10 Tracks</a>
                 </h4>
                 <hr className="my-4"></hr>
-                <div className="small text-black-50">Check Your Top 10 Tracks</div>
+                <div className="small text-black-50">Check Your Top 10 Tracks and Generate Track Playlists based on them</div>
               </div>
             </div>
           </div>
@@ -660,7 +596,7 @@ class App extends Component {
 
 }
 {
-  this.state.tracksFromChosenFeatures && <div id="customized-tracks-container" className = 'customized-tracks-container container'>
+  this.state.tracksFromChosenFeatures && <div id="customized-tracks-container" className ='customized-tracks-container container'>
 
     <CustomizedTracks tracks={this.state.tracksFromChosenFeatures} />
 
@@ -679,26 +615,27 @@ class App extends Component {
       <div className="col-md-10 col-lg-8 mx-auto text-center">
 
         <i className="far fa-paper-plane fa-2x mb-2 text-white"></i>
-        <h2 className="text-white mb-5">Subscribe to receive updates!</h2>
+        <h2 className="text-white mb-5 btn-transparent">Subscribe to receive updates!</h2>
 
         <form className="form-inline d-flex">
           <input type="email" className="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail" placeholder="Enter email address..."></input>
-          <button type="submit" className="btn btn-primary mx-auto">Subscribe</button>
+          <button type="submit" className="btn btn-primary mx-auto btn-white">Subscribe</button>
         </form>
 
       </div>
     </div>
 
     <div className="social d-flex justify-content-center">
-      <a href="#smtg" className="mx-2">
-        <i className="fab fa-twitter"></i>
-      </a>
-      <a href="#smtg" className="mx-2">
-        <i className="fab fa-facebook-f"></i>
-      </a>
-      <a href="#smtg" className="mx-2">
+      <a href="https://github.com/Johnnybar" className="mx-2">
         <i className="fab fa-github"></i>
       </a>
+      <a href="https://www.linkedin.com/in/jonathan-bareket/" className="mx-2">
+        <i className="fab fa-linkedin-in"></i>
+      </a>
+      <a href="https://www.jonathanbareket.com" className="mx-2">
+      <i className="fas fa-home"></i>
+    </a>
+
     </div>
 
   </div>

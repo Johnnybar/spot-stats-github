@@ -1,5 +1,6 @@
 import React from 'react';
 import SpotifyWebApi from 'spotify-web-api-js';
+import scrollIntoView from 'scroll-into-view';
 const spotifyApi = new SpotifyWebApi();
 
 let trackIds;
@@ -126,6 +127,6 @@ export function getFeaturesById(id){
   spotifyApi.getAudioFeaturesForTrack(id).then((response) => {
 this.setState({
   chosenTrackFeatures: response
-})
-  }).catch(err => console.log(err))
+}, scrollIntoView(document.getElementById("featuresChart")))
+}).catch(err => console.log(err))
 }

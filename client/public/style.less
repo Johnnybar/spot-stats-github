@@ -87,6 +87,7 @@ button{
   display: flex;
   flex-direction: column;
   align-items: center;
+  color: white;
 }
 
 .recommendation-artist {
@@ -178,6 +179,24 @@ max-width: 100%
   background-color: transparent;
 }
 
+.customized-track{
+  color:white!important;
+  border-style: solid;
+  border-width: 7px;
+  border-color: #ffffff;
+  border-left: hidden;
+  border-right: hidden;
+  border-radius:25px!important;
+  padding:10px!important;
+  align-items: center;
+  margin: 7px;
+}
+
+#customized-tracks-container{
+  padding-bottom: 300px;
+  display: flex;
+  flex-direction: column;
+}
 @media (min-width: 992px) {
   #mainNav {
     padding-top: 0;
@@ -322,7 +341,7 @@ max-width: 100%
 }
 
 .projects-section {
-  padding: 10rem 0;
+  // padding: 10rem 0;
 }
 
 .projects-section .featured-text {
@@ -471,7 +490,8 @@ a:focus, a:hover {
 
 .bg-black {
   background-color: #161616 !important;
-  padding-bottom: 50px
+  padding-bottom: 50px;
+  padding-top: 50px;
 }
 
 .bg-primary {
