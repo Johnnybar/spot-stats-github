@@ -233,7 +233,7 @@ class App extends Component {
         <img src="ipad2.png" className="img-fluid" alt=""></img>
       </div>
     </section>
-    
+
     {/* <!-- Projects Section --> */}
     <section id="projects" className="projects-section bg-light">
       <div className="container">
@@ -615,24 +615,32 @@ class App extends Component {
       <div className="col-md-10 col-lg-8 mx-auto text-center">
 
         <i className="far fa-paper-plane fa-2x mb-2 text-white"></i>
-        <h2 className="text-white mb-5 btn-transparent">Subscribe to receive updates!</h2>
+        <h2 className="text-white mb-5 btn-transparent">Contact Me!</h2>
+        <form action="https://formspree.io/johnnybareket@gmail.com" method="POST" name="contactForm" id="contactForm" className='form-inline d-flex form-column' target="_blank"  enctype="text/plain">
+          <br/>
 
-        <form className="form-inline d-flex">
-          <input type="email" className="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputEmail" placeholder="Enter email address..."></input>
-          <button type="submit" className="btn btn-primary mx-auto btn-white">Subscribe</button>
+          <input type='text' name='FullName' placeholder='Full Name' autocomplete='full-name'></input>
+          <br/>
+          <input type='email' name='Email' placeholder='Email Address' className="form-control" autocomplete='email'></input>
+          <br/>
+          <input type='text' name='Subject' placeholder='Subject' autocomplete='subject' ></input>
+          <br/>
+          <textarea name="Message"  maxlength="6000" required type="text" id="form-submit" className="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0"  placeholder="Enter Message..."></textarea>
+          <button type="submit" className="btn btn-primary mx-auto btn-white" name="btnSubmit" value="Submit" id="button">Submit</button>
+
         </form>
 
       </div>
     </div>
 
     <div className="social d-flex justify-content-center">
-      <a href="https://github.com/Johnnybar" className="mx-2">
+      <a href="https://github.com/Johnnybar" className="mx-2" target="_blank">
         <i className="fab fa-github"></i>
       </a>
-      <a href="https://www.linkedin.com/in/jonathan-bareket/" className="mx-2">
+      <a href="https://www.linkedin.com/in/jonathan-bareket/" className="mx-2" target="_blank">
         <i className="fab fa-linkedin-in"></i>
       </a>
-      <a href="https://www.jonathanbareket.com" className="mx-2">
+      <a href="http://www.jonathanbareket.com" className="mx-2" target="_blank">
       <i className="fas fa-home"></i>
     </a>
 
