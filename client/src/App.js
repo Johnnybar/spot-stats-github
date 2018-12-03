@@ -616,17 +616,13 @@ class App extends Component {
 
         <i className="far fa-paper-plane fa-2x mb-2 text-white"></i>
         <h2 className="text-white mb-5 btn-transparent">Contact Me!</h2>
-        <form action="https://formspree.io/johnnybareket@gmail.com" method="POST" name="contactForm" id="contactForm" className='form-inline d-flex form-column' target="_blank"  enctype="text/plain">
+        <form action="https://formspree.io/johnnybareket@gmail.com" id="contactForm" className='form-inline d-flex form-column' method="POST">
           <br/>
-
-          <input type='text' name='FullName' placeholder='Full Name' autocomplete='full-name'></input>
-          <br/>
-          <input type='email' name='Email' placeholder='Email Address' className="form-control" autocomplete='email'></input>
-          <br/>
-          <input type='text' name='Subject' placeholder='Subject' autocomplete='subject' ></input>
-          <br/>
-          <textarea name="Message"  maxlength="6000" required type="text" id="form-submit" className="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0"  placeholder="Enter Message..."></textarea>
-          <button type="submit" className="btn btn-primary mx-auto btn-white" name="btnSubmit" value="Submit" id="button">Submit</button>
+          <input type='text' name='FullName' placeholder='Full Name'></input>
+          <input type='email' name='Email' placeholder='Email Address'></input>
+          <input type='text' name='Subject' placeholder='Subject'></input>
+          <textarea name="Message"  maxlength="6000"  id="form-submit" className="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0"  placeholder="Enter Message..."></textarea>
+          <button type="submit" className="btn btn-primary mx-auto btn-white" value="Send">Submit</button>
 
         </form>
 
