@@ -233,7 +233,7 @@ class App extends Component {
         <img src="ipad2.png" className="img-fluid" alt=""></img>
       </div>
     </section>
-
+    
     {/* <!-- Projects Section --> */}
     <section id="projects" className="projects-section bg-light">
       <div className="container">
