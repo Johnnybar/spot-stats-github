@@ -361,7 +361,7 @@ class App extends Component {
                   fontFamily: 'Varela Round',
                   textTransform: "uppercase",
                   letterSpacing: "0.15rem"}}>
-                  <a href="#smtg" style={{color:"black"}} onClick ={() => this.getAudioFeatures()}>Audio Features & Feature Search</a>
+                  <a href="#" style={{color:"black"}} onClick ={() => this.getAudioFeatures()}>Audio Features & Feature Search</a>
                 </h4>
                 <hr className="my-4"></hr>
                 {/* <a href="#smtg" onClick ={() => this.getAudioFeatures()}><img className="card-img-top" src="audioFeaturesCard.jpg" alt=""/></a> */}
