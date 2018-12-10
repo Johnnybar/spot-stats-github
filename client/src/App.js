@@ -230,7 +230,7 @@ class App extends Component {
           <p className="text-white-50">Use Spotify's algorithm to generate interactive charts based on your music, get custom-made recommendations or customize your own algorithm, and get an insight into your own taste</p>
           </div>
         </div>
-        <img src="ipad2.png" className="img-fluid" alt=""></img>
+        <img src="ipad3.png" className="img-fluid" alt=""></img>
       </div>
     </section>
 
@@ -241,7 +241,7 @@ class App extends Component {
         {/* <!-- Featured Project Row --> */}
         <div className="row align-items-center no-gutters mb-4 mb-lg-5">
           <div className="col-xl-8 col-lg-7">
-            <img className="img-fluid mb-3 mb-lg-0" src="bg-masthead.jpg" alt=""></img>
+            <img className="img-fluid mb-3 mb-lg-0" src="dist/images/chris-liverani-552652-unsplash.jpg" alt=""></img>
           </div>
           <div className="col-xl-4 col-lg-5">
             <div className="featured-text text-center text-lg-left">
@@ -254,7 +254,7 @@ class App extends Component {
         {/* <!-- Project One Row --> */}
         <div className="row justify-content-center no-gutters mb-5 mb-lg-0">
           <div className="col-lg-6">
-            <img className="img-fluid" src="demo-image-01.jpg" alt=""></img>
+            <img className="img-fluid" src="dist/images/dayne-topkin-60559-unsplash.jpg" alt=""></img>
           </div>
           <div className="col-lg-6">
             <div className="bg-black text-center h-100 project">
@@ -272,7 +272,7 @@ class App extends Component {
         {/* <!-- Project Two Row --> */}
         <div className="row justify-content-center no-gutters">
           <div className="col-lg-6">
-            <img className="img-fluid" src="demo-image-02.jpg" alt=""></img>
+            <img className="img-fluid" src="dist/images/adi-goldstein-796588-unsplash.jpg" alt=""></img>
           </div>
           <div className="col-lg-6 order-lg-first">
             <div className="bg-black text-center h-100 project">
@@ -621,7 +621,7 @@ class App extends Component {
           <input type='text' name='FullName' placeholder='Full Name'></input>
           <input type='email' name='Email' placeholder='Email Address'></input>
           <input type='text' name='Subject' placeholder='Subject'></input>
-          <textarea name="Message"  maxlength="6000"  id="form-submit" className="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0"  placeholder="Enter Message..."></textarea>
+          <textarea name="Message"  maxLength="6000"  id="form-submit" className="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0"  placeholder="Enter Message..."></textarea>
           <button type="submit" className="btn btn-primary mx-auto btn-white" value="Send">Submit</button>
 
         </form>
