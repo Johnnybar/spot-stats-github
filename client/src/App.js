@@ -164,7 +164,6 @@ class App extends Component {
       tracks = this.state.myTopTracks;
     }
 
-    {/*display list of customized tracks*/}
     // if(this.state.tracksFromChosenFeatures){
     //    customizedTrackList = this.state.tracksFromChosenFeatures.map(track => track.artists[0].name + ' - ' + track.name)
     // }
@@ -203,7 +202,7 @@ class App extends Component {
       <div className="collapse navbar-collapse" id="navbarResponsive">
         <ul className="navbar-nav ml-auto">
           <li className="nav-item">
-            <a className="nav-link" href={anchor}>Log In to Spotify</a>
+            <a className="nav-link" href={anchor}>Log in to Spotify to start</a>
           </li>
         </ul>
       </div>
@@ -215,7 +214,6 @@ class App extends Component {
     <div className="container d-flex h-100 align-items-center">
       <div className="mx-auto text-center">
 <h1 className="mx-auto my-0" style={{fontFamily:'Delicate'}}>Spot.Stats</h1>
-        <h2 className="text-white-50 mx-auto mt-2 mb-5"></h2>
         <a href="#about" className="btn btn-primary js-scroll-trigger btn-transparent">Get Started</a>
       </div>
     </div>
@@ -447,7 +445,7 @@ class App extends Component {
           }}>Energy</p>
         </button>
         {
-          this.state.energy_status == false && <React.Fragment>
+          this.state.energy_status === false && <React.Fragment>
             <Slider.Range min={0} max={1} marks={marks} step={0.05} defaultValue={[0, 0.25]} onChange={(e) => {
               let valueArr = e;
               this.setState({min_energy: valueArr[0], max_energy: valueArr[1]})
@@ -467,7 +465,7 @@ class App extends Component {
         }}>Acousticness</p>
       </button>
       {
-        this.state.acousticness_status == false && <React.Fragment>
+        this.state.acousticness_status === false && <React.Fragment>
           <Slider.Range min={0} max={1} marks={marks} step={0.05} defaultValue={[0, 0.25]} onChange={(e) => {
             let valueArr = e;
             this.setState({min_acousticness: valueArr[0], max_acousticness: valueArr[1]})
@@ -487,7 +485,7 @@ class App extends Component {
       }}>Danceability</p>
     </button>
     {
-      this.state.danceability_status == false && <React.Fragment>
+      this.state.danceability_status === false && <React.Fragment>
         <Slider.Range min={0} max={1} marks={marks} step={0.05} defaultValue={[0, 0.25]} onChange={(e) => {
           let valueArr = e;
           this.setState({min_danceability: valueArr[0], max_danceability: valueArr[1]})
@@ -507,7 +505,7 @@ class App extends Component {
     }}>Instrumentalness</p>
   </button>
   {
-    this.state.instrumentalness_status == false && <React.Fragment>
+    this.state.instrumentalness_status === false && <React.Fragment>
       <Slider.Range min={0} max={1} marks={marks} step={0.05} defaultValue={[0, 0.25]} onChange={(e) => {
         let valueArr = e;
         this.setState({min_instrumentalness: valueArr[0], max_instrumentalness: valueArr[1]})
@@ -527,7 +525,7 @@ class App extends Component {
     }}>Liveness</p>
   </button>
   {
-    this.state.liveness_status == false && <React.Fragment>
+    this.state.liveness_status === false && <React.Fragment>
       <Slider.Range min={0} max={1} marks={marks} step={0.05} defaultValue={[0, 0.25]} onChange={(e) => {
         let valueArr = e;
         this.setState({min_liveness: valueArr[0], max_liveness: valueArr[1]})
@@ -547,7 +545,7 @@ class App extends Component {
     }}>Positivity</p>
   </button>
   {
-    this.state.valence_status == false && <React.Fragment>
+    this.state.valence_status === false && <React.Fragment>
       <Slider.Range min={0} max={1} marks={marks} step={0.05} defaultValue={[0, 0.25]} onChange={(e) => {
         let valueArr = e;
         this.setState({min_valence: valueArr[0], max_valence: valueArr[1]})
@@ -567,7 +565,7 @@ class App extends Component {
     }}>Speechiness</p>
   </button>
   {
-    this.state.speechiness_status == false && <React.Fragment>
+    this.state.speechiness_status === false && <React.Fragment>
       <Slider.Range min={0} max={1} marks={marks} step={0.05} defaultValue={[0, 0.25]} onChange={(e) => {
         let valueArr = e;
         this.setState({min_speechiness: valueArr[0], max_speechiness: valueArr[1]})
@@ -630,13 +628,13 @@ class App extends Component {
     </div>
 
     <div className="social d-flex justify-content-center">
-      <a href="https://github.com/Johnnybar" className="mx-2" target="_blank">
+      <a rel="noopener noreferrer" href="https://github.com/Johnnybar" className="mx-2" target="_blank">
         <i className="fab fa-github"></i>
       </a>
-      <a href="https://www.linkedin.com/in/jonathan-bareket/" className="mx-2" target="_blank">
+      <a rel="noopener noreferrer" href="https://www.linkedin.com/in/jonathan-bareket/" className="mx-2" target="_blank">
         <i className="fab fa-linkedin-in"></i>
       </a>
-      <a href="http://www.jonathanbareket.com" className="mx-2" target="_blank">
+      <a rel="noopener noreferrer" href="http://www.jonathanbareket.com" className="mx-2" target="_blank">
       <i className="fas fa-home"></i>
     </a>
 
