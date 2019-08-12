@@ -1636,7 +1636,7 @@ cosmiconfig@^2.1.0, cosmiconfig@^2.1.1:
   resolved "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-2.2.2.tgz#6173cebd56fac042c1f4390edf7af6c07c7cb892"
   dependencies:
     is-directory "^0.3.1"
-    js-yaml "^3.4.3"
+    js-yaml ">=3.13.1"
     minimist "^1.2.0"
     object-assign "^4.1.0"
     os-homedir "^1.0.1"
@@ -2359,7 +2359,7 @@ eslint@4.10.0:
     imurmurhash "^0.1.4"
     inquirer "^3.0.6"
     is-resolvable "^1.0.0"
-    js-yaml "^3.9.1"
+    js-yaml ">=3.13.1"
     json-stable-stringify "^1.0.1"
     levn "^0.3.0"
     lodash "^4.17.4"
@@ -2978,8 +2978,8 @@ handle-thing@^1.2.5:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/handle-thing/-/handle-thing-1.2.5.tgz#fd7aad726bf1a5fd16dfc29b2f7a6601d27139c4"
 
-handlebars@^4.0.3:
-  version "4.0.12"
+handlebars@^4.0.14:
+  version "4.0.14"
   resolved "https://registry.yarnpkg.com/handlebars/-/handlebars-4.0.12.tgz#2c15c8a96d46da5e266700518ba8cb8d919d5bc5"
   dependencies:
     async "^2.5.0"
@@ -3645,7 +3645,7 @@ istanbul-api@^1.1.1:
     istanbul-lib-report "^1.1.5"
     istanbul-lib-source-maps "^1.2.6"
     istanbul-reports "^1.5.1"
-    js-yaml "^3.7.0"
+    js-yaml ">=3.13.1"
     mkdirp "^0.5.1"
     once "^1.4.0"
 
@@ -3694,7 +3694,7 @@ istanbul-reports@^1.5.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/istanbul-reports/-/istanbul-reports-1.5.1.tgz#97e4dbf3b515e8c484caea15d6524eebd3ff4e1a"
   dependencies:
-    handlebars "^4.0.3"
+    handlebars "^4.0.14"
 
 jest-changed-files@^20.0.3:
   version "20.0.3"
@@ -3920,14 +3920,14 @@ js-tokens@^3.0.2:
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
 
 js-yaml@^3.4.3, js-yaml@^3.7.0, js-yaml@^3.9.1:
-  version "3.12.0"
+  version ">=3.13.1"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.12.0.tgz#eaed656ec8344f10f527c6bfa1b6e2244de167d1"
   dependencies:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
-js-yaml@~3.7.0:
-  version "3.7.0"
+js-yaml@^3.13.1:
+  version ">=3.13.1"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.7.0.tgz#5c967ddd837a9bfdca5f2de84253abe8a1c03b80"
   dependencies:
     argparse "^1.0.7"
@@ -4173,8 +4173,8 @@ lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
 
-lodash.template@^4.4.0:
-  version "4.4.0"
+lodash@^4.17.13:
+  version "4.17.13"
   resolved "https://registry.yarnpkg.com/lodash.template/-/lodash.template-4.4.0.tgz#e73a0385c8355591746e020b99679c690e68fba0"
   dependencies:
     lodash._reinterpolate "~3.0.0"
@@ -6343,7 +6343,7 @@ svgo@^0.7.0:
     coa "~1.0.1"
     colors "~1.1.2"
     csso "~2.3.1"
-    js-yaml "~3.7.0"
+    js-yaml ">=3.13.1"
     mkdirp "~0.5.1"
     sax "~1.2.1"
     whet.extend "~0.9.9"
@@ -6364,7 +6364,7 @@ sw-precache@^5.1.1:
     es6-promise "^4.0.5"
     glob "^7.1.1"
     lodash.defaults "^4.2.0"
-    lodash.template "^4.4.0"
+    lodash.template "^4.5.0"
     meow "^3.7.0"
     mkdirp "^0.5.1"
     pretty-bytes "^4.0.2"
