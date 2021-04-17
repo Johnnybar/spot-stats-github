@@ -17,10 +17,9 @@ if (process.env.NODE_ENV != 'production') {
     client_secret = secrets.client_secret;
     redirect_uri = secrets.redirect_uri;
     client_url = 'http://localhost:3000/#';
-}
-else{
-    client_id =   process.env.CLIENT_ID; // Your client id
-    client_secret =  process.env.CLIENT_SECRET; // Your secret
+} else {
+    client_id = process.env.CLIENT_ID; // Your client id
+    client_secret = process.env.CLIENT_SECRET; // Your secret
     redirect_uri = process.env.REDIRECT_URI; // Your redirect uri
     client_url = 'https://spot-stats.herokuapp.com/#';
 }
@@ -52,21 +51,21 @@ app.get('/login', function(req, res) {
     // console.log('state key and state', stateKey, state);
 
     // your application requests authorization
-    var scope = 'user-read-private user-read-email user-read-playback-state user-top-read';
+    var scope = 'playlist-modify-private playlist-modify-public user-read-private user-read-email user-read-playback-state user-top-read';
 
     res.redirect('https://accounts.spotify.com/authorize?' +
-    querystring.stringify({
-        response_type: 'code',
-        client_id: client_id,
-        scope: scope,
-        redirect_uri: redirect_uri,
-        state: state,
-        cookie:req.cookies.spotify_auth_state
-    }))
+        querystring.stringify({
+            response_type: 'code',
+            client_id: client_id,
+            scope: scope,
+            redirect_uri: redirect_uri,
+            state: state,
+            cookie: req.cookies.spotify_auth_state
+        }))
 });
 
 app.get('/callback', function(req, res) {
-  console.log('in callback');
+    console.log('in callback');
     // your application requests refresh and access tokens
     // after checking the state parameter
 
@@ -75,12 +74,12 @@ app.get('/callback', function(req, res) {
     var storedState = req.cookies ? req.cookies[stateKey] : null;
     console.log('here storedstate, req cookies and req query state ', storedState, req.cookies, req.query.state);
 
-      if (req.query.state !== storedState && process.env.NODE_ENV === 'production') {
-      console.log('in state === null', state);
+    if (req.query.state !== storedState && process.env.NODE_ENV === 'production') {
+        console.log('in state === null', state);
         res.redirect('/#' +
-      querystring.stringify({
-          error: 'state_mismatch'
-      }));
+            querystring.stringify({
+                error: 'state_mismatch'
+            }));
     } else {
         // res.clearCookie(stateKey);
         var authOptions = {
@@ -97,7 +96,7 @@ app.get('/callback', function(req, res) {
         };
 
         request.post(authOptions, function(error, response, body) {
-          console.log('in req post');
+            console.log('in req post');
             if (!error && response.statusCode === 200) {
 
                 var access_token = body.access_token,
@@ -116,21 +115,21 @@ app.get('/callback', function(req, res) {
 
                 // we can also pass the token to the browser to make requests from there
                 res.redirect(client_url +
-          querystring.stringify({
-              access_token: access_token,
-              refresh_token: refresh_token
-          }));
+                    querystring.stringify({
+                        access_token: access_token,
+                        refresh_token: refresh_token
+                    }));
             } else {
                 res.redirect('/#' +
-          querystring.stringify({
-              error: 'invalid_token'
-          }));
+                    querystring.stringify({
+                        error: 'invalid_token'
+                    }));
             }
         });
     }
 });
 app.get('/refresh_token', function(req, res) {
-  console.log('in refresh token');
+    console.log('in refresh token');
 
     // requesting access token from refresh token
     var refresh_token = req.query.refresh_token;
@@ -154,15 +153,15 @@ app.get('/refresh_token', function(req, res) {
     });
 });
 
-app.get('/api/getList', (req,res) => {
+app.get('/api/getList', (req, res) => {
     var list = ["item1", "item2", "item3"];
     res.json(list);
     console.log('Sent list of items');
 });
 
 // Handles any requests that don't match the ones above
-app.get('*', (req,res) =>{
-    res.sendFile(path.join(__dirname+'/client/build/index.html'));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
 
 const port = process.env.PORT || 5000;
