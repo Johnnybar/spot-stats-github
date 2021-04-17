@@ -28,6 +28,7 @@ export function getArtistInfoAndRecommendations(id) {
         "seed_artists": [id]
       }
       spotifyApi.getRecommendations(recommendOptions).then((response) => {
+        let recommendationTrackIds;
         let recommendationNames = response.tracks.filter(each => each.preview_url !== null).map(function(recommendations, i) {
           return (<button id="round-button" className="btn btn-secondary" style={{whiteSpace: 'normal'}} key={i} onClick={this.uponClickOnRecommendation.bind(this, i)}>
             {recommendations.artists[0].name + ' - '}
@@ -35,12 +36,14 @@ export function getArtistInfoAndRecommendations(id) {
             {recommendations.name}
           </button>);
         }, this);
+         recommendationTrackIds = response.tracks.slice(0,8).map(item => item.uri);
         recommendationNames = recommendationNames.slice(0, 8);
         let recommendationSampleTrack = response.tracks.filter(each => each.preview_url !== null).map(eachRecommendation => eachRecommendation.preview_url).slice(0, 8);
         this.setState({
           recommendations: {
             nameAndTrack: recommendationNames,
-            samples: recommendationSampleTrack
+            samples: recommendationSampleTrack,
+            recommendationTrackIds: recommendationTrackIds
           }
         })
       }).catch(err => console.log(err))
@@ -105,12 +108,12 @@ export function getRecommendationsBasedOnTopTracks(genres){
   spotifyApi.getRecommendations(genres).then((response) => {
     //20 tracks based on the 5 genres provided
     let recommendationNames = response.tracks.filter(each => each.preview_url !== null).map(function(recommendations, i) {
-      console.log(recommendations);
       return (<button key={i} onClick={this.uponClickOnTrackRecommendation.bind(this, i)} id="round-button" className="btn btn-secondary" style={{whiteSpace: 'normal'}}>
         {recommendations.artists[0].name + ' - '}
         <br></br>
         {recommendations.name}
-      </button>);
+      </button>
+      )
     },this);
     recommendationNames = recommendationNames.slice(0, 8);
     let recommendationSampleTrack = response.tracks.filter(each => each.preview_url !== null).map(eachRecommendation => eachRecommendation.preview_url).slice(0, 8);
@@ -130,3 +133,25 @@ this.setState({
 }, scrollIntoView(document.getElementById("featuresChart")))
 }).catch(err => console.log(err))
 }
+
+export function createPlaylist(uriListOfRecommended, artistName, type){
+  const playlistName = type === "recommendations" ? `${artistName} Recommended Playlist - By Spot-Stats` : `Customized playlist with ${artistName} and others - By Spot-Stats`
+  spotifyApi.getMe()
+    .then(function (data) {
+      spotifyApi.createPlaylist({ name: playlistName})
+        .then(function (playlistData) {
+          spotifyApi.addTracksToPlaylist(playlistData.id, uriListOfRecommended)
+            .then(function (data) {
+            }, function (err) {
+              console.log('Something went wrong!', err);
+            })
+        }, function (err) {
+          console.log('Something went wrong!', err);
+        }).catch(err => console.log(err))
+    }, function (err) {
+      console.log('Something went wrong!', err);
+    })
+ 
+}
+
+

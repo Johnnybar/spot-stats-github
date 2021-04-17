@@ -2,6 +2,7 @@ import Chart from 'chart.js';
 // import {getArtistInfoAndRecommendations} from './spotify_modules';
 // import getMyTopArtists from './App';
 import {getFeaturesById} from'./spotify_modules';
+import scrollIntoView from 'scroll-into-view';
 import React from 'react';
 let featuresChart
 
@@ -114,6 +115,21 @@ export default class AudioFeatures extends React.Component {
            animateRotate: true,
            duration: 5000
          },
+         tooltips: {
+           mode: 'dataset'
+         },
+         legend: {
+           onHover: function (e) {
+             e.target.style.cursor = 'pointer';
+           }
+         },
+         hover: {
+           onHover: function (e) {
+             var point = this.getElementAtEvent(e);
+             if (point.length) e.target.style.cursor = 'pointer';
+             else e.target.style.cursor = 'default';
+           }
+         },
          scaleShowValues: false,
          scaleShowGridLines: false,
          scales: {
@@ -139,9 +155,13 @@ export default class AudioFeatures extends React.Component {
      });
     }
     return (
+      
       <div id="audioFeaturesContainer" className="container">
+        <div className="empty-space" style={{ height: "100px", width: "100%" }}></div>
+
       <div className="wrapper text-center">
       <h3 className="grey-text">Click one of your favorite tracks to get an analysis of its musical features</h3>
+          <h3 className="grey-text underline cursor-pointer" onClick={() => scrollIntoView(document.getElementById("customizedButtonsContainer"))}>OR search for tracks based on musical features</h3>
       <div className="btn-group text-center features-section-btn-group">
       {trackNames}
       </div>
@@ -149,7 +169,7 @@ export default class AudioFeatures extends React.Component {
 
       </div>
       <div className="chart-container" style={{position:"relative", height:"100%", width: "100%"}}>
-      <canvas width="800" height="400" minWidth='200' id="featuresChart"></canvas>
+      <canvas width="800" height="400" minwidth='200' id="featuresChart"></canvas>
 
       </div>
       </div>)

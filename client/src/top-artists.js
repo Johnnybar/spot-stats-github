@@ -1,5 +1,5 @@
 import Chart from 'chart.js';
-import {getArtistInfoAndRecommendations} from './spotify_modules';
+import {getArtistInfoAndRecommendations, createPlaylist} from './spotify_modules';
 // import getMyTopArtists from './App';
 import React from 'react';
 // import SpotifyWebApi from 'spotify-web-api-js';
@@ -13,6 +13,7 @@ export default class TopArtists extends React.Component {
     this.state = {};
     this.uponClick = this.uponClick.bind(this);
     this.getArtistInfoAndRecommendations = getArtistInfoAndRecommendations.bind(this);
+    this.createPlaylist = createPlaylist.bind(this);
     this.updateConfigByMutating = this.updateConfigByMutating.bind(this);
   }
 
@@ -61,12 +62,25 @@ export default class TopArtists extends React.Component {
         ]
       },
       options: {
+        showTooltips: true,
         legend: {
             labels: {
                 fontColor: "white",
                 fontSize: 14,
                 textAlign: 'center'
             }
+        },
+        legend: {
+          onHover: function (e) {
+            e.target.style.cursor = 'pointer';
+          }
+        },
+        hover: {
+          onHover: function (e) {
+            var point = this.getElementAtEvent(e);
+            if (point.length) e.target.style.cursor = 'pointer';
+            else e.target.style.cursor = 'default';
+          }
         },
 maintainAspectRatio: false,
         ids: artistIds,
@@ -136,13 +150,9 @@ maintainAspectRatio: false,
     let artistInfo = this.state.artistInfo;
     let sampleTrack = this.state.sampleTrack;
     let recommendations = this.state.recommendations
+  
     let selectedTrack = this.state.currentClickedTrack
     let indexOfClickedRecommendation = this.state.indexOfClickedRecommendation;
-    // let chart = document.getElementById("topArtists");
-    if(this.state.recommendations){
-    // let currentlyPreviewed = recommendations.nameAndTrack[indexOfClickedRecommendation]
-
-  }
 
     return (<div id="topArtistsContainer">
       <div className="wrapper text-center">
@@ -178,15 +188,25 @@ maintainAspectRatio: false,
             <div className='artists-recommendations'>
               {recommendations.nameAndTrack}
             </div>
+
+          
           </div>
-      } {
+      } 
+      {
+        recommendations && recommendations.recommendationTrackIds && <button className="btn btn-primary center-block" onClick={(e) => {
+          //create a playlist with recommended tracks, take the first artist name to create playlist name
+          this.createPlaylist(recommendations.recommendationTrackIds, artistInfo.name, "recommendations")
+        }
+        }>Create a spotify playlist with these recommendations</button>
+      }
+      {
         selectedTrack && sampleTrack && <div className='recommend-preview'>Check out a preview of {recommendations.nameAndTrack[indexOfClickedRecommendation]} <audio className='preview-track' src={selectedTrack} controls="controls">
               Your browser does not support the audio element.
             </audio>
           </div>
       }
       <div className="chart-container" style={{}}>
-      <canvas minWidth= '200' width='300' height='600' onClick={(e)=> this.uponClick(e)} id="topArtists" ></canvas>
+      <canvas minwidth= '200' width='300' height='600' onClick={(e)=> this.uponClick(e)} id="topArtists" ></canvas>
         </div>
 
   </div>)
