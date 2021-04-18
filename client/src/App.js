@@ -151,7 +151,7 @@ class App extends Component {
         tracksFromChosenFeatures: false,
         term: term
       }, callback);
-    }).then(() => scrollIntoView(document.getElementById("topArtists"))).catch(err => console.log(err))
+    }).then(() => scrollIntoView(document.getElementById("topArtistsContainer"))).catch(err => console.log(err))
   }
 
   getHashParams() {
@@ -458,8 +458,8 @@ class App extends Component {
               {/* Buttons for activating slider and slider with values */}
               {/* Buttons for customizing tracks */}
               <div className="customizedButtonsContainer container" id="customizedButtonsContainer">
-                <div className="empty-space"></div>
                 <h3 className="grey-text">Customize your search based on features</h3>
+                <div className="empty-space"></div>
 
                 <div className='container title-plus-slider'>
 

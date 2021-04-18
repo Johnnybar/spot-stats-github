@@ -3,6 +3,8 @@ import Chart from 'chart.js';
 import {getRecommondationGenres} from'./spotify_modules';
 import {getTrackInfoAndRecommendation} from'./spotify_modules';
 import {getRecommendationsBasedOnTopTracks} from'./spotify_modules';
+import { createPlaylist } from './spotify_modules';
+
 // import getMyTopTracks from'./App';
 import React from 'react';
 // import SpotifyWebApi from'spotify-web-api-js';
@@ -23,6 +25,7 @@ export default class TopTracks extends React.Component {
     this.getTrackInfoAndRecommendation = getTrackInfoAndRecommendation.bind(this);
     this.getRecommondationGenres = getRecommondationGenres.bind(this);
     this.updateConfigByMutating = this.updateConfigByMutating.bind(this);
+    this.createPlaylist = createPlaylist.bind(this);
   }
 
   componentDidMount() {
@@ -144,7 +147,9 @@ export default class TopTracks extends React.Component {
     let topGenres = this.state.topTracksGenres;
     let topTracksRecommendations = this.state.topTracksRecommendations;
     let currentlyClicked = this.state.currentClickedRecommendation;
-    return (<div id='topTracksContainer' style={{}}>
+    return (<div id='topTracksContainer' className="container">
+        <div className="empty-space"></div>
+
       <div className="wrapper text-center">
       <div className="grey-text">Want to choose a different time range for analysis?</div>
       <div className="btn-group">
@@ -168,7 +173,13 @@ export default class TopTracks extends React.Component {
         </button>
         </div>
       }
-      {topTracksRecommendations && <div className='top-tracks-recommendation-container' style={{paddingBottom: '50px'}}>{topTracksRecommendations.nameAndTrack}</div>}
+      {topTracksRecommendations && topTracksRecommendations.topTracksRecommendationsUriList && <div className='top-tracks-recommendation-container' style={{paddingBottom: '50px'}}>
+      {topTracksRecommendations.nameAndTrack}
+        <button className="btn btn-primary center-block" onClick={(e) => {
+          //create a playlist with recommended tracks, take the first artist name to create playlist name
+          this.createPlaylist(topTracksRecommendations.topTracksRecommendationsUriList, topTracksRecommendations.nameAndTrack[0].props.children[0], "customized")
+        }}>Click to save recommendations to playlist</button>
+      </div>}
       {
         currentlyClicked && <div className='recommend-preview'>Listen to a preview of {currentlyClicked.name}
             <audio className='preview-track' src={currentlyClicked.preview_url} controls="controls">
@@ -177,7 +188,7 @@ export default class TopTracks extends React.Component {
           </div>
       }
       <div className="chart-container" style={{}}>
-      <canvas width="1400" height="700" minWidth='200' onClick={(e) => this.uponClick(e)} id="topTracks"></canvas>
+      <canvas width="1400" height="700" minwidth='200' onClick={(e) => this.uponClick(e)} id="topTracks"></canvas>
         </div>
     </div>)
 

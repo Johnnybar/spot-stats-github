@@ -154,7 +154,9 @@ maintainAspectRatio: false,
     let selectedTrack = this.state.currentClickedTrack
     let indexOfClickedRecommendation = this.state.indexOfClickedRecommendation;
 
-    return (<div id="topArtistsContainer">
+    return (<div id="topArtistsContainer" className="container">
+      <div className="empty-space"></div>
+
       <div className="wrapper text-center">
       <div className="grey-text">Want to choose a different time range for analysis?</div>
       <div className="btn-group text-center">
@@ -171,6 +173,7 @@ maintainAspectRatio: false,
 }
 }>Click here for a longer time range</button>
 </div>
+<div className="grey-text">Click column to see artist-based recommendations playlist</div>
 </div>
       {
         artistInfo && <div className='chosen-artist-container'>

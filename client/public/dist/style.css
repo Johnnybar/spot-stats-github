@@ -160,14 +160,14 @@ button {
   background-color: transparent;
 }
 .customized-track {
-  color: white!important;
+  color: white !important;
   border-style: solid;
   border-width: 7px;
   border-color: #ffffff;
   border-left: hidden;
   border-right: hidden;
-  border-radius: 25px!important;
-  padding: 10px!important;
+  border-radius: 25px !important;
+  padding: 10px !important;
   align-items: center;
   margin: 7px;
 }
@@ -177,16 +177,16 @@ button {
   flex-direction: column;
 }
 .form-column {
-  flex-direction: column!important;
+  flex-direction: column !important;
 }
 #form-submit {
-  padding: 1rem!important;
+  padding: 1rem !important;
   width: 30rem;
   height: 10rem;
 }
 .signup-section .form-inline input {
   padding: 0.25rem 2rem !important;
-  text-transform: none!important;
+  text-transform: none !important;
   margin: 10px;
 }
 @media (min-width: 992px) {
@@ -463,5 +463,24 @@ footer {
   text-decoration: underline;
 }
 .cursor-pointer {
+  cursor: pointer;
+}
+div#customizedButtonsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+.container.title-plus-slider {
+  flex-basis: 0px;
+}
+.empty-space {
+  height: 80px;
+  width: 100%;
+}
+button.btn.btn-slider.btn-transparent p {
+  margin-bottom: 0;
+}
+a.dropdown-item {
   cursor: pointer;
 }

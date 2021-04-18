@@ -115,12 +115,14 @@ export function getRecommendationsBasedOnTopTracks(genres){
       </button>
       )
     },this);
+    let recommendationsUriList = response.tracks.map((track)=> track.uri)
     recommendationNames = recommendationNames.slice(0, 8);
     let recommendationSampleTrack = response.tracks.filter(each => each.preview_url !== null).map(eachRecommendation => eachRecommendation.preview_url).slice(0, 8);
     this.setState({
       topTracksRecommendations: {
         nameAndTrack: recommendationNames,
-        samples: recommendationSampleTrack
+        samples: recommendationSampleTrack,
+        topTracksRecommendationsUriList: recommendationsUriList
       }
     })
   }).catch(err => console.log(err))
