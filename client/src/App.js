@@ -458,9 +458,10 @@ class App extends Component {
               {/* Buttons for activating slider and slider with values */}
               {/* Buttons for customizing tracks */}
               <div className="customizedButtonsContainer container" id="customizedButtonsContainer">
-                <div className="empty-space" style={{ height: "100px", width: "100%" }}></div>
+                <div className="empty-space"></div>
+                <h3 className="grey-text">Customize your search based on features</h3>
+
                 <div className='container title-plus-slider'>
-                  <h3 className="grey-text">Customize your search based on features</h3>
 
                   <button className="btn btn-slider btn-transparent" disabled={this.state.energy_status}>
                     <p onClick={() => {
