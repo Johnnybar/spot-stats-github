@@ -2,13 +2,13 @@
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
-  src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v19/KFOmCnqEu92Fr1Mu4mxP.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/roboto/v27/KFOmCnqEu92Fr1Mu4mxP.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Varela Round';
   font-style: normal;
   font-weight: 400;
-  src: local('Varela Round Regular'), local('VarelaRound-Regular'), url(https://fonts.gstatic.com/s/varelaround/v11/w8gdH283Tvk__Lua32TysjIfp8uK.ttf) format('truetype');
+  src: url(https://fonts.gstatic.com/s/varelaround/v13/w8gdH283Tvk__Lua32TysjIfp8uK.ttf) format('truetype');
 }
 body {
   font-family: 'Varela Round', sans-serif !important;
@@ -41,6 +41,7 @@ body {
 }
 button {
   white-space: normal !important;
+  cursor: pointer;
 }
 .chosen-artist-container {
   display: flex;
@@ -457,4 +458,10 @@ a:hover {
 }
 footer {
   padding: 5rem 0;
+}
+.underline {
+  text-decoration: underline;
+}
+.cursor-pointer {
+  cursor: pointer;
 }
